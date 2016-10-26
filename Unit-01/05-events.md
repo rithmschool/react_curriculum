@@ -1,4 +1,4 @@
-#### [⇐ Previous](./04-props_state.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-refs_form.md)
+#### [⇐ Previous](./04-props_state.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-refs_forms.md)
 
 # Events
 
@@ -10,4 +10,4 @@ By the end of this chapter, you should be able to:
 
 ### Exercise
 
-#### [⇐ Previous](./04-props_state.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-refs_form.md)
+#### [⇐ Previous](./04-props_state.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-refs_forms.md)
