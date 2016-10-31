@@ -6,6 +6,9 @@
 
 By the end of this chapter, you should be able to:
 
+- Understand the key differences between state in `react` and state in `redux`
+- Use `react-redux` to connect `react` and `redux`
+- Use `redux` middleware to handle asynchronous actions
 
 ### Redux and React
 
@@ -22,6 +25,8 @@ To connect these two libraries we use another library called `react-redux` which
 ### Async Redux with Redux Thunk
 
 `npm install --save redux-middleware`
+
+### React Router and Redux
 
 ### Exercise
 

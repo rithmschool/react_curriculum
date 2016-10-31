@@ -6,10 +6,19 @@
 
 By the end of this chapter, you should be able to:
 
+- Explain what `webpack` and `babel` are useful for
+- Configure applications using `webpack`
+
+### Installing Webpack
+
 `npm install -g webpack-dev-server`
 `npm install -g webpack`
 
-### Package.json
+### Essential Files
+
+#### package.json
+
+#### webpack.config.js
 
 To install webpack we need to first create a `package.json` file. This file 
 
@@ -40,6 +49,8 @@ module.exports = {
     }
 }
 ```
+
+#### .babelrc
 
 And now let's create a `.babelrc` file
 

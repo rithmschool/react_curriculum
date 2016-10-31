@@ -6,6 +6,9 @@
 
 By the end of this chapter, you should be able to:
 
+- Define life cycle methods related to initialization, changing state and props, and unmounting components
+- Use life cycle methods to refactor code and better optimize applications
+
 ### Initialization
 
 When a component get's rendered for the first time, we can tap into quite a few lifecycle hooks

@@ -6,7 +6,12 @@
 
 By the end of this chapter, you should be able to:
 
-- 
+- Build an API that a react front-end can consume
+- Connect client side routing with an API
+
+### Routing
+
+### Authentication
 
 ### Exercise
 

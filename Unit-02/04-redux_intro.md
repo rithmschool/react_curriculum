@@ -6,7 +6,9 @@
 
 By the end of this chapter, you should be able to:
 
-- 
+- Explain what `redux` is and the problems it tries to solve
+- Compare and contrast `actions`, `reducers` and `stores`
+- Build applications using `redux` as a state manager
 
 ### Intro
 

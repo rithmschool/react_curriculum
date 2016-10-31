@@ -4,9 +4,9 @@
 
 By the end of this chapter, you should be able to:
 
-- Explain what a front-end framework is 
-- Compare and contrast frameworks like `angular`, `ember`, and `react`
-- Understand what the virtual-dom is and how React works
+- Explain what `react-native` is and how it differs from other tools like `ionic`
+- Build simple mobile applications using `react-native`
+- Deploy `react-native` applications to respective app stores. 
 
 ### Getting Started
 

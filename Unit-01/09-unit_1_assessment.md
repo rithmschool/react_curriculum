@@ -2,11 +2,7 @@
 
 # Unit 1 Assessment
 
-### Objectives
 
-By the end of this chapter, you should be able to:
-
-- 
 
 [https://facebook.github.io/react/tutorial/tutorial.html](https://facebook.github.io/react/tutorial/tutorial.html)
 

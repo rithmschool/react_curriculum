@@ -15,11 +15,10 @@
 ### Unit 2 - Intermediate React / React Router
 
 - [01 Intermediate React](./Unit-02/01-intermediate_react.md)
-- [03 Testing](./Unit-02/02-testing.md)
-- [04 React Router](./Unit-02/03-react_router.md)
-- [05 React Router Continued](./Unit-02/04-react_router_continued.md)
-- [05 Introduction to Redux](./Unit-02/05-redux_intro.md)
-- [06 Redux Continued](./Unit-02/06-redux_continued.md)
-- [07 Full Stack React](./Unit-02/07-backend.md)
-- [08 React Native](./Unit-02/08-backend.md)
-- [09 Unit 2 Assessment](./Unit-02/09-unit_2_assessment.md)
+- [02 Testing](./Unit-02/02-testing.md)
+- [03 React Router](./Unit-02/03-react_router.md)
+- [04 Introduction to Redux](./Unit-02/04-redux_intro.md)
+- [05 Redux Continued](./Unit-02/05-redux_continued.md)
+- [06 Full Stack React](./Unit-02/06-backend.md)
+- [07 React Native](./Unit-02/07-backend.md)
+- [08 Unit 2 Assessment](./Unit-02/08-unit_2_assessment.md)

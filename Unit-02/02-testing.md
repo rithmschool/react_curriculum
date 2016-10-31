@@ -6,7 +6,14 @@
 
 By the end of this chapter, you should be able to:
 
-- 
+- Test `react` components using Mocha and Chai
+- Use `enzyme` to easily test rendering of components
+
+
+### Mocha / Chai
+
+### Enzyme
+
 
 ### Exercise
 

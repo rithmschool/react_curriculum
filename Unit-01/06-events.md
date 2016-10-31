@@ -7,7 +7,11 @@
 By the end of this chapter, you should be able to:
 
 - Compare and contrast events and synthetic events
+- Build React applications with events
 
+### Events with React
+
+### Accessing the event object
 
 ### Exercise
 
