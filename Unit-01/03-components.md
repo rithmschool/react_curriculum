@@ -6,7 +6,8 @@
 
 By the end of this chapter, you should be able to:
 
-- 
+- Understand how to architect and application using components
+- Explain what component hierarchy is and diagram a simple component based application
 
 ### Exercise
 

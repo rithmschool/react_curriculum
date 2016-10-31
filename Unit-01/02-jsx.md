@@ -6,7 +6,8 @@
 
 By the end of this chapter, you should be able to:
 
-- 
+- Understand what `JSX` is and how it is used with React
+- Define what a transpiler is and include `babel-core` in an application
 
 ### Exercise
 

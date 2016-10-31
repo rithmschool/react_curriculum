@@ -6,7 +6,9 @@
 
 By the end of this chapter, you should be able to:
 
-- 
+- Define what `props` is and how it is used with React
+- Define what `state` is and how it is used with React
+- Compare and contrast `props` and `state`
 
 ### Exercise
 

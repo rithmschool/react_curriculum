@@ -6,6 +6,7 @@
 
 By the end of this chapter, you should be able to:
 
+- Compare and contrast events and synthetic events
 - 
 
 ### Exercise
