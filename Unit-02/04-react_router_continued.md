@@ -1,6 +1,6 @@
 #### [⇐ Previous](./01-webpack.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-testing.md)
 
-# New Structure + Syntax
+# React Router Continued
 
 ### Objectives
 

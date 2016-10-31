@@ -12,10 +12,14 @@ By the end of this chapter, you should be able to:
 To connect these two libraries we use another library called `react-redux` which gives us a few functions and components to connect redux state to react state. 
 
 ### connect
+
 ### mapStateToProps
+
+### MapDispatchToProps
+
 ### <Provider></Provider>
 
-### Async Redux 
+### Async Redux with Redux Thunk
 
 `npm install --save redux-middleware`
 
