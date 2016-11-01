@@ -42,7 +42,7 @@ Now let's get started importing react-router
 
 ```js
 import {Router, Route, hashHistory} from 'react-router'
-import {Component} from 'react'
+import React, {Component} from 'react'
 import {render} from 'ReactDom'
 
 class First extends Component {
@@ -110,7 +110,7 @@ import {Link} from 'react-router'
 
 ```js
 import {Router, Route, hashHistory, IndexRoute} from 'react-router'
-import {Component} from 'react'
+import React, {Component} from 'react'
 import {render} from 'react-dom'
 
 class First extends Component {

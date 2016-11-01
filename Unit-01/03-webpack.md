@@ -132,12 +132,12 @@ stats: {
 ### React with es2015 class syntax
 
 ```js
-import {Component} from 'react'
-import {render} from 'react-dpm'
+import React, {Component} from 'react'
+import {render} from 'react-dom'
 
 class App extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
   }
   render(){
     return(

@@ -11,8 +11,10 @@ By the end of this chapter, you should be able to:
 
 ### Events with React
 
+Events in React are not actually `DOM` events they are called `synthetic` events. They React event API is almost identical to the DOM API in its methods, but they are not exactly the same.
+
 ```js
-import {Component} from 'react'
+import React, {Component} from 'react'
 import {render} from 'react-dom'
 
 class App extends Component {
@@ -31,6 +33,28 @@ render(</App>, document.getElementById("main"))
 ```
 
 ### Binding with `this`
+
+import React, {Component} from 'react'
+import {render} from 'react-dom'
+
+class App extends Component {
+    construcotr(props,name){
+        super(props)
+        this.name = name
+        this.printName = this.printName.bind(this)
+    }
+    handleName(){
+        alert("click!")
+    }
+    render(){
+        <div>
+            <button onClick={this.handleName}>{this.props.name}</button>
+            <h2>These are the children!</h2>
+        </div>
+    }
+}
+
+render(
 
 ### Accessing the event object
 
