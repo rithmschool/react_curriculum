@@ -11,6 +11,27 @@ By the end of this chapter, you should be able to:
 
 ### Events with React
 
+```js
+import {Component} from 'react'
+import {render} from 'react-dom'
+
+class App extends Component {
+    handleClick(){
+        alert("click!")
+    }
+    render(){
+        <div>
+            <button onClick={this.handleClick}></button>
+            <h2>These are the children!</h2>
+        </div>
+    }
+}
+
+render(</App>, document.getElementById("main"))
+```
+
+### Binding with `this`
+
 ### Accessing the event object
 
 ### Exercise

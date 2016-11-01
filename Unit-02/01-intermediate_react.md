@@ -28,18 +28,6 @@ App.propTypes = {
 
 ### Structuring Larger React Applications
 
-### Functional Components / Stateless Components
-
-
-```js
-var Component = function (){
-    return (
-            <div>
-                <h1>Hello!</h1>
-            </div>
-        )
-}
-```
 
 ### Immutability
 

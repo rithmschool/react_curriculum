@@ -19,7 +19,20 @@ By the end of this chapter, you should be able to:
 
 #### Container / Smart Components
 #### Presentational / Dumb Components
+
+```js
+var Component = function (){
+    return (
+            <div>
+                <h1>Hello!</h1>
+            </div>
+        )
+}
+```
+
 #### Higher Order Components
+
+
 
 ### Immutability
 

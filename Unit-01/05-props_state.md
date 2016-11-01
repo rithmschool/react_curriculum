@@ -66,6 +66,33 @@ render(</App>, document.getElementById("main"))
 
 ### State
 
+```js
+import {Component} from 'react'
+import {render} from 'react-dom'
+
+class App extends Component {
+    constructor(){
+        this.state = {
+            name: "Old"
+        }
+    }
+    changeInfo(){
+        this.setState({
+            name: "New"
+        })
+    }
+    render(){
+        <div>
+            <button onClick={this.changeInfo}>Change!</button>
+            <h2>Our state is {this.state.name}</h2>
+        </div>
+    }
+}
+
+render(</App>, document.getElementById("main"))
+
+```
+
 ### Initializing state
 
 ### Passing state down to child components as props
