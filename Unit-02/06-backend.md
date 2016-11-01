@@ -11,6 +11,8 @@ By the end of this chapter, you should be able to:
 
 ### Routing
 
+### Including react-router browserHistory
+
 ### Authentication
 
 ### Exercise

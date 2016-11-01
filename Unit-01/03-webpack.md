@@ -9,7 +9,9 @@ By the end of this chapter, you should be able to:
 - Explain what `webpack` and `babel` are useful for
 - Configure applications using `webpack`
 
-### Installing Webpack
+### Introduction + Installing Webpack
+
+So what is `webpack`? You will commonly hear it defined as a module bundler, or build tool. It allows us to easily create modules and then bundle our code together. This makes it very easy for us to write modular code using common.js modules (node.js syntax with `require`) or es2015 modules (with a very similar syntax to python modules).
 
 `npm install -g webpack-dev-server`
 `npm install -g webpack`
@@ -105,6 +107,46 @@ and a `.babelrc file`
 {
   "presets": ["es2015", "react"]
 }
+```
+
+### Additions to webpack
+
+**resolve**
+
+```js
+resolve: {
+    extentions: ['', '.js', '.jsx', '.json']
+},
+```
+
+**stats**
+
+```js
+stats: {
+    colors: true,
+    reasons: true,
+    chunks: false,
+},
+```
+
+### React with es2015 class syntax
+
+```js
+import {Component} from 'react'
+import {render} from 'react-dpm'
+
+class App extends Component {
+  constructor(){
+    super()
+  }
+  render(){
+    return(
+        <div>Hello World!</div>
+      )
+  }
+}
+
+render(<App/>, document.getElementById("app"))
 ```
 
 ### Using Class syntax vs. createClass
