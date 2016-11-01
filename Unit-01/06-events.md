@@ -38,7 +38,7 @@ import React, {Component} from 'react'
 import {render} from 'react-dom'
 
 class App extends Component {
-    construcotr(props,name){
+    constructor(props,name){
         super(props)
         this.name = name
         this.printName = this.printName.bind(this)
@@ -53,8 +53,6 @@ class App extends Component {
         </div>
     }
 }
-
-render(
 
 ### Accessing the event object
 

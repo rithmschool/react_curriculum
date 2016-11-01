@@ -22,16 +22,105 @@ This means that all data in an application follows the same lifecycle pattern, m
 
 The data lifecycle in any Redux app follows these 4 steps:
 
-1. You call store.dispatch(action).
+1. You call `store.dispatch(action)`.
 2. The Redux store calls the reducer function you gave it.
 3. The root reducer may combine the output of multiple reducers into a single state tree.
 4. The Redux store saves the complete state tree returned by the root reducer.
 
 ### Functional Programming Review
 
+Redux revoles around some core concepts in functional programming - let's examine those in further detaial before we talk about reducers:
+
 ### Pure Functions
 
-### Immutability
+A pure function is a predictable function that does not have an side-effects. What does that mean? When a pure function is called many times with the same input, it will always give the same output (this is also known as idempotence) and is predictable. Another characteristic of pure functions are that they do not modify external state, or change values outside of their scope. 
+
+Let's try to identify some pure and impure functions:
+
+Are the following functions **pure** or **impure**?
+
+```js
+var arr = [2,4,6];
+function doubleValues(arr){
+    for(var i =0; i< arr.length; i++){
+        arr[i] = arr[i]*2;
+    }
+}
+
+doubleValues(arr);
+arr; // [4, 8, 12]
+
+doubleValues(arr);
+arr; // [8, 16, 24]
+```
+
+The function is **impure** because there is a side effect, we are mutating or changing the `arr` variable and if we call this function again, we will get a different value!
+
+```js
+var arr = [2,4,6]
+function doubleValues(arr){
+    return arr.map(function(val){
+        return val*2;
+    })
+}
+
+doubleValues(arr); // [4,8,12]
+doubleValues(arr); // [4,8,12]
+doubleValues(arr); // [4,8,12]
+```
+
+This function is **pure** because there is no side effect, if we wanted to double the result of double, we could combine these functions together! `doubleValues(doubleValues(arr)) // [8,16,24]` and we still would not change the `arr` variable. Pretty cool!
+
+How about this one?
+
+```js
+var start = {};
+
+function addNameToObject(obj,val){
+    obj.name = val;
+    return obj;
+}
+```
+
+The function is **impure** because there is a side effect, we are mutating or changing the `start` variable and if we call this function again, we will get a different value!
+
+```js
+var start = {};
+
+function addNameToObject(obj,val){
+    var newObj = {name: val};
+    return Object.assign({}, obj, newObj);
+}
+```
+
+The function is **impure** because there is a not side effect and we are not mutating or changing the `start` variable. if we call this function again, we will get a different value!
+
+```js
+var arr = [1,2,3,4]
+function addToArr(arr,val){
+    arr.push(val);
+    return arr;
+}
+
+addToArr(arr, 5); // [1,2,3,4,5]
+arr; // [1,2,3,4,5]
+```
+
+The function is **impure** because there is a side effect and we are mutating or changing the `arr` variable. if we call this function again, we will get a different value!
+
+```js
+var arr = [1,2,3,4]
+function addToArr(arr,val){
+    var newArr = arr.concat(val);
+    return newArr;
+}
+
+addToArr(arr, 5); // [1,2,3,4,5]
+```
+
+The function is **pure** because there is a not side effect and we are notmutating or changing the `arr` variable. if we call this function again, we will get a different value!
+
+You can read more about pure functions [here](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.d1qdboexh), [here](https://egghead.io/lessons/javascript-redux-pure-and-impure-functions), and if you are looking for a more advanced read, take a look [here](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/)
 
 ### Reducer
 

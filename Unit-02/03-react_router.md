@@ -146,7 +146,59 @@ render(<App/>, document.getElementById('app'))
 
 ### URL Parameters and Query String access
 
+If we want url parameters we can add a `/:NAME_OF_PARAM`
+
+```js
+
+import {Router, Route, hashHistory, IndexRoute} from 'react-router'
+import React, {Component} from 'react'
+import {render} from 'react-dom'
+
+const App = () => (
+    <Router history={hashHistory}>
+        <Route path='/' component={First}></Route>
+        <Route path='/details/:name' component={Info}></Route>
+    </Router>
+    )
+
+render(<App/>, document.getElementById('app'))
+```
+
 ### Passing information from a parent route to child route
+
+With the Router, we may think it's a good idea to pass information from parent routes to child routes, but this is not something that is easy to do. 
+
+### Route Hooks
+
+```js
+
+import {Router, Route, hashHistory, IndexRoute} from 'react-router'
+import React, {Component} from 'react'
+import {render} from 'react-dom'
+
+const First = () => <div>Hello from First!</div>
+const Info = (props) => <div>Hello {props.params.name}!</div>
+
+class App extends Component {
+    sayHello(nextState, data){
+        debugger
+    }
+    render(){
+        return(
+                <Router history={hashHistory}>
+                    <Route path='/' component={First}></Route>
+                    <Route path='/details/:name' component={Info} onEnter={this.sayHello}></Route>
+                </Router>s
+            )
+        }
+    )
+}
+  
+
+render(<App/>, document.getElementById('app'))
+```
+
+**onEnter** - You can add this hook to run when a route happens 
 
 ### Exercise
 

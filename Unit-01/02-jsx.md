@@ -59,6 +59,38 @@ var App = React.createClass({
 
 So what we have done is good for learning the very basics of React, but as we build larger applications, we need a better tool for transpiling our code and `webpack` is going to help us do that. Webpack is a standard when writing React code and it has a very steep learning curve, but with a little bit of practice you'll get the hang of it. Not only does it allow us to easily include `babel`, and it gives us access to easily use some of the best and latest features in JavaScript, specifically `modules`.
 
+### Conditional JSX
+
+Very commonly we want to add conditional logic to our JSX. We can add ternary logic, or isolate or information into a separate function
+
+```js
+var App = React.createClass({
+    determineInfo: function(){
+        if(this.props.info === 'person'){
+            <h1>Hello Person!</h1>
+        } else {
+            <h1>Hello Anything else!</h1>
+        }
+    }
+    render: function(){
+        var style = {color: 'red'}
+        return (
+                <div>
+                    {this.props.info}
+                    <h1 style = {style}> Hello World!</h1>
+                    }
+                    {determineInfo}
+                    {this.props.info == "awesome" ? 
+                        <h1>Nice!</h1>
+                        :
+                        <h1>Not nice!</h1>
+                    }
+                </div>
+            )
+    }
+})
+```
+
 ### Exercise
 
 #### [⇐ Previous](./01-intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-components.md)
