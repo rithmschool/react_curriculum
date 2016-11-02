@@ -9,6 +9,8 @@ By the end of this chapter, you should be able to:
 - Build an API that a react front-end can consume
 - Connect client side routing with an API
 
+### Folder Structure
+
 ### Routing
 
 To connect our flask app let's start with a simple backend application
@@ -25,6 +27,8 @@ def catch_all(path):
 if __name__ == '__main__':
     app.run()
 ```
+
+
 
 ### Including react-router browserHistory
 
