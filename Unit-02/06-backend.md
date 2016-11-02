@@ -1,4 +1,4 @@
-#### [⇐ Previous](./06-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-unit_2_assessment.md)
+#### [⇐ Previous](./05-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-react_native.md)
 
 # Backend with React
 
@@ -17,4 +17,4 @@ By the end of this chapter, you should be able to:
 
 ### Exercise
 
-#### [⇐ Previous](./06-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-unit_2_assessment.md)
+#### [⇐ Previous](./05-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-react_native.md)

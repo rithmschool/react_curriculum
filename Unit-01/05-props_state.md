@@ -1,4 +1,4 @@
-#### [⇐ Previous](./03-components.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-events.md)
+#### [⇐ Previous](./04-components.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-events.md)
 
 # Props + State
 
@@ -126,4 +126,4 @@ render(</App>, document.getElementById("main"))
 
 
 
-#### [⇐ Previous](./03-components.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-events.md)
+#### [⇐ Previous](./04-components.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-events.md)

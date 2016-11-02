@@ -1,4 +1,4 @@
-#### [⇐ Previous](./07-backend.md) | [Table of Contents](./../readme.md) 
+#### [⇐ Previous](./07-react_native.md) | [Table of Contents](./../readme.md) 
 
 # Unit 2 Assessment
 
@@ -10,4 +10,4 @@ By the end of this chapter, you should be able to:
 
 ### Exercise
 
-#### [⇐ Previous](./07-backend.md) | [Table of Contents](./../readme.md) 
+#### [⇐ Previous](./07-react_native.md) | [Table of Contents](./../readme.md) 

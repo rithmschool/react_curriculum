@@ -1,4 +1,4 @@
-#### [⇐ Previous](./03-testing.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_intro.md)
+#### [⇐ Previous](./02-testing.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-redux_intro.md)
 
 # React Router
 
@@ -202,4 +202,4 @@ render(<App/>, document.getElementById('app'))
 
 ### Exercise
 
-#### [⇐ Previous](./03-testing.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_intro.md)
+#### [⇐ Previous](./02-testing.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-redux_intro.md)

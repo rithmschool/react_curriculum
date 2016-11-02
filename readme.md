@@ -20,5 +20,5 @@
 - [04 Introduction to Redux](./Unit-02/04-redux_intro.md)
 - [05 Redux Continued](./Unit-02/05-redux_continued.md)
 - [06 Full Stack React](./Unit-02/06-backend.md)
-- [07 React Native](./Unit-02/07-backend.md)
+- [07 React Native](./Unit-02/07-react_native.md)
 - [08 Unit 2 Assessment](./Unit-02/08-unit_2_assessment.md)

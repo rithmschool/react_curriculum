@@ -1,4 +1,4 @@
-#### [⇐ Previous](./01-intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-components.md)
+#### [⇐ Previous](./01-intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-webpack.md)
 
 # Babel + JSX
 
@@ -31,13 +31,13 @@ Make sure that you have the `javascript-babel` syntax highlighting for Sublime o
 
 ### Babel
 
-In order to convert our JSX to JavaScript (what we wrote before), we need to transpile our code. Our tool to transpile is going to be `babel`. To include babel, we can add the cdn `<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>` and include a script with an attribute of `text/jsx`
+In order to convert our JSX to JavaScript (what we wrote before), we need to transpile our code. Our tool to transpile is going to be `babel`. To include babel, we can add the cdn `<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>` and include a script with an attribute of `text/babel`
 
 ```html
 <script src ="https://fb.me/react-15.0.0-rc.1.js"></script>
 <script src="https://fb.me/react-dom-15.0.0-rc.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
-<script type="text/jsx"></script>
+<script type="text/babel"></script>
 ```
 
 Let's see what some more JSX looks like:
@@ -61,7 +61,7 @@ So what we have done is good for learning the very basics of React, but as we bu
 
 ### Conditional JSX
 
-Very commonly we want to add conditional logic to our JSX. We can add ternary logic, or isolate or information into a separate function
+Very commonly we want to add conditional logic to our JSX. We can add ternary logic, or isolate or information into a separate function, or place code inside of render.
 
 ```js
 var App = React.createClass({
@@ -73,13 +73,17 @@ var App = React.createClass({
         }
     }
     render: function(){
-        var style = {color: 'red'}
+        if(this.props.info === "thing"){
+            var data = "nice!"
+        } else {
+            var data = "meh"
+        }
         return (
                 <div>
                     {this.props.info}
-                    <h1 style = {style}> Hello World!</h1>
+                    {data}
                     }
-                    {determineInfo}
+                    {this.determineInfo()}
                     {this.props.info == "awesome" ? 
                         <h1>Nice!</h1>
                         :
@@ -93,4 +97,4 @@ var App = React.createClass({
 
 ### Exercise
 
-#### [⇐ Previous](./01-intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-components.md)
+#### [⇐ Previous](./01-intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-webpack.md)

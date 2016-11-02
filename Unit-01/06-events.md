@@ -1,4 +1,4 @@
-#### [⇐ Previous](./04-props_state.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-refs_forms.md)
+#### [⇐ Previous](./05-props_state.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-refs_forms.md)
 
 # Events
 
@@ -58,4 +58,4 @@ class App extends Component {
 
 ### Exercise
 
-#### [⇐ Previous](./04-props_state.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-refs_forms.md)
+#### [⇐ Previous](./05-props_state.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-refs_forms.md)

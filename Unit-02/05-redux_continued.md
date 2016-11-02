@@ -1,4 +1,4 @@
-#### [⇐ Previous](./05-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-backend.md)
+#### [⇐ Previous](./04-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-backend.md)
 
 # Redux Continued
 
@@ -146,4 +146,4 @@ describe("Our Store", function(){
 
 ### Exercise
 
-#### [⇐ Previous](./05-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-backend.md)
+#### [⇐ Previous](./04-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-backend.md)

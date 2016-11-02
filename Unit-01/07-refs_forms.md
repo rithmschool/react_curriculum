@@ -1,4 +1,4 @@
-#### [⇐ Previous](./05-events.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-lifecycle.md)
+#### [⇐ Previous](./06-events.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-lifecycle.md)
 
 # Forms and Refs
 
@@ -14,4 +14,4 @@ By the end of this chapter, you should be able to:
 
 ### Exercise
 
-#### [⇐ Previous](./05-events.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-lifecycle.md)
+#### [⇐ Previous](./06-events.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-lifecycle.md)

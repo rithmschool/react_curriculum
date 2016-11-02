@@ -1,4 +1,4 @@
-#### [⇐ Previous](./06-refs_forms.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-unit_1_assessment.md)
+#### [⇐ Previous](./07-refs_forms.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_1_assessment.md)
 
 # Component Lifecycle
 
@@ -152,4 +152,4 @@ This is useful for clearing event listeners, timers and other data that you will
 
 [https://facebook.github.io/react/docs/react-component.html](https://facebook.github.io/react/docs/react-component.html)
 
-#### [⇐ Previous](./06-refs_forms.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-unit_1_assessment.md)
+#### [⇐ Previous](./07-refs_forms.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_1_assessment.md)

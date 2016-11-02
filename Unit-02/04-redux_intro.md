@@ -1,4 +1,4 @@
-#### [⇐ Previous](./04-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-redux_continued.md)
+#### [⇐ Previous](./03-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_continued.md)
 
 # Introduction to Redux
 
@@ -195,4 +195,4 @@ What having a single immutable state store allows us to do is some really awesom
 
 ### Exercise
 
-#### [⇐ Previous](./04-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-redux_continued.md)
+#### [⇐ Previous](./03-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_continued.md)
