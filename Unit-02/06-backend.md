@@ -11,6 +11,21 @@ By the end of this chapter, you should be able to:
 
 ### Routing
 
+To connect our flask app let's start with a simple backend application
+
+```py
+from flask import Flask, render_template
+app = Flask(__name__)
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run()
+```
+
 ### Including react-router browserHistory
 
 ### Authentication

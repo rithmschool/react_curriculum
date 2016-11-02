@@ -1,6 +1,6 @@
 #### [⇐ Previous](./07-refs_forms.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_1_assessment.md)
 
-# Component Lifecycle
+# component Lifecycle
 
 ### Objectives
 
@@ -38,32 +38,35 @@ class App extends Component {
 }
 ```
 
-#### ComponentWillMount
+#### componentWillMount
 
-`componentWillMount` is called before the render method is executed. It is important to note that setting the state in this phase will not trigger a re-rendering.
+`componentWillMount` is called before the render method is executed. It is important to note that setting the state in this phase will **not** trigger a re-rendering.
 
 ```js
+componentWillMount(){
+
+}
 ```
 
 #### Render
 
 The render method returns the needed component markup, which can be a single child component or null or false (in case you don't want any rendering).
 
-```js
-```
+#### componentDidMount
 
-#### ComponentDidMount
-
-As soon as the render method has been executed the componentDidMount function is called. The DOM can be accessed in this method, enabling to define DOM manipulations or data fetching operations. Any DOM interactions should always happen in this phase not inside the render method.
+As soon as the render method has been executed the `componentDidMount` function is called. The DOM can be accessed in this method, enabling to define DOM manipulations or data fetching operations. Any DOM interactions should always happen in this phase not inside the render method.
 
 ```js
+componentDidMount(){
+    // the component mounted! Let's do some DOM stuff
+}
 ```
 
 ### Changing State
 
 Right when we call `setState`, we can tap into quite a few lifecycle hooks
 
-#### ShouldComponentUpdate
+#### shouldComponentUpdate
 
 shouldComponentUpdate is always called before the render method and enables to define if a re-rendering is needed or can be skipped. Obviously this method is never called on initial rendering. A boolean value must be returned.
 
@@ -74,9 +77,9 @@ shouldComponentUpdate(nextProps, nextState) {
 }
 ```
 
-#### ComponentWillUpdate
+#### componentWillUpdate
 
-componentWillUpdate gets called as soon as the the shouldComponentUpdate returned true. Any state changes via this.setState are not allowed as this method should be strictly used to prepare for an upcoming update not trigger an update itself.
+componentWillUpdate gets called as soon as the the shouldComponentUpdate returned true. Any state changes via `this.setState` are not allowed as this method should be strictly used to prepare for an upcoming update not trigger an update itself.
 
 ```js
 componentWillUpdate(nextProps, nextState){
@@ -86,10 +89,9 @@ componentWillUpdate(nextProps, nextState){
 
 #### Render
 
-```js
-```
+We've seen this one before! Just **always** remember - changing state triggers a re-render unless you modify `shouldComponentUpdate`
 
-#### ComponentDidUpdate
+#### componentDidUpdate
 
 Finally componentDidUpdate is called after the render method. Similar to the componentDidMount, this method can be used to perform DOM operations after the data has been updated.
 
@@ -103,7 +105,7 @@ componentDidUpdate: function(prevProps, prevState){
 
 Right when props are being set on a component, we can tap into the same exact hooks as when we change state, except we get one more before `shouldComponentUpdate` called `componentWillRecieveProps`
 
-#### ComponentWillRecieveProps
+#### componentWillRecieveProps
 
 componentWillReceiveProps is only called when the props have changed and when this is not an initial rendering. componentWillReceiveProps enables to update the state depending on the existing and upcoming props, without triggering another rendering. One interesting thing to remember here is that there is no equivalent method for the state as state changes should never trigger any props changes.
 
@@ -115,12 +117,12 @@ componentWillReceiveProps(nextProps) {
 }
 ```
 
-#### ShouldComponentUpdate
+#### shouldComponentUpdate
 
 ```js
 ```
 
-#### ComponentWillUpdate
+#### componentWillUpdate
 
 ```js
 ```
@@ -130,18 +132,23 @@ componentWillReceiveProps(nextProps) {
 ```js
 ```
 
-#### ComponentDidUpdate
+#### componentDidUpdate
 
 ```js
 ```
 
 ### Removing a component (unmounting)
 
-#### ComponentWillUnmount
+#### componentWillUnmount
 
 The only method we haven't touched yet is the componentWillUnmount which gets called before the component is removed from the DOM. This method can be beneficial when needing to perform clean up operations, f.e. removing any timers defined in componentDidMount.
 
 ```js
+componentWillUnmount(){
+    // remove an event listener
+    // clear a timeout
+    // remove any reference to variables you will not be using to ensure there are no memory leaks
+}
 ```
 
 This is useful for clearing event listeners, timers and other data that you will not need in memory when the component is removed.
