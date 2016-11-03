@@ -26,7 +26,7 @@ export default class User extends React.Component {
     render(){
         var users = this.state.users.map(user => {
             return (<p key={user.id}>
-                {user.username} | <Link to={`/users/${user.id}`}>{user.username}</Link>
+                {user.username} | <Link to={`/users/${user.id}`}>{user.username}</Link> | | <Link to={`users/${user.id}/puppies`}>See puppies</Link>
             </p>
             )
         })
@@ -34,7 +34,6 @@ export default class User extends React.Component {
             <div>
                 <h1>All the users!</h1>
                 <pre>
-                    {JSON.stringify(this.state.users,null,2)}
                     {users}
                 </pre>
             </div>
