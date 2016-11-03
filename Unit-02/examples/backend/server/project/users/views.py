@@ -10,6 +10,7 @@ user_puppies_fields = {
     'name': fields.String,
     'created': fields.DateTime(dt_format='rfc822'),
 }
+
 user_fields= {
     'id': fields.Integer,
     'username': fields.String,
