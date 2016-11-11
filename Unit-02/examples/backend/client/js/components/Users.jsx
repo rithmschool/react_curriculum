@@ -32,10 +32,9 @@ export default class User extends React.Component {
         })
         return (
             <div>
+                <Link to={'/'}>Go Home</Link>
                 <h1>All the users!</h1>
-                <pre>
-                    {users}
-                </pre>
+                {users}
             </div>
           )
         }

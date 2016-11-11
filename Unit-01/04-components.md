@@ -13,6 +13,8 @@ By the end of this chapter, you should be able to:
 
 One of the best tutorials on how to structure React applications and determine what should be a component is from the docs [here](https://facebook.github.io/react/docs/thinking-in-react.html).
 
+Since React applications are 
+
 ### Structuring React Applications
 
 Another important thing to think about when building React applications is a folder structure! For now we will be placing our `bundle.js` in the root directory and our javascript (our components and `index.js` file in a `js` folder). We will also make sure we have a `.gitignore` file for our node modules
