@@ -12,6 +12,10 @@ By the end of this chapter, you should be able to:
 
 ### Props
 
+We have seen props earlier as values that are passed to our components (similar to attributes). Props can be defined on all of our components and can be passed down from parent to child component. The most important thing to understand about props are that they are **immutable**. Props can not be changed, which means if we need to change our layout or add dynamic behavior, we will need something else (this is where state comes in).
+
+Let's see how we can initialize props on our components.
+
 ### Initializing props
 
 ```js
@@ -31,18 +35,19 @@ class App extends Component {
 }
 
 render(</App name="Elie">, document.getElementById("main"))
-
 ```
 
 ### props.children
+
+A special property that all react components have is called `children`. This allows for JSX to be placed inside of a component when it is rendered. 
 
 ```js
 import React, {Component} from 'react'
 import {render} from 'react-dom'
 
 class Parent extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
     }
     render(){
         <div>
