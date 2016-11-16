@@ -52,16 +52,25 @@ export default class App extends React.Component {
 
 ### The ref callback
 
+React supports a special attribute that you can attach to any component. The ref attribute takes a callback function, and the callback will be executed immediately after the component is mounted or unmounted. When the ref attribute is used on an HTML element, the ref callback receives the underlying DOM element as its argument. For example, this code uses the ref callback to store a reference to a DOM node:
+
 ```js
-class CustomTextInput extends React.Component {
+import React from 'react'
+
+export default class RefCallback extends React.Component {
   constructor(props) {
     super(props);
     this.focus = this.focus.bind(this);
+    this.displayInput = this.displayInput.bind(this);
   }
 
   focus() {
     // Explicitly focus the text input using the raw DOM API
     this.textInput.focus();
+  }
+  displayInput() {
+    // grab the text using the DOM API
+    console.log(this.textInput.value);
   }
 
   render() {
@@ -76,6 +85,7 @@ class CustomTextInput extends React.Component {
           type="button"
           value="Focus the text input"
           onClick={this.focus}
+          onMouseOver={this.displayInput}
         />
       </div>
     );
@@ -85,7 +95,7 @@ class CustomTextInput extends React.Component {
 
 ### getDOMNode()
 
-In some tutorials you may see a method called `getDOMNode`, this is deprecated and should **not** be used. You can learn more about the changes [here](http://stackoverflow.com/questions/30190608/react-js-the-difference-between-finddomnode-and-getdomnode)
+In some tutorials you may see a method called `getDOMNode`, this is deprecated and should **not** be used. You can learn more about the changes [here](http://stackoverflow.com/questions/30190608/react-js-the-difference-between-finddomnode-and-getdomnode). If you MUST get access to the dom node, using the ref callback is the preferred way of doing so.
 
 ### When not to use refs
 

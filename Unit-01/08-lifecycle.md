@@ -15,7 +15,7 @@ When a component get's rendered for the first time, we can tap into quite a few 
 
 #### GetDefaultProps
 
-First, a component is given default props, getDefaultProps can be used to define any default props which can be accessed via this.props.  The invo­ca­tion of get­De­fault­Props actu­ally takes place once before any instance of the com­po­nent is cre­ated and the return value is shared among all instances of the com­po­nent. 
+First, a component is given default props, `getDefaultProps` can be used to define any default props which can be accessed via this.props.  The invo­ca­tion of get­De­fault­Props actu­ally takes place once before any instance of the com­po­nent is cre­ated and the return value is shared among all instances of the com­po­nent. 
 
 ```js
 getDefaultProps(){
@@ -25,7 +25,7 @@ getDefaultProps(){
 
 #### GetInitialState
 
-The getInitialState method enables to set the initial state value, that is accessible inside the component via this.state. In the `React.createClass()` syntax, we have a special method called `getInitialState`. Using the `es2015 class syntax`, we place our initial state in the `constructor` function in our `class`.
+The `getInitialState` method enables to set the initial state value, that is accessible inside the component via this.state. In the `React.createClass()` syntax, we have a special method called `getInitialState`. Using the `es2015 class syntax`, we place our initial state in the `constructor` function in our `class`.
 
 ```js
 class App extends Component {
@@ -117,25 +117,14 @@ componentWillReceiveProps(nextProps) {
 }
 ```
 
-#### shouldComponentUpdate
+#### Next cycles:
 
-```js
-```
+After `componentWillReceiveProps`, the following events occur (similar to before):
 
-#### componentWillUpdate
-
-```js
-```
-
-#### Render
-
-```js
-```
-
-#### componentDidUpdate
-
-```js
-```
+- shouldComponentUpdate
+- componentWillUpdate
+- Render
+- componentDidUpdate
 
 ### Removing a component (unmounting)
 

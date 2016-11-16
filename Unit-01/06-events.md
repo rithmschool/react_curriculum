@@ -54,7 +54,65 @@ class App extends Component {
     }
 }
 
-### Accessing the event object
+### Passing event handlers from parents to children
+
+Very commonly, when we want to change data in a child component, we can not simply do that as the data is stored in props. In order to change this data, we need to re-render the component and pass down new state from a parent. Let's imagine that we have a list of Instructor components and we can delete individual instructors. You can run this example [here](./examples/events).
+
+The idea is that we pass down an event listener to our child component, that runs a function in the parent component which can then change the state and re-render necessary child components. Here is what our parent component might look like:
+
+```jsx
+export default class InstructorList extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            instructors: ["Elie", "Matt", "Tim"]
+        }
+    }
+    handleRemove(idx){
+        let {instructors} = this.state
+        let newInstructors = instructors.slice(0, idx).concat(instructors.slice(idx+1))
+        this.setState({
+            instructors: newInstructors
+        })
+    }
+    render(){
+        let instructors = this.state.instructors.map((name,idx) => {
+            return(
+                <div key={idx}>
+                    <Instructor removeInstructor={this.handleRemove.bind(this,idx)} name={name}></Instructor>
+                </div>
+            )
+        })
+        return(
+                <div>
+                    {instructors}
+                </div>
+            )
+    }
+}
+```
+
+And our child component can look like this:
+
+```jsx
+import React, {Component} from "react";
+
+export default class Instructor extends Component {
+    constructor(props, name){
+        super(props)
+        this.name = name
+    }
+    render(){
+        return(
+                <div>
+                    <h2>This instructor's name is {this.props.name} <button onClick={this.props.removeInstructor}>X</button></h2>
+                </div>
+            )
+    }
+}
+```
+
+You can also use the event object in your components using the keyword `event` inside of your handlers.  
 
 ### Exercise
 

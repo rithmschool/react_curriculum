@@ -11,9 +11,7 @@ By the end of this chapter, you should be able to:
 
 ### Component Hierarchy
 
-One of the best tutorials on how to structure React applications and determine what should be a component is from the docs [here](https://facebook.github.io/react/docs/thinking-in-react.html).
-
-Since React applications are 
+As you continue to build React applications, you will begin to better understand just how much logic should go into a component before splitting into multiple components. One of the best tutorials on how to structure React applications and determine what should be a component is from the docs [here](https://facebook.github.io/react/docs/thinking-in-react.html).
 
 ### Structuring React Applications
 
@@ -34,7 +32,7 @@ Another important thing to think about when building React applications is a fol
 
 ### React Dev Tools
 
-Facebook offers a very helpful debugging tool for React called the React Developer Tools, which is an extention for the Chrome Dev Tools. You can install it [here](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+Facebook offers a very helpful debugging tool for React called the React Developer Tools, which is an extention for the Chrome Dev Tools. You can install it [here](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi). This will give you access to a tab called "React" in the chrome dev tools where you can examine your components and see all essential information about them. 
 
 ### Exercise
 
