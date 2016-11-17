@@ -18,12 +18,30 @@ The other option is to make everything one large application and have the server
 First - let's start with a new folder structure
 
 ```sh
+├── Procfile
+├── package.json
+├── requirements.txt
+├── runtime.txt
+├── webpack.config.js
+├── client
+│   ├── index.html
+│   └── js
+│       ├── components
+│       │   └── App.jsx
+│       └── index.js
+├── server
+│   ├── app.py
+│   ├── manager.py
+│   └── project
+│       ├── __init__.py
+│       ├── puppies
+│       │   └── views.py
+│       └── users
+│             ├── models.py 
+└──           └── views.py
 ```
 
-### Including react-router browserHistory
-
-### Authentication
 
 ### Exercise
 
-#### [⇐ Previous](./05-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-react_native.md)
+#### [⇐ Previous](./05-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-backend_continued.md)

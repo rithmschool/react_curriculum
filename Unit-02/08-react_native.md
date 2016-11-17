@@ -1,4 +1,4 @@
-#### [⇐ Previous](./06-backend.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-unit_2_assessment.md)
+#### [⇐ Previous](./07-backend_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_2_assessment.md)
 
 # React Native
 
@@ -54,10 +54,10 @@ On ios there is not a great way to log information outside of Xcode and debuggin
 import StyleSheet from 'react-native'
 
 StyleSheet.create({
-	main:{
-		color: 'red',
-		backgroundColor: 'green'
-	}
+    main:{
+        color: 'red',
+        backgroundColor: 'green'
+    }
 })
 ```
 
@@ -65,12 +65,12 @@ Since each of our elements are `display:flex` already, we can add flexbox proper
 
 ```js
 StyleSheet.create({
-	main:{
-		color: 'red',
-		backgroundColor: 'green'
-		alignItems: 'center',
-		justifyContent: 'center
-	}
+    main:{
+        color: 'red',
+        backgroundColor: 'green'
+        alignItems: 'center',
+        justifyContent: 'center
+    }
 })
 ```
 
@@ -80,9 +80,9 @@ React Native uses the Fetch API for making external requests. Here is how we can
 
 ```js
 componentWillMount(){
-	fetch('https://www.omdbapi.com?t=titanic', {'Accept': 'application/json'})
-	.then(response => response.json())
-	.then(data => console.log(data))
+    fetch('https://www.omdbapi.com?t=titanic', {'Accept': 'application/json'})
+    .then(response => response.json())
+    .then(data => console.log(data))
 }
 ```
 
@@ -100,4 +100,4 @@ We now can use these native libraries just like javascript packages!
 
 Siphon / Codepush / AppHub
 
-#### [⇐ Previous](./06-backend.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-unit_2_assessment.md)
+#### [⇐ Previous](./07-backend_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_2_assessment.md)
