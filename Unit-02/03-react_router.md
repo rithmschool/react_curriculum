@@ -96,17 +96,40 @@ const App = () => (
 render(<App/>, document.getElementById('app'))
 ```
 
-You **must** have a server configured for browserHistory to work - we'll come back to this.
+### BrowserHistory
+
+If you would like to remove the `/#/` in the URL, we can use `browserHistory` instead of `hashHistory`. 
+
+`import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router'
+
+`<Router history={browserHistory}>`
+
+`webpack-dev-server --inline --content-base . --history-api-fallback`
 
 ### Linking routes
 
 ```js
 import {Link} from 'react-router'
+
+const Main = () => {
+    return(
+        <div>Hello from main!
+            <Link to='/first'>First</Link> |
+            <Link to='/second'>Second</Link>
+        </div>
+        )
+    }
 ```
 
 ### 404
+const NotFound = () => (
+  <h1>404.. This page is not found!</h1>)
+
+`<Route path='*' component={NotFound} />`
 
 ### Nested Routes
+
+When using nested routes, make sure the parent route contains {this.props.children} or {props.children} if using a simple component.
 
 ```js
 import {Router, Route, hashHistory, IndexRoute} from 'react-router'
@@ -139,10 +162,23 @@ const App = () => (
 render(<App/>, document.getElementById('app'))
 ```
 
-
 ### Active Links
 
 ### Index Routes + Links
+
+const Users = (props) => {
+    return(
+            <div>
+                <Link activeStyle={{ color: 'red' }} to='/first'>First</Link> |
+                <Link activeStyle={{ color: 'red' }} to='/second'>Second</Link>
+                <Link activeStyle={{ color: 'red' }} to='/users/Elie'>Elie</Link>
+                <Link activeClassName="active" to='/users/Matt'>Matt</Link>
+                <Link activeClassName="active" to='/users/Tim'>Tim</Link>
+                <h1>Hello Users!</h1>
+                {props.children}
+            </div>
+        )
+}
 
 ### URL Parameters and Query String access
 
@@ -181,6 +217,7 @@ const Info = (props) => <div>Hello {props.params.name}!</div>
 
 class App extends Component {
     sayHello(nextState, data){
+        console.log("HELLO!")
         debugger
     }
     render(){
@@ -198,7 +235,7 @@ class App extends Component {
 render(<App/>, document.getElementById('app'))
 ```
 
-**onEnter** - You can add this hook to run when a route happens 
+**onEnter** - You can add this hook to run when a route happens. This is very useful for authentication and ensuring only certain users can access certain routes.
 
 ### Exercise
 
