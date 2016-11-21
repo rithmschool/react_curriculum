@@ -71,7 +71,7 @@ var App = React.createClass({
         } else {
             <h1>Hello Anything else!</h1>
         }
-    }
+    },
     render: function(){
         if(this.props.info === "thing"){
             var data = "nice!"
