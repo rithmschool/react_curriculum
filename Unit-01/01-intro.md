@@ -12,7 +12,7 @@ By the end of this chapter, you should be able to:
 
 ### Introduction
 
-React is a wonderful library for the view layer. You can use React on its own for a single page application as it is very unopinionated. This is a stark contrast to frameworks like Angular, which have their own entire standard for how to build front-end applications. The idea behind React is to create a UI that is comprised of `components`. Components are pieces of UI code that can be composed together to form larger UIs. Components can render HTML, or other components, or even pass properties from one component to another.
+React is a wonderful library for the view layer. You can use React on its own for a single page application as it is very un-opinionated.  This is a stark contrast to frameworks like Angular, which have their own entire standard for how to build front-end applications. The idea behind React is to create a UI that is comprised of `components`. Components are pieces of UI code that can be composed together to form larger UIs. Components can render HTML, or other components, or even pass properties from one component to another. 
 
 What makes React so wonderful is that its API is quite small and it has a relatively small learning curve, unlike other frameworks. React also enforces some of the best practices in JavaScript and web development, which make it a great library to learn even if you don't use it every day. However, there are a couple tools like `webpack` which add some complexity, but we will be going through them in great detail. When you start reading about React, you may hear terms like es2015 modules, JSX, redux and all sorts of other buzz words, but to get started with React - you just need to write a little bit of JavaScript! 
 
@@ -58,8 +58,8 @@ If we open this in the browser we should see "Hello World!". This may look quite
 </head>
 <body>
     <div id="app"></div>
-    <script src ="https://fb.me/react-15.0.0-rc.1.js"></script>
-    <script src="https://fb.me/react-dom-15.0.0-rc.1.js"></script>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
     <script>
         
         // React is a global from the React library
@@ -91,7 +91,7 @@ If we open this in the browser we should see "Hello World!". This may look quite
 </html>
 ```
 
-Now let's see what that looks like! We just made up our own component and we can start using it anywhere! But our components are pretty rigid, how can we add some flexibilty to them! Let's introduce a concept called `props`. We can think of these as "properties" for our components. Let's see what they look like.
+Now let's see what that looks like! We just made up our own component and we can start using it anywhere! But our components are pretty rigid, how can we add some flexibility to them! Let's introduce a concept called `props`. We can think of these as "properties" for our components. Let's see what they look like.
 
 ```html
 ```html
@@ -103,8 +103,8 @@ Now let's see what that looks like! We just made up our own component and we can
 </head>
 <body>
     <div id="app"></div>
-    <script src ="https://fb.me/react-15.0.0-rc.1.js"></script>
-    <script src="https://fb.me/react-dom-15.0.0-rc.1.js"></script>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
     <script>
         
         // React is a global from the React library

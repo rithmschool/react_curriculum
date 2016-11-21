@@ -56,8 +56,11 @@ module.exports = {
         // where does it go?
         path: './',
         // what is the file called?
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        // and where should our server find the bundle and other loaders find static files?
+        publicPath: './'
     },
+    // how can we debug our bundle? for production, we can use 'source-map'
     devtool: 'inline-source-map'
     module: {
     loaders: [{
@@ -249,6 +252,43 @@ class App extends Component {
 
 render(<App/>, document.getElementById("app"))
 ```
+
+### Webpack-dev-server
+
+Instead of building and refreshing the page each time, we can use a lightweight server to start our applications. This involes installing wepack-dev-server and running webpack-dev-server in the terminal. We can include additional configuration in our webpack.config.js. We can also pass other flags to our webpack-dev-server command including hot module reloading (reloading the same state without needing to refresh the page!) using --hot when we start the server.
+
+### Webpack for production
+
+The easiest way to minify and compress files is to run `webpack -p` and then include that file, but how can we distinguish between production and development environments? The best way is to not export an object, but a function!
+
+```
+module.exports = (env) => {
+  return {
+      // config goes here
+      devtool: env.prod ? 'source-map': 'inline-source-maps'
+    }
+}
+```
+
+`webpack -p --env.prod`
+
+If you don't want to use ternary operators there is a module called `webpack-utils` which provides nice helper functions for determining if in production or not.
+
+### Webpack validator
+
+To make things **much** easier when working with webpack we can install the webpack-validator module, require it in our `webpack.config.js` file and call it around the module.exports
+
+```
+module.exports = () => {
+  return webpackValidator({
+      // config goes here
+    })
+}
+```
+
+### Configuring SASS/LESS or Stylus
+
+To add a CSS preprocessor, we just have to add a loader for SCSS, and a style loader and make sure they are added to the loaders array!
 
 ### Using Class syntax vs. createClass
 

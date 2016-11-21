@@ -1,5 +1,5 @@
 module.exports = {
-    entry: './index.js',
+    entry: './js/index.js',
     output: {
         filename: 'bundle.js',
         path: './'
@@ -7,7 +7,7 @@ module.exports = {
     module: {
         loaders:[{
             loader: 'babel',
-            test: /\.js$/,
+            test: /\.jsx?$/,
             exclude: /node_modules/
         }]
     },

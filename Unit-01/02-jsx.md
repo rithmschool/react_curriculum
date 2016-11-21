@@ -34,8 +34,8 @@ Make sure that you have the `javascript-babel` syntax highlighting for Sublime o
 In order to convert our JSX to JavaScript (what we wrote before), we need to transpile our code. Our tool to transpile is going to be `babel`. To include babel, we can add the cdn `<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>` and include a script with an attribute of `text/babel`
 
 ```html
-<script src ="https://fb.me/react-15.0.0-rc.1.js"></script>
-<script src="https://fb.me/react-dom-15.0.0-rc.1.js"></script>
+<script src="https://unpkg.com/react@15/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
 <script type="text/babel"></script>
 ```

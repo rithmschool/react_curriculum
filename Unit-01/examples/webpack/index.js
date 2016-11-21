@@ -14,5 +14,3 @@ console.log(Person.isPerson(p))
 
 console.log(p.fullName())
 
-console.log(printStudents())
-
