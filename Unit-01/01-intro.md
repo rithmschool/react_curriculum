@@ -27,8 +27,8 @@ Let's jump in an write our first React code! To get started, let's make sure we 
 </head>
 <body>
     <div id="app"></div>
-    <script src ="https://fb.me/react-15.0.0-rc.1.js"></script>
-    <script src="https://fb.me/react-dom-15.0.0-rc.1.js"></script>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
     <script>
         // React is a global from the React library
         var div = React.DOM.div; // let's create a div!
