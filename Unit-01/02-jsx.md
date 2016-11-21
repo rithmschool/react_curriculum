@@ -82,7 +82,6 @@ var App = React.createClass({
                 <div>
                     {this.props.info}
                     {data}
-                    }
                     {this.determineInfo()}
                     {this.props.info == "awesome" ? 
                         <h1>Nice!</h1>
