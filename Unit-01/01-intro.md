@@ -14,7 +14,7 @@ By the end of this chapter, you should be able to:
 
 React is a wonderful library for the view layer. You can use React on its own for a single page application as it is very un-opinionated.  This is a stark contrast to frameworks like Angular, which have their own entire standard for how to build front-end applications. The idea behind React is to create a UI that is comprised of `components`. Components are pieces of UI code that can be composed together to form larger UIs. Components can render HTML, or other components, or even pass properties from one component to another. 
 
-What makes React so wonderful is that its API is quite small and it has a relatively small learning curve, unlike other frameworks. React also enforces some of the best practices in JavaScript and web development, which make it a great library to learn even if you don't use it every day. However, there are a couple tools like `webpack` which add some complexity, but we will be going through them in great detail. When you start reading about React, you may hear terms like es2015 modules, JSX, redux and all sorts of other buzz words, but to get started with React - you just need to write a little bit of JavaScript! 
+What makes React so wonderful is that its API is quite small and it has a relatively small learning curve, unlike other frameworks. React also enforces some of the best practices in JavaScript and web development, which make it a great library to learn even if you don't use it every day. There are a couple tools like `webpack` which add some complexity, but we will be going through them in great detail. When you start reading about React, you may hear terms like es2015 modules, JSX, redux and all sorts of other buzz words, but to get started with React, you just need to write a little bit of JavaScript! 
 
 Let's jump in an write our first React code! To get started, let's make sure we have the two scripts necessary for rendering a component in the DOM. The first is the React library and the second is the ReactDOM library, which is used for rendering to the DOM. These libraries are isolated as there are environments where we can use React and not have access to a DOM (like mobile development, game development or even command line scripts).
 
@@ -47,7 +47,9 @@ Let's jump in an write our first React code! To get started, let's make sure we 
 </html>
 ```
 
-If we open this in the browser we should see "Hello World!". This may look quite strange, so lets talk more about what we did. `div`, `h1` are actually functions, and `null` that we pass in is an attribute and the second is the innerHTML for that element. Now we said that React is all about "components", but we have just been using existing HTML elements so let's make another one!
+If we open this in the browser we should see "Hello World!". This may look quite strange, so let's talk more about what we did. `div` and `h1` are actually functions, `null` that we pass in is an attribute, and the second argument to each function is the innerHTML for that element. 
+
+Now we said that React is all about "components," but so far we have just been using existing HTML elements. Let's change things up by writing our first bona-fide React component.
 
 ```html
 <!DOCTYPE html>
@@ -91,7 +93,11 @@ If we open this in the browser we should see "Hello World!". This may look quite
 </html>
 ```
 
-Now let's see what that looks like! We just made up our own component and we can start using it anywhere! But our components are pretty rigid, how can we add some flexibility to them! Let's introduce a concept called `props`. We can think of these as "properties" for our components. Let's see what they look like.
+Now let's see what that looks like! We just made up our own component and we can start using it anywhere! 
+
+Our first component is still fairly rigid, however. It will have the same structure and content no matter where we put it. It would be better if we could add some flexibility to it; for instance, it might be nice if we could modify the text inside of the component when it renders.
+
+To acheive this goal, let's introduce a concept called `props`. We can think of these as "properties" for our components. Here's an example of what they look like:
 
 ```html
 <!DOCTYPE html>
@@ -139,10 +145,10 @@ Now let's see what that looks like! We just made up our own component and we can
 </html>
 ```
 
-So we've done some pretty cool stuff here, but you might be thinking - this syntax is a bit strange. Thankfully there is another way of using JavaScript to write HTML with a language called `JSX`. JSX might be a bit tricky to get used to at first, but it's the standard when writing React and can do some pretty incredible things once you get used to it.
+We've done some pretty cool stuff here, but you might be thinking that this syntax is a bit strange. Fortunately, there is another way of using JavaScript to write HTML with a language called `JSX`. `JSX` might be a bit tricky to get used to at first, but it's the standard when writing React and can do some pretty incredible things once you get used to it. We'll dig into `JSX` in the next chapter.
 
 ### Exercise
 
-
+Complete the [intro to React](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/01-intro/readme.md) exercise.
 
 #### [Table of Contents](./../readme.md) | [Next ⇒](./02-jsx.md)
