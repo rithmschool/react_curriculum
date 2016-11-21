@@ -26,6 +26,7 @@ Another important thing to think about when building React applications is a fol
 │   │   ├── App.jsx
 │   │   └── Main.jsx
 │   └── index.js
+├── index.html
 ├── package.json
 └── webpack.config.js
 ```
