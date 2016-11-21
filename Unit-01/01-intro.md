@@ -94,7 +94,6 @@ If we open this in the browser we should see "Hello World!". This may look quite
 Now let's see what that looks like! We just made up our own component and we can start using it anywhere! But our components are pretty rigid, how can we add some flexibility to them! Let's introduce a concept called `props`. We can think of these as "properties" for our components. Let's see what they look like.
 
 ```html
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
