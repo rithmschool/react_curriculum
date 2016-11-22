@@ -6,7 +6,7 @@
 
 By the end of this chapter, you should be able to:
 
-- Understand how to architect and application using components
+- Understand how to architect an application using components
 - Explain what component hierarchy is and diagram a simple component based application
 
 ### Component Hierarchy
@@ -15,7 +15,7 @@ As you continue to build React applications, you will begin to better understand
 
 ### Structuring React Applications
 
-Another important thing to think about when building React applications is a folder structure! For now we will be placing our `bundle.js` in the root directory and our javascript (our components and `index.js` file in a `js` folder). We will also make sure we have a `.gitignore` file for our node modules
+Another important thing to think about when building React applications is a folder structure! For now we will be placing our `bundle.js` in the root directory and our javascript (our components and `index.js` file) in a `js` folder. We will also make sure we have a `.gitignore` file for our node modules:
 
 ```sh
 .
