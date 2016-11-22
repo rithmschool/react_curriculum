@@ -78,7 +78,7 @@ When state is changed, the `render` is called **again**. This is very important 
 
 ### Initializing state
 
-Let's create some
+Let's create some state!
 
 ```js
 import React, {Component} from 'react'
