@@ -11,17 +11,19 @@ By the end of this chapter, you should be able to:
 
 ### Introduction + Installing Webpack
 
-So what is `webpack`? You will commonly hear it defined as a module bundler, or build tool. It allows us to easily create modules and then bundle our code together. This makes it very easy for us to write modular code using common.js modules (node.js syntax with `require`) or es2015 modules (with a very similar syntax to python modules).
+So what is `webpack`? You will commonly hear it defined as a module bundler, or build tool. We learned about modules in Python; in that context, a module was just a chunk of code that had been encapsulated into its own file. While a similar system is coming to JavaScript, it isn't quite there yet; in the meantime, tools like `webpack` let us create modules in a relatively seamless way. In other words, `webpack` allows us to easily create modules and then bundle our code together. This makes it very easy for us to write modular code using common.js modules (node.js syntax with `require`) or es2015 modules (with a very similar syntax to python modules).
+
+To install `webpack`, you must have installed `node`. From the terminal, you can then run:
 
 `npm install -g webpack`
 
 ### Essential Files
 
-#### package.json
+#### `package.json`
 
-Since we will be using `npm` which is the package manager for `node.js` to fetch packages (react, webpack etc). We will want to create a `package.json`. A package.json is a file that describes the application you are building and lists all of the dependencies and development dependencies (which are not installed in production). 
+Since we will be using `npm` which is the package manager for `node.js` to fetch packages (`react`, `webpack` etc). We will want to create a `package.json`. A package.json is a file that describes the application you are building and lists all of the dependencies and development dependencies (which are not installed in production). The dependencies section of a `package.json` is very similar to what you see when you type `pip list` in the terminal for one of your Python projects.
 
-To create a package.json file you can type in `npm init` and then add whatever additional information you want or just keep pressing enter. Almost all of the time, you will not need to edit this file when initializing so you can pass in the `-y` flag to confirm everything.
+To create a `package.json` file you can type in `npm init` and then add whatever additional information you want or just keep pressing enter. Almost all of the time, you will not need to edit this file when initializing so you can pass in the `-y` flag to confirm everything.
 
 Let's create our first package.json file using `npm init -y`
 
@@ -61,11 +63,11 @@ module.exports = {
         publicPath: './'
     },
     // how can we debug our bundle? for production, we can use 'source-map'
-    devtool: 'inline-source-map'
+    devtool: 'inline-source-map',
     module: {
     loaders: [{
       // what loader are we using
-      loader: 'babel'
+      loader: 'babel',
       // what files should we look for
       test: /\.js$/,
       // what files should we exclude
@@ -91,7 +93,7 @@ Another nice tool we can use is the webpack-dev-server which watches for changes
 
 ### ES2015 modules 
 
-Before we start learning about ES2015 modules, let's make sure have a proper setup, files and folder structure. We will be using an entry file called `index.js` and a file called `index.html` to serve content and a folder called `helpers` with some helper files. Here is what our folder structure should look like
+Before we start learning about ES2015 modules, let's make sure we have a proper setup, including a well-organized file and folder structure. We will be using an entry file called `index.js` and a file called `index.html` to serve content, and a folder called `helpers` with some helper files. Here is what our folder structure should look like
 
 ```sh
 .
@@ -146,7 +148,7 @@ export {instructor, instructor2, instructor3}
 
 #### default
 
-If we want to export a single value or to have a fallback value for our module, we could use a default export. It is not possible to use var, let or const with export default.
+If we want to export a single value or to have a fallback value for our module, we can use a default export. It is not possible to use `var`, `let`, or `const` with export default.
 
 Inside `helpers/default.js`
 
@@ -187,7 +189,7 @@ console.log(Person.isPerson(p))
 console.log(p.fullName())
 ```
 
-There are quite a few things we can do with the `import` keyword, you can read about it [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+There are quite a few things we can do with the `import` keyword, you can read about it [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
 ### Using webpack with React
 
@@ -230,7 +232,7 @@ and a `.babelrc file`
 
 ### React with es2015 class syntax
 
-Now that we have included React into our application, we can create React components using `ES2015 syntax!`. This syntax is a bit different then `React.createClass()`, but it is the standard in Facebook docs and Facebook is eventually planning on removing `createClass` from React (but it will not be for a long time). Here's what that syntax looks like
+Now that we have included React into our application, we can create React components using `ES2015 syntax!`. This syntax is a bit different then `React.createClass()`, but it is the standard in Facebook docs and Facebook is eventually planning on removing `createClass` from React (but not for a long time). Here's what that syntax looks like
 
 ```js
 import React, {Component} from 'react'
@@ -295,5 +297,7 @@ To add a CSS preprocessor, we just have to add a loader for SCSS, and a style lo
 You can read more about the differences between these two [here](https://toddmotto.com/react-create-class-versus-component). There are quite a few opinions as to which one is better, but we will be using the `class` syntax as that is what the docs use and will continue to use. They both accomplish the same thing, but have some syntax differences. 
 
 ### Exercise
+
+Complete the [webpack](https://github.com/rithmschool/react_curriculum_exercises/tree/master/Unit-01/03-webpack) exercises.
 
 #### [⇐ Previous](./02-jsx.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-components.md)
