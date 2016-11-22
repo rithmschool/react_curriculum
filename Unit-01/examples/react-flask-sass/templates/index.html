@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='bundle.css')}}">
+</head>
+<body>
+    <h1>Dope!</h1>
+    <div id="app"></div>
+    <p> Server side data!
+    {% for name in names %}
+        {{name}}
+    {% endfor %}
+    </p>
+    <script type="text/javascript" src="{{ url_for('static', filename='bundle.js') }}"></script>
+</body>
+
+</html>
