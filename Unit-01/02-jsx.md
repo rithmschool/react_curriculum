@@ -25,7 +25,7 @@ var App = React.createClass({
 })
 ```
 
-Instead of using `React.DOM` we can actually write HTML that gets converted into that code! But how do we "convert" our JSX into JavaScript? We need a little bit of help from a transpiler. Enter `babel`.
+Instead of using `React.DOM` we can actually use JSX to write HTML inside of our JavaScript code! But how do we "convert" our JSX into JavaScript? We need a little bit of help from a transpiler. Enter `babel`.
 
 Make sure that you have the `javascript-babel` syntax highlighting for Sublime or else you will get some pretty ugly looking code.
 
@@ -50,18 +50,20 @@ var App = React.createClass({
                 <div>
                     {this.props.info}
                     <h1 style = {style}> Hello World!</h1>
-                    }
                 </div>
             )
     }
 })
-```
 
-So what we have done is good for learning the very basics of React, but as we build larger applications, we need a better tool for transpiling our code and `webpack` is going to help us do that. Webpack is a standard when writing React code and it has a very steep learning curve, but with a little bit of practice you'll get the hang of it. Not only does it allow us to easily include `babel`, and it gives us access to easily use some of the best and latest features in JavaScript, specifically `modules`.
+ReactDOM.render(
+    <App info="boom"/>,
+    document.getElementById('app')
+)
+```
 
 ### Conditional JSX
 
-Very commonly we want to add conditional logic to our JSX. We can add ternary logic, or isolate or information into a separate function, or place code inside of render.
+Very commonly we want to add conditional logic to our JSX. We can add ternary logic, or isolate our information into a separate function, or place code inside of `render`.
 
 ```js
 var App = React.createClass({
@@ -94,6 +96,10 @@ var App = React.createClass({
 })
 ```
 
+What we've learned so far is fine for the very basics of React, but as we build larger applications, we need a better tool for transpiling our code, and `webpack` is going to help us do that. Webpack is a standard when writing React code and it has a very steep learning curve, but with a little bit of practice you'll get the hang of it. Not only does it allow us to easily include `babel`, it also gives us access to some of the best and latest features in JavaScript, specifically `modules`. We'll talk about webpack in the next chapter.
+
 ### Exercise
+
+Complete the [JSX](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/02-jsx/readme.md) exercises.
 
 #### [⇐ Previous](./01-intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-webpack.md)
