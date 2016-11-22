@@ -34,6 +34,7 @@ render(</App>, document.getElementById("main"))
 
 ### Binding with `this`
 
+```js
 import React, {Component} from 'react'
 import {render} from 'react-dom'
 
@@ -53,6 +54,7 @@ class App extends Component {
         </div>
     }
 }
+```
 
 ### Passing event handlers from parents to children
 
