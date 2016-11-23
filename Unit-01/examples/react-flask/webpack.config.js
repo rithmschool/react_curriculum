@@ -1,8 +1,12 @@
 module.exports = {
-  entry: "./js/index.js",
+  entry: {
+    index: "./js/index.js",
+    new: "./js/new.js",
+  },
+  devtool: 'inline-source-map',
   output: {
     path: __dirname + '/static',
-    filename: "bundle.js"
+    filename: "[name].js"
   },
   module: {
     loaders: [
