@@ -26,7 +26,11 @@ Now let's make our `webpack.config.js` and `.babelrc` file:
 
 ### Mocha / Chai
 
-Let's make a new folder called `test`. This is what `mocha` needs to run tests. Inside of here let's make a directory called `helpers` and make a file called `setup.js`. The code here is taken from [here](https://github.com/kentcdodds/react-mocha-workshop/blob/master/test/helpers/setup-test-env.js), which is a great resource to learn more about testing
+Let's first make sure we install the required dev-dependencies:
+
+`npm install --save-dev babel-polyfill babel-register react-addons-test-utils jsdom`
+
+Now let's make a new folder called `test`. This is what `mocha` needs to run tests. Inside of here let's make a directory called `helpers` and make a file called `setup.js`. The code here is taken from [here](https://github.com/kentcdodds/react-mocha-workshop/blob/master/test/helpers/setup-test-env.js), which is a great resource to learn more about testing. 
 
 ```js
 require('babel-register')
@@ -49,8 +53,6 @@ describe("<App/>", function(){
   });
 });
 ```
-
-`npm install --save-dev babel-polyfill babel-register react-addons-test-utils jsdom`
 
 And then run:
 

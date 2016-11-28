@@ -58,9 +58,7 @@ module.exports = {
         // where does it go?
         path: './',
         // what is the file called?
-        filename: 'bundle.js',
-        // and where should our server find the bundle and other loaders find static files?
-        publicPath: './'
+        filename: 'bundle.js'
     },
     // how can we debug our bundle? for production, we can use 'source-map'
     devtool: 'inline-source-map',
@@ -288,13 +286,62 @@ module.exports = () => {
 }
 ```
 
+### Resolve
+
+When we import our files, we have to include the extentions like this:
+
+```js
+import App from './components/App.jsx'
+import Second from './components/utils/Second.jsx'
+```
+
+There is a handy key in the `webpack.config.js` called `resolve`, which helps us with this. Many `webpack.config.js` files have a resolve extensions property that has an empty string like shown below. The empty string is there to help resolve imports without extensions
+
+```
+{
+    resolve: {
+      extensions: [‘’, ‘.js’, ‘.jsx’]
+    }
+}
+```
+
+### PublicPath
+
+```
+// update the URLs inside CSS, HTML files when generating production builds.
+        publicPath: './'
+```
+
+You can read more about it [here](https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9#.rnhxkn9rc)
+
 ### Configuring SASS/LESS or Stylus
 
-To add a CSS preprocessor, we just have to add a loader for SCSS, and a style loader and make sure they are added to the loaders array!
+To add a CSS preprocessor, we just have to add a loader for SCSS, and a style loader and make sure they are added to the loaders array! 
+
+Similarly extract-text-webpack-plugin internally uses css-loader and style-loader to gather all the CSS into one place and finally extracts the result into a separate external styles.css file and includes the link to style.css into index.html. This is helpful if we do not want to inline all of our CSS which is what will happen without this plugin.
+
+```js
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+module: {
+    loaders: [{
+      test: /\.css$/, 
+      loader:ExtractTextPlugin.extract("style-loader","css-loader") 
+    }]
+},
+plugins: [
+    new ExtractTextPlugin("styles.css") //Extract to styles.css file
+  ]
+}
+```
 
 ### Using Class syntax vs. createClass
 
 You can read more about the differences between these two [here](https://toddmotto.com/react-create-class-versus-component). There are quite a few opinions as to which one is better, but we will be using the `class` syntax as that is what the docs use and will continue to use. They both accomplish the same thing, but have some syntax differences. 
+
+### External Resources
+
+[- https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9#.ahhz90ekm ](- https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9#.ahhz90ekm )
 
 ### Exercise
 

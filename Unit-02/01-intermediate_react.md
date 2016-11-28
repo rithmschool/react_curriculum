@@ -118,7 +118,6 @@ var Component = function (){
 
 [https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures](https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures)
 
-
 ### Additional Resources
 
 [https://camjackson.net/post/9-things-every-reactjs-beginner-should-know](https://camjackson.net/post/9-things-every-reactjs-beginner-should-know)
