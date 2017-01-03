@@ -1,4 +1,4 @@
-#### [⇐ Previous](./03-webpack.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-props_state.md)
+#### [⇐ Previous](./03-webpack.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-props_state.md)
 
 # Component Architecture
 
@@ -37,4 +37,4 @@ Facebook offers a very helpful debugging tool for React called the React Develop
 
 ### Exercise
 
-#### [⇐ Previous](./03-webpack.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-props_state.md)
+#### [⇐ Previous](./03-webpack.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-props_state.md)
