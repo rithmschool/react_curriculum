@@ -1,15 +1,20 @@
 module.exports = {
-    entry: './index.js',
-    output: {
-        filename: 'bundle.js',
-        path: './'
-    },
-    module: {
-        loaders:[{
-            loader: 'babel',
-            test: /\.js$/,
-            exclude: /node_modules/
-        }]
-    },
-    devtool: 'inline-source-map'
-}
+  context: __dirname + "/",
+  entry: './index.js',
+  output: {
+    path: __dirname + "/",
+    filename: 'bundle.js'
+  },
+  devtool: 'inline-source-map',
+  module: {
+    rules: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'babel-loader',
+        options: { presets: ['es2015'] }
+      }]
+    }]
+  }
+};
+
