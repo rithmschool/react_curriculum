@@ -13,9 +13,6 @@ By the end of this chapter, you should be able to:
 
 So what is `webpack`? You will commonly hear it defined as a module bundler, or build tool. We learned about modules in Python; in that context, a module was just a chunk of code that had been encapsulated into its own file. While a similar system is coming to JavaScript, it isn't quite there yet; in the meantime, tools like `webpack` let us create modules in a relatively seamless way. In other words, `webpack` allows us to easily create modules and then bundle our code together. This makes it very easy for us to write modular code using common.js modules (node.js syntax with `require`) or es2015 modules (with a very similar syntax to python modules).
 
-To install `webpack`, you must have installed `node`. From the terminal, you can then run:
-
-`npm install -g webpack`
 
 ### Essential Files
 
@@ -29,11 +26,21 @@ Let's create our first package.json file using `npm init -y`
 
 #### Installing dependencies
 
-Now that we have a `package.json` file configured, let's install all the necessary dependencies using `npm install --save babel-core babel-loader babel-preset-es2015`. The `--save` (or `-S`) flag will save the names and versions of these modules to the `package.json` file. This is essential when working with other developers as they can easily install all dependencies if a package.json exists by simply running `npm install`.
+Now that we have a `package.json` file configured, let's install all the necessary dependencies entering the following in your terminal:
+
+```sh
+npm install --save-dev babel-core babel-loader \
+                       babel-preset-es2015 webpack \
+                       webpack-dev-server
+```
+
+The `--save-dev` flag will save the names and versions of these modules to the `package.json` file in a section called `devDependencies`.  `devDependencies` are dependencies that you need for development, but not production code. Listing your dependencies in a package.json file is essential when working with other developers as they can easily install all dependencies by simply running `npm install` in the terminal.
 
 ### Creating our first webpack.config.js
 
 Now that we have a `package.json` and required dependencies. Let's create the configuration file for `webpack`. This file is called `webpack.config.js` - let's see what goes inside.
+
+**context** - the _absolute_ path to your project.  Typically, `__dirname` is used in the path
 
 **entry** - the file where we will start bundling. Usually this file is the one that contains your initial `ReactDOM.render` call.
 
@@ -43,37 +50,44 @@ Now that we have a `package.json` and required dependencies. Let's create the co
 
 **devtool** - this is very useful for debugging purposes. We will be using `inline-source-map` to see where in our bundle errors are occuring.
 
-**module** - this object can contain quite a few things, we are only concerned now with a key called `loaders`
-  - *loaders* - the value is an array of loaders used for transpiling and bundling. Inside of each value in the array, we pass in an object with the following keys
-    - *loader* - what is the name of the loader
+**module** - this object can contain quite a few things, we are only concerned now with a key called `rules`
+
+  - *rules* - the value is an array of rules used for transpiling and bundling. Inside of each value in the array, we pass in an object with the following keys
+    - *use* - the loader to load for this rule.  In the example, the loader will transpile
     - *test* - what files to look for (regular expression)
-    - *exclude* - what files to exclude from bundling 
+    - *exclude* - what files to exclude from bundling
 
 ```js
 module.exports = {
-    // where we start bundling our code
-    entry: 'main.js',
-    // where it gets output to (what our script tag will link to)
-    output: {
-        // where does it go?
-        path: './',
-        // what is the file called?
-        filename: 'bundle.js'
-    },
-    // how can we debug our bundle? for production, we can use 'source-map'
-    devtool: 'inline-source-map',
-    module: {
-    loaders: [{
-      // what loader are we using
-      loader: 'babel',
-      // what files should we look for
+  // The absolute path to your project
+  context: __dirname + "/",
+  // the entry point for our app
+  entry: './main.js',
+  // where to put the compiled output (what our script tag will link to)
+  output: {
+    // where does it go?
+    path: __dirname + "/",
+    // what is the file called?
+    filename: 'bundle.js'
+  },
+  // how can we debug our bundle? for production, we can use 'source-map'
+  devtool: 'inline-source-map',
+  module: {
+    rules: [{
+      //Check for all js files
       test: /\.js$/,
-      // what files should we exclude
+      // Don't include node_modules directory in the search for js files
       exclude: /node_modules/,
+      // Use the babel-loader plugin to transpile the javascript
+      use: [{
+        loader: 'babel-loader',
+        options: { presets: ['es2015'] }
       }]
-    }
-}
+    }]
+  }
+};
 ```
+
 
 #### .babelrc
 
@@ -194,30 +208,40 @@ There are quite a few things we can do with the `import` keyword, you can read a
 Now that we understand how to use modules, let's add React to the mix! We can keep the same exact setup, but just add a few more modules for react and a babel preset!
 
 ```sh
-npm install --save babel-preset-react react react-dom
+npm install --save-dev babel-preset-react react react-dom
 ```
 
-In our `webpack.config.js` we have to make one small change
+In our `webpack.config.js` we have to make one small change.  For the test property inside of our rules, we are changing the test to `/\.jsx?$/`:
 
 ```js
 module.exports = {
-  entry: './index.js',
+  // The absolute path to your project
+  context: __dirname + "/",
+  // the entry point for our app
+  entry: './main.js',
+  // where to put the compiled output (what our script tag will link to)
   output: {
-    path: './',
+    // where does it go?
+    path: __dirname + "/",
+    // what is the file called?
     filename: 'bundle.js'
   },
+  // how can we debug our bundle? for production, we can use 'source-map'
+  devtool: 'inline-source-map',
   module: {
-    loaders: [
-        {
-          loader: 'babel',
-          // if we use jsx we want to be aware of both js and jsx files
-          test: /\jsx?$/,
-          exclude: /node_modules/
-        }
-      ]
+    rules: [{
+      //Check for all js files
+      test: /\.jsx?$/,
+      // Don't include node_modules directory in the search for js files
+      exclude: /node_modules/,
+      // Use the babel-loader plugin to transpile the javascript
+      use: [{
+        loader: 'babel-loader',
+        options: { presets: ['es2015'] }
+      }]
+    }]
   }
-  devtool: 'inline-source-map'
-}
+};
 ```
 
 and a `.babelrc file`
@@ -314,26 +338,6 @@ There is a handy key in the `webpack.config.js` called `resolve`, which helps us
 
 You can read more about it [here](https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9#.rnhxkn9rc)
 
-### Configuring SASS/LESS or Stylus
-
-To add a CSS preprocessor, we just have to add a loader for SCSS, and a style loader and make sure they are added to the loaders array! 
-
-Similarly extract-text-webpack-plugin internally uses css-loader and style-loader to gather all the CSS into one place and finally extracts the result into a separate external styles.css file and includes the link to style.css into index.html. This is helpful if we do not want to inline all of our CSS which is what will happen without this plugin.
-
-```js
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-
-module: {
-    loaders: [{
-      test: /\.css$/, 
-      loader:ExtractTextPlugin.extract("style-loader","css-loader") 
-    }]
-},
-plugins: [
-    new ExtractTextPlugin("styles.css") //Extract to styles.css file
-  ]
-}
-```
 
 ### Using Class syntax vs. createClass
 
