@@ -19,17 +19,17 @@ import {render} from 'react-dom'
 
 class App extends Component {
     handleClick(){
-        alert("click!")
+        alert("click!");
     }
     render(){
-        <div>
+        return (<div>
             <button onClick={this.handleClick}></button>
             <h2>These are the children!</h2>
-        </div>
+        </div>);
     }
 }
 
-render(</App>, document.getElementById("main"))
+render(<App/>, document.getElementById("main"));
 ```
 
 ### Binding with `this`
@@ -40,20 +40,22 @@ import {render} from 'react-dom'
 
 class App extends Component {
     constructor(props,name){
-        super(props)
-        this.name = name
-        this.printName = this.printName.bind(this)
+        super(props);
+        this.name = name;
+        this.printName = this.printName.bind(this);
     }
     handleName(){
-        alert("click!")
+        alert("click!");
     }
     render(){
-        <div>
+        return (<div>
             <button onClick={this.handleName}>{this.props.name}</button>
             <h2>These are the children!</h2>
-        </div>
+        </div>);
     }
 }
+
+render(<App/>, document.getElementById("main"));
 ```
 
 ### Passing event handlers from parents to children
@@ -65,17 +67,17 @@ The idea is that we pass down an event listener to our child component, that run
 ```jsx
 export default class InstructorList extends Component {
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             instructors: ["Elie", "Matt", "Tim"]
-        }
+        };
     }
     handleRemove(idx){
-        let {instructors} = this.state
-        let newInstructors = instructors.slice(0, idx).concat(instructors.slice(idx+1))
+        let {instructors} = this.state;
+        let newInstructors = instructors.slice(0, idx).concat(instructors.slice(idx+1));
         this.setState({
             instructors: newInstructors
-        })
+        });
     }
     render(){
         let instructors = this.state.instructors.map((name,idx) => {
@@ -83,15 +85,17 @@ export default class InstructorList extends Component {
                 <div key={idx}>
                     <Instructor removeInstructor={this.handleRemove.bind(this,idx)} name={name}></Instructor>
                 </div>
-            )
-        })
+            );
+        });
         return(
                 <div>
                     {instructors}
                 </div>
-            )
+            );
     }
 }
+
+render(<InstructorList/>, document.getElementById("main"));
 ```
 
 And our child component can look like this:
@@ -101,15 +105,15 @@ import React, {Component} from "react";
 
 export default class Instructor extends Component {
     constructor(props, name){
-        super(props)
-        this.name = name
+        super(props);
+        this.name = name;
     }
     render(){
         return(
                 <div>
                     <h2>This instructor's name is {this.props.name} <button onClick={this.props.removeInstructor}>X</button></h2>
                 </div>
-            )
+            );
     }
 }
 ```
