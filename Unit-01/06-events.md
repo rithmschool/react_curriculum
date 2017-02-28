@@ -39,23 +39,20 @@ import React, {Component} from 'react'
 import {render} from 'react-dom'
 
 class App extends Component {
-    constructor(props,name){
-        super(props);
-        this.name = name;
-        this.printName = this.printName.bind(this);
-    }
+
     handleName(){
-        alert("click!");
+        alert(this.props.name);
     }
+
     render(){
         return (<div>
-            <button onClick={this.handleName}>{this.props.name}</button>
+            <button onClick={this.handleName.bind(this)}>{this.props.name}</button>
             <h2>These are the children!</h2>
         </div>);
     }
 }
 
-render(<App/>, document.getElementById("main"));
+render(<App name="Matt"/>, document.getElementById("app"));
 ```
 
 ### Passing event handlers from parents to children
