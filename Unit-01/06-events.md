@@ -34,6 +34,8 @@ render(<App/>, document.getElementById("main"));
 
 ### Binding with `this`
 
+Be careful when calling functions that rely on the keyword `this`, as it's very easy to lose the proper context. For example, take a look at the code below. If you forget to use `bind` inside of the `onClick` handler, the alert message will break!
+
 ```js
 import React, {Component} from 'react'
 import {render} from 'react-dom'
@@ -47,6 +49,33 @@ class App extends Component {
     render(){
         return (<div>
             <button onClick={this.handleName.bind(this)}>{this.props.name}</button>
+            <h2>These are the children!</h2>
+        </div>);
+    }
+}
+
+render(<App name="Matt"/>, document.getElementById("app"));
+```
+
+Another solution to this problem is to bind the keyword `this` inside of the constructor. This saves you from having to bind inside of the `render` method:
+
+```js
+import React, {Component} from 'react'
+import {render} from 'react-dom'
+
+class App extends Component {
+    constructor(props) {
+      super(props)
+      this.handleName = this.handleName.bind(this)
+    }
+
+    handleName(){
+        alert(this.props.name);
+    }
+
+    render(){
+        return (<div>
+            <button onClick={this.handleName}>{this.props.name}</button>
             <h2>These are the children!</h2>
         </div>);
     }
