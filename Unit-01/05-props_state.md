@@ -23,10 +23,11 @@ import React, {Component} from 'react'
 import {render} from 'react-dom'
 
 class App extends Component {
+ 
     constructor(props, name){
         super(props)
-        this.name = name
     }
+    
     render(){
         return <div>
                  <h1>Hello {this.props.name}</h1>
