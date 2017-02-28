@@ -105,7 +105,7 @@ Another nice tool we can use is the webpack-dev-server which watches for changes
 
 ### ES2015 modules 
 
-Before we start learning about ES2015 modules, let's make sure we have a proper setup, including a well-organized file and folder structure. We will be using an entry file called `index.js` and a file called `index.html` to serve content, and a folder called `helpers` with some helper files. Here is what our folder structure should look like
+Before we start learning about ES2015 modules, let's make sure we have a proper setup, including a well-organized file and folder structure. We will be using an entry file called `main.js` and a file called `index.html` to serve content, and a folder called `helpers` with some helper files. Here is what our folder structure should look like
 
 ```sh
 .
@@ -113,7 +113,7 @@ Before we start learning about ES2015 modules, let's make sure we have a proper 
 │   └── functions.js
 ├── node_modules
 ├── index.html
-├── index.js
+├── main.js
 ├── package.json
 └── webpack.config.js
 ```
@@ -181,7 +181,7 @@ export default class Person {
 
 #### import
 
-To import modules, we use the `import` keyword. Here is what our `index.js` file looks like:
+To import modules, we use the `import` keyword. Here is what our `main.js` file looks like:
 
 ```js
 import { sayHi, sayBye, instructor,instructor2,instructor3 } from './helpers/functions';
