@@ -111,6 +111,7 @@ Before we start learning about ES2015 modules, let's make sure we have a proper 
 .
 ├── helpers
 │   └── functions.js
+│   └── default.js
 ├── node_modules
 ├── index.html
 ├── main.js
