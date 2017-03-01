@@ -161,7 +161,7 @@ function removeName(name){
 
 ### Store
 
-Our store accepts a reducer and has methods for getting the state, dispatching actions and subscribing and unsubscribing. 
+Our store accepts a reducer and has methods for getting the state, dispatching actions and subscribing and unsubscribing. If we have multiple reducers, we can merge them together with the `combineReducers` function that `redux` provides, but we will just be starting with a single reducer
 
 We import the `createStore` from `redux` and create a store with a reducer.
 

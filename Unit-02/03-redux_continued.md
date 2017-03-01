@@ -18,7 +18,6 @@ The connect function returns a new function which can wrap a component so it loo
 
 ### mapStateToProps
 
-
 The first parameter to connect is called `mapStateToProps` If this argument is specified, the component passed to connect will subscribe to Redux store updates. This means that any time the store is updated, mapStateToProps will be called. The results of mapStateToProps must be a plain object*, which will be merged into the component’s props.
 
 If you don't want to subscribe to store updates, pass `null` or `undefined` in place of mapStateToProps. If ownProps is specified as a second argument, its value will be the props passed to your component, and mapStateToProps will be additionally re-invoked whenever the component receives new props. Here is what this might look like:

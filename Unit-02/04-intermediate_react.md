@@ -88,43 +88,24 @@ You can read more about them here  -[https://facebook.github.io/react/docs/typec
 
 ### Types of Components
 
-#### Container / Smart Components
+So far we have been creating almost all of our components using `class ___ extends React.component` or the ES5 `React.createClass` method. While this will work, it is not necessary for components that do not have state or "stateless" components. These components can be written as functions that render JSX and can accept props. These are known as [Stateless Functional Components](https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#stateless-functional-components) and are often labeled as "dumb" components (which you can read more about [here](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.mlq5og2kx)). 
 
-#### Presentational / Dumb Components
+Using this structure, it is much easier to scale applications as its easy to discern between our presentation (presentational/components) and our stateful components (containers). You can read more about them [here](http://jaketrent.com/post/smart-dumb-components-react/)
 
-```js
-var Component = function (){
-    return (
-            <div>
-                <h1>Hello!</h1>
-            </div>
-        )
-}
-```
+### Folder Structure
 
-[https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.fy1q2lldu](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.fy1q2lldu)
+Now that we have an idea of how to create different kinds of components and we have just started the conversation around building larger react applications - the next logical question becomes, "how do we organize our applications"? A very common approach is to place `actions`, `components`, `containers`, `reducers` in their own folders as an app scales. However, there are other approaches and you can read some thoughts on them [here](https://medium.com/@alexmngn/how-to-better-organize-your-react-applications-2fd3ea1920f1#.yx64ess6p), but
 
-[http://jaketrent.com/post/smart-dumb-components-react/](http://jaketrent.com/post/smart-dumb-components-react/)
+### Immutability
 
-#### Higher Order Components
+A bit more of an advanced topic in React is the use of immutable data structures when building larger applications. You can read more about it [here](http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/), [here](http://jamesknelson.com/should-i-use-shouldcomponentupdate/) and [here](https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures)
+
+### Additional Resources
 
 [https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e#.52qvqdmg7](https://medium.com/@franleplant/react-higher-order-components-in-depth-cf9032ee6c3e#.52qvqdmg7)
 
 [https://www.sitepoint.com/react-higher-order-components/](https://www.sitepoint.com/react-higher-order-components/)
 
-### Immutability
-
-[http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/](http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/)
-
-[https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures](https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures)
-
-### Folder Structure
-
-### Combining Redux Reducers 
-
-### Additional Resources
-
 [https://camjackson.net/post/9-things-every-reactjs-beginner-should-know](https://camjackson.net/post/9-things-every-reactjs-beginner-should-know)
-
 
 #### [⇐ Previous](./03-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-testing.md)
