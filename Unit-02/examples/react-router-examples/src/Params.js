@@ -12,10 +12,13 @@ const Instructor = ({ match, location }) => (
   </div>
 )
 
+const Person = () => <h1>Hello World</h1>
+
 
 const ParamsExample = () => (
   <Router>
     <div>
+      <Route exact path="/" component={Person}/>
       <h2>Accounts</h2>
       <ul>
         <li><Link to="/elie">Elie</Link></li>

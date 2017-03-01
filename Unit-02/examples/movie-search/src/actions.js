@@ -3,8 +3,10 @@ import axios from 'axios'
 const randomMovies = ['titanic', 'forrest gump', 'good will hunting']
 const randomMovie = randomMovies[Math.floor(Math.random() * randomMovies.length)]
 
+export const GET_RANDOM_MOVIE = 'GET_RANDOM_MOVIE'
+
 export function getMovie (omdbData) {
-  return { type: 'GET_RANDOM_MOVIE', omdbData }
+  return { type: GET_RANDOM_MOVIE, omdbData }
 }
 
 export function getRandomMovie () {

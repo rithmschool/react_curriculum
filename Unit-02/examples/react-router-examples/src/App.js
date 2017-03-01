@@ -8,10 +8,12 @@ class App extends Component {
   render() {
     return (
         <div>
-          <ContextExample/>
+          <ParamsExample/>
         </div>
     );
   }
 }
 
 export default App;
+
+

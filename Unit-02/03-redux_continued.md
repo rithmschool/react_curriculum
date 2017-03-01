@@ -160,15 +160,117 @@ export function asyncExample (imdbID) {
 
 ### Sample OMDB Application with Redux-Thunk
 
-Let's build a simple application where a user can search for movie information using `redux-thunk`. We will also be storing a history of their searches. We will be using two simple components, `searchForm` and `searchData`.
+Let's build a simple application where we will prepopulate a random array of movies and a user will see one of them! We will be using the OMDB API and since we are making AJAX requests, the `axios` library. For managing asynchronous state with redux we will be using `redux-thunk`. We will also be storing a history of their searches. We will be using one simple component, `MovieDetails`.
 
 1. `create-react-app movie-search` && `cd movie-search`
 2. `npm install --save redux redux-thunk react-redux`
-3. `touch src/{actions,reducers,store}.js`
+3. `touch src/{actions,reducers,store,MovieDetails}.js`
+
+Now let's start with our `store` and add our necessary middleware.
+
+```js
+import { createStore, compose, applyMiddleware } from 'redux' // add applyMiddleware
+import thunk from 'redux-thunk' // import
+import rootReducer from './reducers'
+
+const store = createStore(rootReducer, compose(
+  applyMiddleware(thunk), // middleware
+  typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : (f) => f
+))
+
+export default store
+```
+
+Since we don't have any reducers, let's make one in `reducers.js`
+
+```js
+import {GET_RANDOM_MOVIE} from './actions'
+
+const DEFAULT_STATE = {
+  omdbData: {}
+}
+
+const rootReducer = (state = DEFAULT_STATE, action) => {
+  switch (action.type) {
+    case GET_RANDOM_MOVIE:
+      return Object.assign({}, state, {omdbData: action.omdbData})
+    default:
+      return state
+  }
+}
+
+export default rootReducer
+```
+
+Now let's use this reducer in our `App.js`
+
+```js
+import React, { Component } from 'react';
+import { Provider } from 'react-redux'
+import store from './store'
+import MovieDetails from './MovieDetails'
+
+
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <div>
+          Let's see a random movie!
+          <MovieDetails/>
+        </div>
+      </Provider>
+    );
+  }
+}
+
+export default App;
+```
+
+And finally create our `MovieDetails` component
+
+```js
+import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import { getRandomMovie } from './actions'
+
+class MovieDetails extends Component {
+  constructor(props){
+    super(props)
+  }
+  
+  // make our AJAX call when the component mounts
+  componentDidMount () {
+    this.props.dispatch(getRandomMovie())
+  }
+
+  render () {
+    const { Title, Plot, Year, Poster } = this.props
+    return (
+      <div>
+        <section>
+          <h1>{Title}</h1>
+          <h2>{Year}</h2>
+          <p>{Plot}</p>
+          <img src={Poster} alt=""/>
+        </section>
+      </div>
+    )
+  }
+}
+
+// after actions are dispatched, add the redux state onto props for the component
+const mapStateToProps = (state, ownProps) => {
+  return state.omdbData
+}
+
+// make sure we connect this component with redux and export it out
+export default connect(mapStateToProps)(MovieDetails)
+```
 
 ### React Router and Redux
 
-This previously had to be done using a seperate module, but can now be done 
+
 
 ### Exercise
 

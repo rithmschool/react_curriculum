@@ -206,7 +206,7 @@ export default store
 
 ### Exercises
 
-Build a simple todo application but include redux to manage your data! You should have actions for creating, updating and deleting todos.
+Build a simple todo application but include redux to manage your data! You should have actions for creating, updating and deleting todos. Remember that since you are using redux, all of your reducers must be pure functions so each of these CRUD operations **must** be done using pure functions. 
 
 - `/todos` - list all of your todos
 - `/todos/new` - render a form to create a new todos

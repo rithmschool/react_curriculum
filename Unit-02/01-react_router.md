@@ -110,6 +110,7 @@ const Instructor = ({ match, location }) => (
 const ParamsExample = () => (
   <Router>
     <div>
+      <Route exact path="/" component={Person}/>
       <h2>Accounts</h2>
       <ul>
         <li><Link to="/elie">Elie</Link></li>
@@ -121,11 +122,10 @@ const ParamsExample = () => (
   </Router>
 )
 
-
 export default ParamsExample
 ```
 
-[https://reacttraining.com/react-router/#history](https://reacttraining.com/react-router/#history)
+You can also see above that one of our routes has an `exact` prop, which specifies that we should only display that route if the "exact" match exists and not a relative match. If we do not specify "exact" on a route like `/`, then any route that starts with a `/` will include whatever component we render. Try to remove the `exact` prop and see what it does!
 
 ### HashRouter vs BrowserRouter
 
