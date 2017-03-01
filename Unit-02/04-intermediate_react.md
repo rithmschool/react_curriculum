@@ -120,10 +120,11 @@ var Component = function (){
 
 ### Folder Structure
 
+### Combining Redux Reducers 
+
 ### Additional Resources
 
 [https://camjackson.net/post/9-things-every-reactjs-beginner-should-know](https://camjackson.net/post/9-things-every-reactjs-beginner-should-know)
 
-### Context
 
 #### [⇐ Previous](./03-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-testing.md)

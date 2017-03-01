@@ -270,10 +270,16 @@ export default connect(mapStateToProps)(MovieDetails)
 
 ### React Router and Redux
 
+Now that we have an idea of how to connect our react components to our redux application, let's bring back the react-router and build a simple Todo Application using `redux`, `react` and `react-router`. We will have components for a `TodoList`, `Todo` and `TodoForm` along with our `actions` and `reducers`. Since our store is so small, we will place it in our `index.js`. 
+
+1. `create-react-app redux-react-todo` && `cd redux-react-todo`
+2. `npm install --save redux react-redux react-router-dom@next redux-devtools-extension # for making dev tools integration easier`
+3. `touch {actions,rootReducer, TodoList, Todo, TodoForm}.js` 
+
 
 
 ### Exercise
 
-Build an application 
+ 
 
 #### [⇐ Previous](./02-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-intermediate_react.md)
