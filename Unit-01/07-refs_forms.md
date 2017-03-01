@@ -11,11 +11,11 @@ By the end of this chapter, you should be able to:
 
 ### Refs
 
-So far, we have seen that the only for a parent component to pass information to a child component are through re-rendering a child component with `props`  However, there are a few cases where you need to modify a child outside of the typical dataflow. The child to be modified could be a component, or DOM element. 
+So far, we have seen that the only for a parent component to pass information to a child component are through re-rendering a child component with `props`. Sometimes, however, you may want to re-render a child without having to set state on the parent. In most cases, this is how you should think of data flowing through your application, but in exceptional cases you can use a concept called `refs`. 
 
-For both of these cases, React provides a tool called `refs` to help. However, be aware that this is not something you should be using frequently. When coming from a library like `jQuery`, it is easy to think that using `refs` is the way to get things done with React, but anytime that you are adding a `ref`, ask yourself "Can I do this using state?"
+Be aware that `refs` are not something you should be using frequently. When coming from a library like `jQuery`, it is easy to think that using `refs` is the way to get things done with React, but anytime that you are adding a `ref`, ask yourself "Can I do this using state?"
 
-Let's see some examples of what a `ref` looks like:
+To learn more about `refs`, including exploring some use cases, you can always head to the [docs](https://facebook.github.io/react/docs/refs-and-the-dom.html). For now, let's look at some simple examples:
 
 ```js
 import React from 'react'
