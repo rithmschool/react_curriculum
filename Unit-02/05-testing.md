@@ -1,4 +1,4 @@
-#### [⇐ Previous](./01-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-react_router.md)
+#### [⇐ Previous](./04-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-backend.md)
 
 # Testing
 
@@ -149,4 +149,4 @@ This does not mean that all UI code should not be tested. If you are working wih
 
 Using NYC for test coverage - [https://github.com/istanbuljs/nyc](https://github.com/istanbuljs/nyc)
 
-#### [⇐ Previous](./01-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-react_router.md)
+#### [⇐ Previous](./04-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-backend.md)

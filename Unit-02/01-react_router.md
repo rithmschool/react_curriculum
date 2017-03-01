@@ -458,8 +458,15 @@ const SidebarExample = () => (
 export default SidebarExample
 ```
 
-### Using Context To Change Routes
+### Exercises
 
-### Exercise
+Build a simple todo application but use the router for the following routes:
+
+- `/todos` - list all of your todos
+- `/todos/new` - render a form to create a new todos
+- `/todos/:id` - list a single todo
+- `/todos/:id/edit` - render a form to edit an existing todo
+
+When a user creates, updates or deletes a todo - they should be redirected to the `/todos` page.
 
 #### [Table of Contents](./../readme.md) | [Next ⇒](./02-redux_intro.md)

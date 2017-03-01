@@ -1,4 +1,4 @@
-#### [Table of Contents](./../readme.md) | [Next ⇒](./02-testing.md)
+#### [⇐ Previous](./03-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-testing.md)
 
 # Intermediate React
 
@@ -118,10 +118,12 @@ var Component = function (){
 
 [https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures](https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures)
 
+### Folder Structure
+
 ### Additional Resources
 
 [https://camjackson.net/post/9-things-every-reactjs-beginner-should-know](https://camjackson.net/post/9-things-every-reactjs-beginner-should-know)
 
 ### Context
 
-#### [Table of Contents](./../readme.md) | [Next ⇒](./02-testing.md)
+#### [⇐ Previous](./03-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-testing.md)

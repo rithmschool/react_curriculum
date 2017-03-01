@@ -1,4 +1,4 @@
-#### [⇐ Previous](./04-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-backend.md)
+#### [⇐ Previous](./02-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-intermediate_react.md)
 
 # Redux Continued
 
@@ -118,32 +118,60 @@ export default connection(App)
 
 ### Async Redux with Redux Thunk
 
-`npm install --save redux-middleware`
+So far all of our actions have been synchronous, but what happens if we want to do something async (AJAX call, setTimeout etc) Unfortunately, Redux by itself has no built in way of handling async actions. To add this functionality we need to add some middleware to `redux`. The two most popular pieces of middleware for managing asynchronous code with `redux` are `redux-thunk`, which uses functions and promises (and ES2017 async functions) and `redux-saga`, which makes use of ES2015 generators. 
+
+While `redux-saga` has some advantages, it is a bit more challenging to understand so we will be using `redux-think` and can install it with `npm install --save redux-thunk`. We will adding this middleware inside of our `store`. 
+
+```js
+import { createStore, compose, applyMiddleware } from 'redux' // add applyMiddleware 
+import thunk from 'redux-thunk' // import our middleware
+import rootReducer from './reducers'
+
+const store = createStore(rootReducer, compose(
+  applyMiddleware(thunk), // add our middleware
+  // make sure we have the dev tools as well!
+  typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : (f) => f
+))
+
+export default store
+```
+
+Now that we have this implemented, we can add some async actions! Let's use the axios `npm install --save axios` library for some help with AJAX requests (we could use jQuery, but we don't need the entire library). Here is what that might look like:
+
+```js
+import axios from 'axios' 
+
+export function someAction (omdbData) {
+  return { type: 'ADD_OMDB_DATA', omdbData }
+}
+
+export function asyncExample (imdbID) {
+  return (dispatch) => {
+    axios.get(`http://www.omdbapi.com/?t=titanic`)
+      .then((response) => {
+        dispatch(someAction(response.data))
+      })
+      .catch((error) => {
+        console.error('axios error', error)
+      })
+  }
+}
+```
+
+### Sample OMDB Application with Redux-Thunk
+
+Let's build a simple application where a user can search for movie information using `redux-thunk`. We will also be storing a history of their searches. We will be using two simple components, `searchForm` and `searchData`.
+
+1. `create-react-app movie-search` && `cd movie-search`
+2. `npm install --save redux redux-thunk react-redux`
+3. `touch src/{actions,reducers,store}.js`
 
 ### React Router and Redux
 
-### Redux Dev Tools
-
-### Testing Redux
-
-Fortunately, testing Redux is quite easy to do since we are simply testing functions! All we need to do when testing the initialization of a reducer, is pass some defaault values, which might look a bit strange, but this is what Redux wants for testing:
-
-```js
-
-import {store, firstReducer} from './index.js'
-
-describe("Our Store", function(){
-  it("It has an initial state", function(){
-    const state = firstReducer(undefined, {type: '@@redux/INIT'})
-    expect(state).to.deep.equal([])
-  });
-  it("handles new changes correctly", function(){
-    const state = firstReducer(undefined, {type: 'ADD_TODO', value: "eat"})
-    expect(state).to.deep.equal(["eat"])
-  });
-});
-```
+This previously had to be done using a seperate module, but can now be done 
 
 ### Exercise
 
-#### [⇐ Previous](./04-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-backend.md)
+Build an application 
+
+#### [⇐ Previous](./02-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-intermediate_react.md)

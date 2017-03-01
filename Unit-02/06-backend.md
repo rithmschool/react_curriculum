@@ -1,4 +1,4 @@
-#### [⇐ Previous](./05-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-react_native.md)
+#### [⇐ Previous](./05-testing.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-backend_continued.md)
 
 # Backend with React
 
@@ -44,4 +44,4 @@ First - let's start with a new folder structure
 
 ### Exercise
 
-#### [⇐ Previous](./05-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-backend_continued.md)
+#### [⇐ Previous](./05-testing.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-backend_continued.md)

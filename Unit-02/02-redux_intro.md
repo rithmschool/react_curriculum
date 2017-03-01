@@ -1,4 +1,4 @@
-#### [⇐ Previous](./03-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_continued.md)
+#### [⇐ Previous](./01-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-redux_continued.md)
 
 # Introduction to Redux
 
@@ -191,8 +191,26 @@ What happens if you have multiple reducers? You can import the `combineReducers`
 
 ### Redux Dev Tools
 
-What having a single immutable state store allows us to do is some really awesome stuff like time travelling, hot module reloading and easier debugging. With redux, the only way we can change state is to fire off an action, which creates a new state so that we can always revert and see changes in state! 
+What having a single immutable state store allows us to do is some really awesome stuff like time travelling, hot module reloading and easier debugging. With redux, the only way we can change state is to fire off an action, which creates a new state so that we can always revert and see changes in state! You can get the chrome extention [here](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) and here is the code necessary to use the extention with a redux application (this is a sample store)
 
-### Exercise
+```js
+import { createStore, compose } from 'redux'
+import rootReducer from './reducers'
 
-#### [⇐ Previous](./03-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_continued.md)
+const store = createStore(rootReducer, compose(
+  typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : (f) => f
+))
+
+export default store
+```
+
+### Exercises
+
+Build a simple todo application but include redux to manage your data! You should have actions for creating, updating and deleting todos.
+
+- `/todos` - list all of your todos
+- `/todos/new` - render a form to create a new todos
+- `/todos/:id` - list a single todo
+- `/todos/:id/edit` - render a form to edit an existing todo
+
+#### [⇐ Previous](./01-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-redux_continued.md)
