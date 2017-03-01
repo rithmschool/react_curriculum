@@ -12,11 +12,16 @@ By the end of this chapter, you should be able to:
 
 ### Redux and React
 
-To connect these two libraries we use another library called `react-redux` which gives us a few functions and components to connect redux state to react state. Let's install this library with `npm install react-redux`
+To connect these two libraries we use another library called `react-redux` which gives us a few functions and components to connect redux state to react state. Let's install this library with `npm install --save react-redux`. Once we have this library installed, we will most commonly use the `connect` function from that library to connect react and redux along with a component called `Provider`, which accepts a prop of `store`, which is a `redux` store!
+
+The connect function returns a new function which can wrap a component so it looks like this: `connect(mapStateToProps, mapDispatchToProps)(SomeReactComponent`
 
 ### mapStateToProps
 
-In order to connect our `redux` state to our react components, we create a function called `mapStateToProps`, which will turn our properties on `redux` state into `props` that we can use in our `react` components
+
+The first parameter to connect is called `mapStateToProps` If this argument is specified, the component passed to connect will subscribe to Redux store updates. This means that any time the store is updated, mapStateToProps will be called. The results of mapStateToProps must be a plain object*, which will be merged into the component’s props.
+
+If you don't want to subscribe to store updates, pass `null` or `undefined` in place of mapStateToProps. If ownProps is specified as a second argument, its value will be the props passed to your component, and mapStateToProps will be additionally re-invoked whenever the component receives new props. Here is what this might look like:
 
 ```js
 const mapStateToProps = function(state){
@@ -26,13 +31,17 @@ const mapStateToProps = function(state){
     }
 }
 
-// we now will have access to this.props.propertyToPassToReact in our component once we connect them!
+// we now will have access to this.props.propertyToPassToReact in our component once we connect them using the `connect` function.
 ```
 
 ### MapDispatchToProps
 
 We also want to be able to dispatch our actions from our components, so let's attach these actions onto props for our react components using a function called `mapDispatchToProps`. This will return an object with keys which will be `props` and values which are `redux` actions.
 
+If an object is passed, each function inside it is assumed to be a Redux action creator. An object with the same function names, but with every action creator wrapped into a dispatch call so they may be invoked directly, will be merged into the component’s props. If a function is passed, it will be given dispatch. 
+
+If you don't want to subscribe to store updates, pass null or undefined in place of mapStateToProps. If you omit it, the default implementation just injects `dispatch` into your component’s props. If ownProps is specified as a second argument, its value will be the props passed to your component, and mapDispatchToProps will be re-invoked whenever the component receives new props just like `mapStateToProps`.
+
 ```js
 const mapDispatchToProps = function(dispatch){
     return {
@@ -47,20 +56,51 @@ const mapDispatchToProps = function(dispatch){
 }
 ```
 
+This is also commonly done by importing actions from another file:
+
+```js
+import { addTodo, updateTodo } from './actions'
+import {connect} from 'react-redux'
+
+function mapStateToProps(state) {
+  return {
+    // create a prop called entireReduxState which is the result of the entire redux state
+    entireReduxState: state
+  }
+}
+
+export default connect(mapStateToProps, { addTodo, updateTodo })(TodoFormContainer);
+```
+
 So we just defined two functions that are helpful for connecting redux state to props, and actions to props in our components. But we still haven't actually connected react and redux! To do this, we need to use the `connect` method from the `react-redux` library.
 
 ### connect
 
+Here is 
+
 ```js
 import {connect} from 'react-redux'
+import React, {Component} from 'react'
+
+class LearnConnect extends Component {
+  render(){
+    <div>
+      <h1>Hello World!</h1>
+      <p>Here is our state </p>
+      <pre>
+        {JSON.stringify(this.props.reduxStateAsProp, null, 4)}
+      </pre>
+      <button onClick={() => this.props.someAction()}> Dispatch an action!</button>
+    </div>
+  }
+}
 
 const mapStateToProps = function(state){
     return {
         // state comes from the redux store
-        propertyToPassToReact: state.someValue
+        reduxStateAsProp: state
     }
 }
-
 
 const mapDispatchToProps = function(dispatch){
     return {
@@ -74,9 +114,7 @@ const mapDispatchToProps = function(dispatch){
     }
 }
 
-const firstConnection = connect(mapStateToProps, mapDispatchToProps)
-
-// ideally we will have many connections
+export default connect(mapStateToProps, mapDispatchToProps)(LearnConnect)
 ```
 
 So we just created our connection, but how do we place our connection into a react component? The final step we need to do is inject our redux store into a ocmponent called `Provider`
@@ -162,9 +200,9 @@ export function asyncExample (imdbID) {
 
 Let's build a simple application where we will prepopulate a random array of movies and a user will see one of them! We will be using the OMDB API and since we are making AJAX requests, the `axios` library. For managing asynchronous state with redux we will be using `redux-thunk`. We will also be storing a history of their searches. We will be using one simple component, `MovieDetails`.
 
-1. `create-react-app movie-search` && `cd movie-search`
-2. `npm install --save redux redux-thunk react-redux`
-3. `touch src/{actions,reducers,store,MovieDetails}.js`
+- `create-react-app movie-search` && `cd movie-search`
+- `npm install --save redux redux-thunk react-redux`
+- `touch src/{actions,reducers,store,MovieDetails}.js`
 
 Now let's start with our `store` and add our necessary middleware.
 
@@ -272,8 +310,8 @@ export default connect(mapStateToProps)(MovieDetails)
 
 Now that we have an idea of how to connect our react components to our redux application, let's bring back the react-router and build a simple Todo Application using `redux`, `react` and `react-router`. We will have our `actions` and `reducers`. Since our store is so small, we will place it in our `index.js`. 
 
-1. `create-react-app redux-react-todo` && `cd redux-react-todo`
-2. `npm install --save redux react-redux react-router-dom@next redux-devtools-extension # for making dev tools integration easier`
+- `create-react-app redux-react-todo` && `cd redux-react-todo`
+- `npm install --save redux react-redux react-router-dom@next redux-devtools-extension # for making dev tools integration easier`
 
 ### Component Structure
 
