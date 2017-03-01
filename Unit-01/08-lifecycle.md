@@ -11,19 +11,19 @@ By the end of this chapter, you should be able to:
 
 ### Initialization
 
-When a component get's rendered for the first time, we can tap into quite a few lifecycle hooks
+When a component get's rendered for the first time, we can tap into quite a few lifecycle hooks. 
 
-#### GetDefaultProps
+#### `getDefaultProps` and `getInitialState`
 
-First, a component is given default props, `getDefaultProps` can be used to define any default props which can be accessed via this.props.  The invo­ca­tion of get­De­fault­Props actu­ally takes place once before any instance of the com­po­nent is cre­ated and the return value is shared among all instances of the com­po­nent. 
+If you're using the `React.createClass` syntax instead of `ES2015` class syntax, these two functions are the first two that get called in the component lifecycle (in this order).
+
+First, if you want to give a component default props, `getDefaultProps` can be used to define any default props which can be accessed via this.props.  The invo­ca­tion of get­De­fault­Props actu­ally takes place once before any instance of the com­po­nent is cre­ated and the return value is shared among all instances of the com­po­nent. 
 
 ```js
 getDefaultProps(){
     return { /* something here */};
 }
 ```
-
-#### GetInitialState
 
 The `getInitialState` method enables to set the initial state value, that is accessible inside the component via this.state. In the `React.createClass()` syntax, we have a special method called `getInitialState`. Using the `es2015 class syntax`, we place our initial state in the `constructor` function in our `class`.
 
@@ -38,15 +38,23 @@ class App extends Component {
 }
 ```
 
-#### componentWillMount
+For more on these functions (and their analogues using `ES2015` syntax, take a look at the [docs](https://facebook.github.io/react/docs/react-without-es6.html#declaring-prop-types-and-default-props).
+
+#### `constructor`
+
+Before the component is mounted, the constructor function is run. Using `ES2015` syntax, this is typically where initial state is set, and where any method binding occurs.
+
+#### `componentWillMount`
 
 `componentWillMount` is called before the render method is executed. It is important to note that setting the state in this phase will **not** trigger a re-rendering.
 
 ```js
 componentWillMount(){
-
+    // nothing has rendered yet
 }
 ```
+
+[Here](https://developmentarc.gitbooks.io/react-indepth/content/life_cycle/birth/premounting_with_componentwillmount.html) are some examples of use-cases for this lifecycle method.
 
 #### Render
 
@@ -54,7 +62,7 @@ The render method returns the needed component markup, which can be a single chi
 
 #### componentDidMount
 
-As soon as the render method has been executed the `componentDidMount` function is called. The DOM can be accessed in this method, enabling to define DOM manipulations or data fetching operations. Any DOM interactions should always happen in this phase not inside the render method.
+After the component renders, `componentDidMount` will fire. Since the component has rendered, we can access the DOM from this method.
 
 ```js
 componentDidMount(){
@@ -64,11 +72,11 @@ componentDidMount(){
 
 ### Changing State
 
-Right when we call `setState`, we can tap into quite a few lifecycle hooks
+Whenever we call `setState`, we can tap into quite a few lifecycle hooks:
 
-#### shouldComponentUpdate
+#### `shouldComponentUpdate`
 
-shouldComponentUpdate is always called before the render method and enables to define if a re-rendering is needed or can be skipped. Obviously this method is never called on initial rendering. A boolean value must be returned.
+By default, when a parent component updates, all children are re-rendered as well. But `shouldComponentUpdate` allows us to pass on a re-rendering if we know one is not needed. This function should return a boolean; if it's `true`, the component will render, and if it's `false`, the component won't.
 
 ```js
 shouldComponentUpdate(nextProps, nextState) {
@@ -77,9 +85,9 @@ shouldComponentUpdate(nextProps, nextState) {
 }
 ```
 
-#### componentWillUpdate
+#### `componentWillUpdate`
 
-componentWillUpdate gets called as soon as the the shouldComponentUpdate returned true. Any state changes via `this.setState` are not allowed as this method should be strictly used to prepare for an upcoming update not trigger an update itself.
+`componentWillUpdate` gets called as soon as the the shouldComponentUpdate returns true. This is sort of analogous to the `componentWillMount` hook; the difference now is that we're updating an existing component, not mounting a new one.
 
 ```js
 componentWillUpdate(nextProps, nextState){
@@ -87,27 +95,27 @@ componentWillUpdate(nextProps, nextState){
 }
 ```
 
-#### Render
+#### `render`
 
 We've seen this one before! Just **always** remember - changing state triggers a re-render unless you modify `shouldComponentUpdate`
 
-#### componentDidUpdate
+#### `componentDidUpdate`
 
-Finally componentDidUpdate is called after the render method. Similar to the componentDidMount, this method can be used to perform DOM operations after the data has been updated.
+Finally `componentDidUpdate` is called after the render method, and is similar to the `componentDidMount`.
 
 ```js
 componentDidUpdate: function(prevProps, prevState){
-    // 
+    // component just updated!
 }
 ```
 
 ### Changing Props
 
-Right when props are being set on a component, we can tap into the same exact hooks as when we change state, except we get one more before `shouldComponentUpdate` called `componentWillRecieveProps`
+Right when props are being set on a component, we can tap into the same exact hooks as when we change state, except we get one more before `shouldComponentUpdate` called `componentWillRecieveProps`.
 
-#### componentWillRecieveProps
+#### `componentWillRecieveProps`
 
-componentWillReceiveProps is only called when the props have changed and when this is not an initial rendering. componentWillReceiveProps enables to update the state depending on the existing and upcoming props, without triggering another rendering. One interesting thing to remember here is that there is no equivalent method for the state as state changes should never trigger any props changes.
+This lifecycle method is only called when the props have changed and when this is not an initial rendering. `componentWillReceiveProps` allows us to update the state depending on the existing and upcoming props before the `render` method has been called.
 
 ```js
 componentWillReceiveProps(nextProps) {
@@ -121,16 +129,16 @@ componentWillReceiveProps(nextProps) {
 
 After `componentWillReceiveProps`, the following events occur (similar to before):
 
-- shouldComponentUpdate
-- componentWillUpdate
-- Render
-- componentDidUpdate
+- `shouldComponentUpdate`
+- `componentWillUpdate`
+- `render`
+- `componentDidUpdate`
 
 ### Removing a component (unmounting)
 
-#### componentWillUnmount
+#### `componentWillUnmount`
 
-The only method we haven't touched yet is the componentWillUnmount which gets called before the component is removed from the DOM. This method can be beneficial when needing to perform clean up operations, f.e. removing any timers defined in componentDidMount.
+The only method we haven't touched yet is the `componentWillUnmount` which gets called before the component is removed from the DOM. This method can be beneficial when needing to perform cleanup operations, i.e. removing any timers defined in `componentDidMount`.
 
 ```js
 componentWillUnmount(){
@@ -139,8 +147,6 @@ componentWillUnmount(){
     // remove any reference to variables you will not be using to ensure there are no memory leaks
 }
 ```
-
-This is useful for clearing event listeners, timers and other data that you will not need in memory when the component is removed.
 
 ### Exercise
 
