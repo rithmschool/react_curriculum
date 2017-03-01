@@ -1,23 +1,24 @@
-import React from 'react'
+import React, {PropTypes, Component} from 'react'
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from 'react-router-dom'
 
-const Data = ({ match, location }) => (
-  <div>
-    <h1>You made it!</h1>
-  </div>
-)
+const Data = () => (<h1>You made it!</h1>)
 
-class Button extends React.Component {
+class Button extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
   constructor(props){
     super(props)
     this.handleClick = this.handleClick.bind(this)
   }
   handleClick(){
-    debugger
+    this.context.router.push('/data')
   }
   render(){
     return (
@@ -27,8 +28,6 @@ class Button extends React.Component {
       )
   }
 }
-
-
 
 const ContextExample = () => (
   <Router>
@@ -43,6 +42,5 @@ const ContextExample = () => (
     </div>
   </Router>
 )
-
 
 export default ContextExample

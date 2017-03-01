@@ -458,6 +458,61 @@ const SidebarExample = () => (
 export default SidebarExample
 ```
 
+### Redirecting Programatically
+
+With react router v4 we are given access to the `Redirect` component which is useful for conditionally rendering or redirecting, but if we need to redirect programatically (after a form submission, click) we can use `context` to do that. This can also be done with `state` and having something like `this.state.redirect` be set to `false` unless something has changed, and if so - change `this.state.redirect` to be `true` and redirect to another component. However, this example will show you how to redirect using an object called `context`, which you should almost never be manipulating on your own, it is internal to React and you can read more about it [here](https://facebook.github.io/react/docs/context.html)
+
+For now, let's see an example of redirecting with `context`. You will also see in order to make this work, we need to add `contextTypes` as a `static` property to our `class`. 
+
+```js
+import React, {PropTypes, Component} from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+
+const Data = () => (<h1>You made it!</h1>)
+
+class Button extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  constructor(props){
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick(){
+    this.context.router.push('/data')
+  }
+  render(){
+    return (
+        <div>
+          <button onClick={this.handleClick}>Click me!</button>
+        </div>
+      )
+  }
+}
+
+const ContextExample = () => (
+  <Router>
+    <div>
+      <h2>Start here:</h2>
+      <ul>
+        <li><Link to="/next">With me!</Link></li>
+        <li><Link to="/data">Or just go here!</Link></li>
+      </ul>
+      <Route path="/next" component={Button}/>
+      <Route path="/data" component={Data}/>
+    </div>
+  </Router>
+)
+
+export default ContextExample
+```
+
 ### Exercises
 
 Build a simple todo application but use the router for the following routes:
