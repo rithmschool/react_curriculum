@@ -4,7 +4,7 @@
 
 - [01 Introduction To React](./Unit-01/01-intro.md)
 - [02 Babel + JSX](./Unit-01/02-jsx.md)
-https://www.eventbrite.com/myevent/31072875808/reports/sales-by-ticket-type/- [03 Webpack](./Unit-01/03-webpack.md)
+- [03 Webpack](./Unit-01/03-webpack.md)
 - [04 Component Architecture](./Unit-01/04-components.md)
 - [05 Props + State](./Unit-01/05-props_state.md)
 - [06 Events](./Unit-01/06-events.md)
