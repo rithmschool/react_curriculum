@@ -1,4 +1,4 @@
-from flask import Blueprint, abort, g, request
+from flask import Blueprint, abort, request
 from flask_restful import Api, Resource, reqparse, marshal_with, fields
 from project.models import User
 from project import db,bcrypt
@@ -23,6 +23,8 @@ def jwt_required(fn):
             if token:
                 return fn(*args, **kwargs)
         except DecodeError as e:
+            return abort(401, "Please log in again")
+        except UnboundLocalError as e:
             return abort(401, "Please log in again")
         return abort(401, "Please log in")
     return wrapper
