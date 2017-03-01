@@ -270,16 +270,164 @@ export default connect(mapStateToProps)(MovieDetails)
 
 ### React Router and Redux
 
-Now that we have an idea of how to connect our react components to our redux application, let's bring back the react-router and build a simple Todo Application using `redux`, `react` and `react-router`. We will have components for a `TodoList`, `Todo` and `TodoForm` along with our `actions` and `reducers`. Since our store is so small, we will place it in our `index.js`. 
+Now that we have an idea of how to connect our react components to our redux application, let's bring back the react-router and build a simple Todo Application using `redux`, `react` and `react-router`. We will have our `actions` and `reducers`. Since our store is so small, we will place it in our `index.js`. 
 
 1. `create-react-app redux-react-todo` && `cd redux-react-todo`
 2. `npm install --save redux react-redux react-router-dom@next redux-devtools-extension # for making dev tools integration easier`
-3. `touch {actions,rootReducer, TodoList, Todo, TodoForm}.js` 
+
+### Component Structure
+
+This application will contain the following components:
+- `TodoFormContainer` - connected to redux to determine whether editing or creating should be done and handles redirects when the form is submitted
+  - `TodoForm` - a form for creating and editing, contains state but not connected to redux
+- `TodoListContainer` - connected to redux to allow for fetching the list of todos
+  - `TodoList` - a simple component to render multiple todos
+    - `Todo` - a simple component displaying the task and links/buttons to edit and delete
+
+### Setting Up Routes and store
+
+In our `App.js` we can set up the following:
+
+```js
+import React, { Component } from 'react';
+import { Link, Route } from 'react-router-dom';
+import TodoListContainer from './TodoListContainer';
+import TodoFormContainer from './TodoFormContainer';
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Welcome to our Todo App!</h1>
+        <Link to='/todos'>See Your Todos</Link>
+        <br/>
+        <Link to="/todos/new">Add New Todo</Link>
+        <Route exact path="/todos" component={TodoListContainer} />
+        <Route path="/todos/new" component={TodoFormContainer} />
+        <Route path="/todos/:id/edit" component={TodoFormContainer} />
+      </div>
+    );
+  }
+}
+export default App;
+```
+
+And in our `index.js` we can set up the following:
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { createStore } from 'redux';
+import rootReducer from './rootReducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools()
+);
+
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById('root')
+);
+```
 
 
+### Redux Actions
+
+The actions we will need are for adding, updating and deleting. Since we are not using a backend, there will be no "fetching" so we do not need these actions.
+
+```js
+export const ADD_TODO = 'ADD_TODO';
+export const UPDATE_TODO = 'UPDATE_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
+
+export function addTodo(todo) {
+  return {
+    type: ADD_TODO,
+    todo
+  }
+}
+
+export function updateTodo(todo) {
+  return {
+    type: UPDATE_TODO,
+    todo
+  }
+}
+
+export function deleteTodo(id) {
+  return {
+    type: DELETE_TODO,
+    id
+  }
+}
+```
+
+### Reducers
+
+We can now use these actions in our reducers - remember that reducers need to be `pure` functions!
+
+```js
+import { ADD_TODO, UPDATE_TODO, DELETE_TODO } from './actions';
+
+const DEFAULT_STATE = {
+  todos: [],
+  id: 0
+}
+
+export default function games(state = DEFAULT_STATE, action = {}) {
+  switch(action.type) {
+    
+    case ADD_TODO: // IMPLEMENT ME
+      // increment the id so it is a unique value
+      // return a new object with state as an array of existing todos concatenated with the new todo
+
+    case UPDATE_TODO:
+      // create a new array
+        // if we find the one to be updated
+          // update it
+        // regardless, return the todo
+      
+      // return a new state object
+    default:
+      return state;
+
+    case DELETE_TODO:
+      // return a new array of todos without the one passed to this action
+      // return a new object with the todos 
+  }
+}
+```
+
+### Create
+
+To create we will need to do the following:
+- Make sure our `TodoFormContainer` can dispatch the create action when the form is submitted, this action should be passed down as a prop to the `TodoForm` component
+- Make sure that when we submit the form, we `Redirect` back to the `/todos` route. This will require importing the `Redirect` component from `react-router-dom` and we should be setting a property on state called `redirect`, which will initialize as false, but if true, it will redirect.
+- Our `TodoForm` should allow a user to add a `task` and when submitted will use props passed to it from the `TodoFormContainer`.
+
+### Read
+
+Once a todo is created, the `TodoListContainer` should grab the list of todos from the redux state and render the `TodoList` passing in the `todos` as a prop. The `TodoList` component should iterate over the `todos` prop and render `Todo` components. Each `Todo` component should have a link to the `edit` route as well as a button that when clicked will remove the Todo (those will be implemented later)
+
+### Update
+
+When the `edit` button is clicked, a form should appear with the text of the task in an input. When the form is submitted, the `UPDATE_TODO` action should be dispatched and the redux `state` should be modified. When the form is submitted, you should redirect back to `/todos`
+
+### Delete
+
+Each `Todo` component should have a prop called `deleteTodo` which is recieved from the `TodoList` component. The `TodoList` component should recieve this prop from the `TodoListContainer` component, which should import the ` deleteTodo` action and `mapDispatchToAction`. When the delete button is clicked, the `DELETE_TODO` action should be dispatched and the redux `state` should be modified.
 
 ### Exercise
 
- 
+Complete CRUD on `todos`! 
 
 #### [⇐ Previous](./02-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-intermediate_react.md)

@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoList from './TodoList';
 import { connect } from 'react-redux';
-import { getTodos, deleteTodo } from './actions';
+import { deleteTodo } from './actions';
 
 class TodoListContainer extends React.Component {
 
@@ -21,4 +21,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { getTodos, deleteTodo })(TodoListContainer);
+export default connect(mapStateToProps, { deleteTodo })(TodoListContainer);

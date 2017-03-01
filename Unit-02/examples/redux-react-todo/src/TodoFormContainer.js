@@ -43,7 +43,7 @@ function mapStateToProps(state, props) {
       todo: state.todos.find(todo => todo.id === +match.params.id)
     }
   }
-  return { game: null };
+  return { todo: null };
 }
 
 export default connect(mapStateToProps, { addTodo, updateTodo })(TodoFormContainer);
