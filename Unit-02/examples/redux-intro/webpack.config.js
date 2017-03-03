@@ -1,13 +1,13 @@
 module.exports = {
+    context: __dirname,
     entry: './js/index.js',
     output: {
         filename: 'bundle.js',
-        path: './'
     },
-    devtool: 'inline-source-map',
+    devtool: 'eval',
     module: {
-        loaders: [{
-            loader: 'babel',
+        rules: [{
+            loader: 'babel-loader',
             exclude: /node_modules/
         }]
     }

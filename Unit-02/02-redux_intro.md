@@ -14,7 +14,7 @@ By the end of this chapter, you should be able to:
 
 Redux is a single state management store.  While it is commonly used with React, it is an entirely separate library that can be used on its own or with a other frameworks. 
 
-![https://camo.githubusercontent.com/5aba89b6daab934631adffc1f301d17bb273268b/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6d656469612d702e736c69642e65732f75706c6f6164732f3336343831322f696d616765732f323438343535322f415243482d5265647578322d7265616c2e676966](https://camo.githubusercontent.com/5aba89b6daab934631adffc1f301d17bb273268b/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6d656469612d702e736c69642e65732f75706c6f6164732f3336343831322f696d616765732f323438343535322f415243482d5265647578322d7265616c2e676966)
+![https://css-tricks.com/wp-content/uploads/2016/03/redux-article-3-04.svg](https://css-tricks.com/wp-content/uploads/2016/03/redux-article-3-04.svg)
 
 Redux architecture revolves around a strict unidirectional data flow.
 
