@@ -1,11 +1,11 @@
 import { SET_CURRENT_USER } from './actions';
 
-const initialState = {
+const DEFAULT_STATE = {
   isAuthenticated: false,
   user: {}
 };
 
-export default (state = initialState, action = {}) => {
+export default function (state = DEFAULT_STATE, action){
   switch(action.type) {
     case SET_CURRENT_USER:
       return {

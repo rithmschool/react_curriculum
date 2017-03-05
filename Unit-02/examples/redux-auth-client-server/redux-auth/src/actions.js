@@ -1,6 +1,7 @@
 import axios from 'axios';
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 import jwtDecode from 'jwt-decode';
+
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 const BASE_URL = 'http://localhost:3001'
 
@@ -12,23 +13,10 @@ export function setAuthorizationToken(token) {
   }
 }
 
-export function userSignupRequest(userData) {
+export function signup(userData) {
   return dispatch => {
     return axios.post(`${BASE_URL}/api/users`, userData);
   }
-}
-
-export function isUserExists(id) {
-  return dispatch => {
-    return axios.get(`${BASE_URL}/api/users/${id}`);
-  }
-}
-
-export function setCurrentUser(user) {
-  return {
-    type: SET_CURRENT_USER,
-    user
-  };
 }
 
 export function logout() {
@@ -48,4 +36,11 @@ export function login(data) {
       dispatch(setCurrentUser(jwtDecode(token)));
     });
   }
+}
+
+export function setCurrentUser(user) {
+  return {
+    type: SET_CURRENT_USER,
+    user
+  };
 }
