@@ -310,7 +310,7 @@ export default connect(mapStateToProps)(MovieDetails)
 Now that we have an idea of how to connect our react components to our redux application, let's bring back the react-router and build a simple Todo Application using `redux`, `react` and `react-router`. We will have our `actions` and `reducers`. Since our store is so small, we will place it in our `index.js`. 
 
 - `create-react-app redux-react-todo` && `cd redux-react-todo`
-- `npm install --save redux react-redux react-router-dom@next redux-devtools-extension # for making dev tools integration easier`
+- `npm install --save redux react-redux react-router-dom@next`
 
 ### Component Structure
 

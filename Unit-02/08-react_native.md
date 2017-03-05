@@ -1,4 +1,4 @@
-#### [⇐ Previous](./07-backend_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_2_assessment.md)
+#### [⇐ Previous](./07-react_redux_auth.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_2_assessment.md)
 
 # React Native
 
@@ -100,4 +100,4 @@ We now can use these native libraries just like javascript packages!
 
 Siphon / Codepush / AppHub
 
-#### [⇐ Previous](./07-backend_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_2_assessment.md)
+#### [⇐ Previous](./07-react_redux_auth.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_2_assessment.md)

@@ -204,6 +204,14 @@ const store = createStore(rootReducer, compose(
 export default store
 ```
 
+Once this is installed, you can open up the chrome dev tools and check out the redux tab. Inside here you can time travel and do the following:
+
+`commit` - take any changes you have made to the redux state and set it to be the new initial state. You can do this as many times as you want.
+`revert` - go back to an original state (a previous commit)
+`reset` - undo all commits and revert to the original state
+
+You can read more about the dev tools [here](https://onsen.io/blog/react-redux-devtools-with-time-travel/) 
+
 ### Exercises
 
 Build a simple todo application but include redux to manage your data! You should have actions for creating, updating and deleting todos. Remember that since you are using redux, all of your reducers must be pure functions so each of these CRUD operations **must** be done using pure functions. 

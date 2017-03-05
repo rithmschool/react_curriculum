@@ -1,4 +1,4 @@
-#### [⇐ Previous](./05-testing.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-backend_continued.md)
+#### [⇐ Previous](./05-testing.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-react_redux_auth.md)
 
 # Backend with React
 
@@ -17,4 +17,4 @@ The other option is to make everything one large application and have the server
 
 ### Exercise
 
-#### [⇐ Previous](./05-testing.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-backend_continued.md)
+#### [⇐ Previous](./05-testing.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-react_redux_auth.md)
