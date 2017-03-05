@@ -69,7 +69,7 @@ StyleSheet.create({
         color: 'red',
         backgroundColor: 'green'
         alignItems: 'center',
-        justifyContent: 'center
+        justifyContent: 'center'
     }
 })
 ```
