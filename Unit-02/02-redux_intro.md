@@ -29,7 +29,7 @@ The data lifecycle in any Redux app follows these 4 steps:
 
 ### Functional Programming Review
 
-Redux revoles around some core concepts in functional programming - let's examine those in further detaial before we talk about reducers:
+Redux revoles around some core concepts in functional programming - let's examine those in further detail before we talk about reducers:
 
 ### Pure Functions
 
