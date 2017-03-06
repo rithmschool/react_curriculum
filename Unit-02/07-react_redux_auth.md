@@ -1,4 +1,4 @@
-#### [⇐ Previous](./06-backend.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-react_native.md)
+#### [⇐ Previous](./06-backend.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-unit_2_assessment.md)
 
 # Authentication with React and Redux
 
@@ -523,4 +523,4 @@ export default connect(mapStateToProps)(App)
 
 ### Getting Started
 
-#### [⇐ Previous](./06-backend.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-react_native.md)
+#### [⇐ Previous](./06-backend.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-unit_2_assessment.md)
