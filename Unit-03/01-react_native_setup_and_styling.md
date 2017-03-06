@@ -8,6 +8,7 @@ By the end of this chapter, you should be able to:
 
 - Describe the differences between react native and other mobile platforms
 - Use flexbox properties to style a react-native app
+- Explore the react native developer tools
 - Add a dependency that has native components
 
 ### React Native Background
@@ -272,6 +273,10 @@ conatinerRow: {
 
 This property accepts a number and determines the proportion of the available space to occupy.  For example, if there are two elements, both with a value of `flex: 1`, the two elements will both be given have the space.  The value of flex doesn't exactly matter, just the proportion.  So the same behavior would happen if both elements have `flex: 0.5`.  You can read more about flex in [react native docs](https://facebook.github.io/react-native/docs/layout-props.html#flex)
 
+#### flexbox
+
+To get more practice with flexbox, try [flexbox froggy](http://flexboxfroggy.com/).  Not all of the styles on the site apply to react native (the reverse options don't exist for example), but much of them apply.
+
 
 ### Developer Tools In React Native
 
@@ -314,7 +319,18 @@ Next, run:
 react-native link
 ```
 
-Now you should have access to that module in your code.  Try adding an icon to your app! You can see the icon example in their [docs](https://github.com/oblador/react-native-vector-icons)
+Now you should have access to that module in your code.
+
+__EXERCISE 2__
+
+Try adding an icon to your app! You can see an icon example in the [react native vector icon docs](https://github.com/oblador/react-native-vector-icons)
+
+
+__EXERCISE 3__
+
+Create the following mock up in react native
+
+
 
 
 ### Exercise Solutions
