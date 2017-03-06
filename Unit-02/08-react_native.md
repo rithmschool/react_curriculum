@@ -169,6 +169,32 @@ Make the following UI:
 
 ![react native smile mock](./images/react-native-smile-mock.png)
 
+### Native Dependencies
+
+React native uses npm to manage dependencies, but sometimes those dependencies have native code that must be linked into the iOS build or the android build.  Thankfully for most projects, the process is as simple as doing the following:
+
+```
+react-native link
+```
+
+For example, let's install `react-native-vector-icons`:
+
+```
+npm install --save react-native-vector-icons
+```
+
+Next, run:
+
+```
+react-native link
+```
+
+Now you should have access to that module in your code.  Try adding an icon to your app! You can see the icon example in their [docs](https://github.com/oblador/react-native-vector-icons)
+
+### TextInput
+
+
+
 ### Exercise Solutions
 
 __EXERCISE 1__
