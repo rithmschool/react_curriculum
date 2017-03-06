@@ -6,98 +6,232 @@
 
 By the end of this chapter, you should be able to:
 
-- Explain what `react-native` is and how it differs from other tools like `ionic`
-- Build simple mobile applications using `react-native`
-- Deploy `react-native` applications to respective app stores. 
+- Describe the differences between react native and other mobile platforms
+- Use flexbox properties to style a react-native app
+- Add a dependency that has native components
+- Use `TextInput` to get user input
 
-### Getting Started
+### React Native Background
 
-React Native is simply a bridge to run javascript natively on a mobile device.
+The react ecosystem is described as a learn once write anyone framework.  In other words, code may be slightly different on different platforms (web vs iOS vs android), but the fundamental ways that you build a react app are the same.  And hopefully many components that you create can be shared across the platforms.
 
-Let's get started
+This philosophy is in contrast to other frameworks like [apache cordova](https://cordova.apache.org/) that have tried to be a _write_ once and run anywhere framework.
+
+The main difference between the two approaches is that react native apps actually compile down to native code.  In other words, the react native app that you create is very similar to implementing a native application on iOS or android.  In cordova however, most of your code is run in a web view inside of a native container, so fundamentally, you are trying to make a webpage look like a mobile app.
+
+### Getting Setup
+
+
+To get started, make sure you have `watchman`:
+
+```
+brew install watchman
+```
+
+And install the react native cli:
 
 ```sh
-npm install -g react-native
-react-native init TodoApp
+npm install -g react-native-cli
 ```
 
-This will take a second to install all dependencies. It will create a folder for us with files for an ios and android app. These files are entry points for applications for specific devices. 
+To create an iOS app, you will need XCode installed. And to create an android app, you'll need android studio.  You can find more info about setup for each platform in the [facebook setup docs](https://facebook.github.io/react-native/docs/getting-started.html)
 
-Let's see what this generates by running `react-native run-ios`
+### First App
 
-You will see a new terminal window open up as well! This is where can debug our react application
+To make your first app, in the terminal, type:
 
-Let's start by creating a folder called `src` which will contain our code
-
-### Foundational Components
-
-```js
-<View> // <div>
-<Text> // <h1-6>
-<TextInput> // <input />
-<TouchableHighlight> // <button>
+```
+react-native init FirstApp
 ```
 
-### Building a small todo app
+The cli will create a directory called FirstApp. Inside of it, you will get the following files:
 
-### React native dev tools
 
-Command d for the developer tools. 
+* __package.json__: Lists our javascript dependencies.  This is what gets edited when you do `npm install --save <module_name>`
+* __index.ios.js__: The entry point to our ios app.  We can put ios specific setup here.
+* __index.android.js__: The entry point to our android app.  Android specific setup can go here
+* __.babelrc__: The config file for babel (a transpiling library)
+* __.flowconfig__: Flow is a static type checker than you can use in your app.  Find out more from [facebook](https://flowtype.org/)
+* __node_modules__: A directory that contains all of our JS dependencies.
+* __ios__: A directory that contains build settings for iOS. The xcode project will be found here.
+* __android__: A directory that contains build settings for android. The gradle build scrips will be in here.
 
-Live reload loads the whole application, hot reloading keeps your state but loads any new changes. You can remotely debug your javascript and a new window in the browser will open at [http://localhost:8081/debugger-ui](http://localhost:8081/debugger-ui)
+To run your app for the first time in the simulator, run:
 
-On ios there is not a great way to log information outside of Xcode and debugging remotely. You can also console.warn information and it will appear in the simulator.
-
-### Styling + Flexbox
-
-```js
-import StyleSheet from 'react-native'
-
-StyleSheet.create({
-    main:{
-        color: 'red',
-        backgroundColor: 'green'
-    }
-})
+```
+react-native run-ios
 ```
 
-Since each of our elements are `display:flex` already, we can add flexbox properties right on them:
+You should see a welcome screen that tells you a little about react native.
 
-```js
-StyleSheet.create({
-    main:{
-        color: 'red',
-        backgroundColor: 'green'
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-})
+### New Components In React Native
+
+Since react native is not web development, our jsx will not have access to the `react-dom`.  If you open up `index.ios.js`, you'll notice new imports from `react-native`:
+
+* __AppRegistery__: Used to register the parent component for our app.  We will only need to use this in the entry point for our app.
+* __StyleSheet__: Useful for creating stylesheet objects.  Checks to make sure the values that are being passed are valid react styles.
+* __View__: A container component.  You can think of it as a similar component to an html div
+* __Text__: For showing text. Unlike the browser, our text must always be inside of a text component.
+
+
+### React Native Styling With Flexbox
+
+React native has embraced flexbox for its styling. In order to use flexbox, it's important to understand a few concepts:
+
+#### flexDirection
+
+Determines the primary axis for the flexbox flow.  By default the `flexDirection` is set to `column`, which means that elements on the page stack vertically  in the view.  The other option is `row`, which means that the elements are positioned next to each other in a row.
+
+Try the following example and switch the flexDirection between row and column:
+
+```
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+
+export default class FirstApp extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.box} />
+        <View style={styles.box} />
+        <View style={styles.box} />
+        <View style={styles.box} />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+    flexDirection: 'column'
+  },
+  boxR: {
+    width: 70,
+    height: 70,
+    backgroundColor: 'red'
+  }
+});
 ```
 
-### AJAX Requests
+#### justifyContent
 
-React Native uses the Fetch API for making external requests. Here is how we can use fetch to grab data from a server in the `componentWillMount` lifecycle method and place the data into state
+Acts on the primary axis in the flexbox flow.  So if the primary direction is `flexDirection: 'column'` and content is `justifyContent: center` all of the items will be be bunched together in the center in the available vertical space.
 
-```js
-componentWillMount(){
-    fetch('https://www.omdbapi.com?t=titanic', {'Accept': 'application/json'})
-    .then(response => response.json())
-    .then(data => console.log(data))
+However, if the flexDirection is `flexDirection: 'row'` and the content is `justifyContent: center`, all of the content will be bunched together in the center of the horizontal space
+
+You can read all of the properties for `justifyContent` in the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content)
+
+#### alignItems
+
+Acts on the secondary axis in the flexbox flow.  So if the flexDirection is ``flexDirection: 'column'`, `alignItems` will align horizontally, and if the flexDirection is `flexDirection: 'row'`, `alignItems` will align vertically.
+
+You can check out the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) for align items as well.
+
+#### width and height
+
+React native styling also supports width and height.  As of [February 2017](https://github.com/facebook/react-native/releases/tag/v0.42.0), react native supports percentages for widths and heights!  So you can now do something like this:
+
+```
+conatinerRow: {
+    width: '100%',
+    height: 100
 }
 ```
 
-### Routing with React Native
 
-Unfortunately, routing with React Native is not something that is completely standardized by the community. There are quite a few solutions for using routing.
+### Developer Tools In React Native
 
-### Importing Native Libraries with rnpm
+To get the developer menu to pop up while using the iOS simulator, type command + D or go to Hardware menu and select shake gesture.  If you are debugging on the physical phone, you can simply shake the phone.
 
-Instead of manually adding native libraries to certain files, we can use a react native package manager called `rnpm``npm install -g rnpm`. We can install native libraries and link them as an alternative to using `cocoapods` (package manager for ios) and `gradle` (building for android)
+There are some really cool features here:
 
-We now can use these native libraries just like javascript packages!
+* Reload - simply reload the app along with any changes
+* Debug JS Remotely - use chrome dev tools to set break points, inspect state, and look at the console logs!
+* Enable Live Reload - Automatically reloads your new bundle whenever you make a change.  Speeds up development a lot!
+* Start Systrace - used for performance
+* Enable Hot Reloading -  this feature tries to reload your code changes without making a new app bundle.  It does this without changing your state, but sometimes it will get confused. I prefer to use this mainly for styling.
+* Show Inspector - Similar to the inspector on chrome.  You can see elements, their margin, padding, etc.
+* Show Perf Monitor - Shows perf stats like frame rate, etc.
 
-### Publishing to the app store
+__EXERCISE 1__
 
-Siphon / Codepush / AppHub
+Make the following UI:
+
+
+![react native smile mock](./images/react-native-smile-mock.png)
+
+### Exercise Solutions
+
+__EXERCISE 1__
+
+```
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+
+export default class FirstApp extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={[
+            styles.containerRow,
+            {justifyContent: 'space-around'}
+          ]} >
+          <View style={styles.boxR} />
+          <View style={styles.boxR} />
+        </View>
+        <View style={styles.boxR} />
+        <View style={styles.containerRow} >
+          <View style={styles.boxB} />
+          <View style={styles.boxR} />
+          <View style={styles.boxB} />
+          <View style={styles.boxR} />
+        </View>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+    flexDirection: 'column'
+  },
+  containerRow: {
+    width: '100%',
+    height: 100,
+    justifyContent: 'center',
+    flexDirection: 'row' 
+  },
+  boxR: {
+    width: 80,
+    height: 70,
+    backgroundColor: 'red'
+  },
+  boxB: {
+    width: 80,
+    height: 70,
+    backgroundColor: 'blue'
+  },
+});
+
+AppRegistry.registerComponent('FirstApp', () => FirstApp);
+```
 
 #### [⇐ Previous](./07-react_redux_auth.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_2_assessment.md)
