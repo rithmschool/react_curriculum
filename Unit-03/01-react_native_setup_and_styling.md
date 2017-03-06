@@ -9,7 +9,6 @@ By the end of this chapter, you should be able to:
 - Describe the differences between react native and other mobile platforms
 - Use flexbox properties to style a react-native app
 - Add a dependency that has native components
-- Use `TextInput` to get user input
 
 ### React Native Background
 
@@ -74,7 +73,129 @@ Since react native is not web development, our jsx will not have access to the `
 * __Text__: For showing text. Unlike the browser, our text must always be inside of a text component.
 
 
-### React Native Styling With Flexbox
+### React Native Styling
+
+Many of the styles that you use in react native are very similar to what you'll use on the web.
+
+For example, the following (hopefully familiar) styles exist in react native:
+
+* height
+* width
+* backgroundColor
+* margin
+* padding
+* fontSize
+* fontWeight
+* color
+
+To add a style to a component, you can do a few things. Commonly, you'll import `StyleSheet` from `react-native` and use `StyleSheet.create` which accepts an object of styles.  Here is an example that gives text some styling:
+
+```
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+
+export default class FirstApp extends Component {
+  render() {
+    return (
+      <View>
+        <Text style={styles.text}>
+          Welcome to React Native!
+        </Text>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  text: {
+    color: '#ff0000',
+    fontWeight: 'bold',
+    fontSize: 50,
+  },
+});
+
+AppRegistry.registerComponent('FirstApp', () => FirstApp);
+
+```
+
+Notice that the text takes a style prop, that accepts a JavaScript object from `StyleSheet.create`.  We can also just put our styles inline:
+
+```
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+
+export default class FirstApp extends Component {
+  render() {
+    return (
+      <View>
+        <Text style={{
+           color: '#ff0000',
+           fontWeight: 'bold',
+           fontSize: 50,
+        }}>
+          Welcome to React Native!
+        </Text>
+      </View>
+    );
+  }
+}
+
+AppRegistry.registerComponent('FirstApp', () => FirstApp);
+```
+
+We don't need to use `StyleSheet.create in this case because we are providing the style object directly to the Text component.  It is a good idea to use `StyleSheet.create` though because it checks to make sure the styles you provided in your objects are all valid react native styles.
+
+One more thing you can do with styling is provide an array.  Say you'd like to override one style:
+
+
+
+```
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+
+export default class FirstApp extends Component {
+  render() {
+    return (
+      <View>
+        <Text style={[styles.text, {fontSize: 35}]}>
+          Welcome to React Native!
+        </Text>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  text: {
+    color: '#ff0000',
+    fontWeight: 'bold',
+    fontSize: 50,
+  },
+});
+
+AppRegistry.registerComponent('FirstApp', () => FirstApp);
+
+```
+
+Since `fontSize: 35` is later in the array, it will overwrite the first style.
+
+### Flexbox Styling
+
 
 React native has embraced flexbox for its styling. In order to use flexbox, it's important to understand a few concepts:
 
@@ -147,6 +268,10 @@ conatinerRow: {
 }
 ```
 
+#### flex
+
+This property accepts a number and determines the proportion of the available space to occupy.  For example, if there are two elements, both with a value of `flex: 1`, the two elements will both be given have the space.  The value of flex doesn't exactly matter, just the proportion.  So the same behavior would happen if both elements have `flex: 0.5`.  You can read more about flex in [react native docs](https://facebook.github.io/react-native/docs/layout-props.html#flex)
+
 
 ### Developer Tools In React Native
 
@@ -190,9 +315,6 @@ react-native link
 ```
 
 Now you should have access to that module in your code.  Try adding an icon to your app! You can see the icon example in their [docs](https://github.com/oblador/react-native-vector-icons)
-
-### TextInput
-
 
 
 ### Exercise Solutions
