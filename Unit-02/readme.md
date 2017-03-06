@@ -1,4 +1,4 @@
-### Unit 2 - Intermediate React / React-Router / Redux / React-Native
+### Unit 2 - Intermediate React / React-Router / Redux
 
 - [01 React Router](./01-react_router.md)
 - [02 Introduction to Redux](./02-redux_intro.md)
