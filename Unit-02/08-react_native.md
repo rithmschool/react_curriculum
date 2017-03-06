@@ -1,6 +1,6 @@
-#### [⇐ Previous](./07-react_redux_auth.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_2_assessment.md)
+#### [Table of Contents](./../readme.md) | [Next ⇒](./)
 
-# React Native
+# React Native Setup And Styling
 
 ### Objectives
 
@@ -260,4 +260,4 @@ const styles = StyleSheet.create({
 AppRegistry.registerComponent('FirstApp', () => FirstApp);
 ```
 
-#### [⇐ Previous](./07-react_redux_auth.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-unit_2_assessment.md)
+#### [Table of Contents](./../readme.md) | [Next ⇒](./)
