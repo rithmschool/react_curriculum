@@ -7,5 +7,4 @@
 - [05 Testing](./05-testing.md)
 - [06 Full Stack React](./06-backend.md)
 - [07 React Redux Auth](./07-react_redux_auth.md)
-- [08 React Native](./08-backend.md)
-- [09 Unit 2 Assessment](./09-unit_2_assessment.md)
+- [08 Unit 2 Assessment](./08-unit_2_assessment.md)

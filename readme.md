@@ -21,5 +21,8 @@
 - [05 Testing React and Redux](./Unit-02/05-testing.md)
 - [06 Full Stack React](./Unit-02/06-backend.md)
 - [07 React Redux Auth](./Unit-02/07-react_redux_auth.md)
-- [08 React Native](./Unit-02/08-react_native.md)
-- [09 Unit 2 Assessment](./Unit-02/09-unit_2_assessment.md)
+- [08 Unit 2 Assessment](./Unit-02/08-unit_2_assessment.md)
+
+### Unit 3 - React Native
+
+- [01 React Native Setup and Styling]()
