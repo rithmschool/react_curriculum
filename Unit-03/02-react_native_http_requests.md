@@ -133,6 +133,10 @@ To see all the properties that you can set on a scroll view, checkout the [faceb
 The simplicity of the `ScrollView` has a downside.  The `ScrollView` puts creates all of the react components that are in the scroll view even if those items are not displayed on screen.  That's fine for a small list, but if you have hundreds of complex list items, your scrolling could be noticeably slow.  The solution to this problem is to set up a [ListView](https://facebook.github.io/react-native/docs/listview.html).
 
 
+### Assignment
+
+Create a movie search app.  For details, go [here]()
+
 
 ### Exercise Solutions
 
