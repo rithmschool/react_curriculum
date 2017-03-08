@@ -326,6 +326,46 @@ __EXERCISE 2__
 Try adding an icon to your app! You can see an icon example in the [react native vector icon docs](https://github.com/oblador/react-native-vector-icons)
 
 
+### Full Screen Background Image
+
+To setup a full screen background image, use an `Image` component as your containing component.  Then you just need to specify the image `source` prop and include the image in your app.  Assuming you have a directory called `images` and a file inside called `background.jpg`, this would get you a background image:
+
+```
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  Image,
+  View
+} from 'react-native';
+
+export default class FirstApp extends Component {
+  render() {
+    return (
+      <Image style={styles.image} source={require('./images/sunset-background.jpg')}>
+        <Text>Hello, I'm on top of the image</Text>
+      </Image>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    resizeMode: 'stretch',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+});
+
+AppRegistry.registerComponent('FirstApp', () => FirstApp);
+```
+
+Notice that the style uses width and height of 100% and the image resize mode of `stretch`.  To see other options for image resize modes, look at the [facebook docs](https://facebook.github.io/react-native/docs/image.html#style)
+
 __EXERCISE 3__
 
 Create the following mock up in react native
