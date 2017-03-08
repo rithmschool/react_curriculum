@@ -26,3 +26,5 @@
 ### Unit 3 - React Native
 
 - [01 React Native Setup and Styling](./Unit-03/01-react_native_setup_and_styling.md)
+- [02 React Native HTTP Requests](./Unit-03/02-react_native_http_requests.md 
+Unit-03/02-react_native_http_requests.md)
