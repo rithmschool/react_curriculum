@@ -43,7 +43,9 @@ import {
 Here we are importing three essential components
 
 __BrowserRouter__ - this component wraps our entire application and contains routes.
+
 __Route__ - this component tells the router what route triggers what component. We can give this component quite a few more props aside from `path`, and `component` - we will see more later ( we can even render )
+
 __Link__ - this component is used for building anchor tags. `<a>` tags are not enough since we need some javascript to tell react-router about the new route. Use `<Link>` instead of `<a>`.
 
 ### Basic Routing
@@ -133,10 +135,14 @@ With ReactRouter there are quite a few Router components that come with the modu
 
 __Router__ - The common low-level interface for all router components. Higher-level routers include:
 
-- __BrowserRouter__ - A <Router> that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
-- __HashRouter__ - A <Router> that uses the hash portion of the URL (i.e. window.location.hash) to keep your UI in sync with the URL. Using HashRouter will include a `#` in the URL. This is a fallback for older browsers when using `BrowserRouter`
+__BrowserRouter__ - A <Router> that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
+
+__HashRouter__ - A <Router> that uses the hash portion of the URL (i.e. window.location.hash) to keep your UI in sync with the URL. Using HashRouter will include a `#` in the URL. This is a fallback for older browsers when using `BrowserRouter`
+
 __NativeRouter__ - A <Router> for native iOS and Android apps built using React Native.
+
 __MemoryRouter__ - A <Router> that keeps the history of your “URL” in memory (does not read or write to the address bar). Useful in tests and non-browser environments like React Native.
+
 __StaticRouter__ - A <Router> that never changes location. This can be useful in server-side rendering scenarios when the user isn’t actually clicking around, so the location never actually changes. Hence, the name: static. It’s also useful in simple tests when you just need to plug in a location and make assertions on the render output.
 
 In order to use BrowserRouter, we need to specify a fallback (what route to go to when a full refresh comes in (changing something in the browser bar)). This can be done in the `webpack.config.js` and is handled for us when using `create-react-app` - you can read more about it [here](https://webpack.github.io/docs/webpack-dev-server.html#the-historyapifallback-option)
