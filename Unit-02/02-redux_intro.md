@@ -31,21 +31,21 @@ Here's an overview of the purpose of redux, courtesy of their [documentation](ht
 
 ### Functional Programming Review
 
-Redux revoles around some core concepts in functional programming. Let's examine those in further detail before we talk about reducers:
+Redux revolves around some core concepts in functional programming. Let's examine these in more detail before we talk about reducers.
 
 ### Pure Functions
 
-A pure function is a predictable function that does not have an side-effects. What does that mean? When a pure function is called many times with the same input, it will always give the same output (this is also known as idempotence) and is predictable. Another characteristic of pure functions are that they do not modify external state, or change values outside of their scope. 
+A *pure function* is a predictable function that does not have any side-effects. What does that mean? When a pure function is called many times with the same input, it will always give the same output (this is also known as idempotence). This makes the function predictable, easier to reason about, and easier to test. Another characteristic of pure functions are that they do not modify external state, or change values outside of their scope. 
 
 Let's try to identify some pure and impure functions:
 
 Are the following functions **pure** or **impure**?
 
 ```js
-var arr = [2,4,6];
-function doubleValues(arr){
-    for(var i =0; i< arr.length; i++){
-        arr[i] = arr[i]*2;
+var arr = [2, 4, 6];
+function doubleValues(arr) {
+    for(var i = 0; i < arr.length; i++){
+        arr[i] = arr[i] * 2;
     }
 }
 
@@ -56,22 +56,22 @@ doubleValues(arr);
 arr; // [8, 16, 24]
 ```
 
-The function is **impure** because there is a side effect, we are mutating or changing the `arr` variable and if we call this function again, we will get a different value!
+The function is **impure** because there is a side effect: we are mutating (or changing) the `arr` variable. 
 
 ```js
-var arr = [2,4,6]
-function doubleValues(arr){
+var arr = [2, 4, 6];
+function doubleValues(arr) {
     return arr.map(function(val){
-        return val*2;
-    })
+        return val * 2;
+    });
 }
 
-doubleValues(arr); // [4,8,12]
-doubleValues(arr); // [4,8,12]
-doubleValues(arr); // [4,8,12]
+doubleValues(arr); // [4, 8, 12]
+doubleValues(arr); // [4, 8, 12]
+doubleValues(arr); // [4, 8, 12]
 ```
 
-This function is **pure** because there is no side effect, if we wanted to double the result of double, we could combine these functions together! `doubleValues(doubleValues(arr)) // [8,16,24]` and we still would not change the `arr` variable. Pretty cool!
+This function is **pure** because there is no side effect. If we wanted to double the result of double, we could combine these functions together! `doubleValues(doubleValues(arr)) // [8, 16, 24]` and we still would not change the `arr` variable. Pretty cool!
 
 How about this one?
 
@@ -82,9 +82,11 @@ function addNameToObject(obj,val){
     obj.name = val;
     return obj;
 }
+
+addNameToObject(start, "Elie");
 ```
 
-The function is **impure** because there is a side effect, we are mutating or changing the `start` variable and if we call this function again, we will get a different value!
+The function is **impure** because there is a side effect: we are mutating (or changing) the `start` variable. If you take a look at `start` after calling `addNameToObject`, you'll see that it's no longer an empty object!
 
 ```js
 var start = {};
@@ -93,40 +95,50 @@ function addNameToObject(obj,val){
     var newObj = {name: val};
     return Object.assign({}, obj, newObj);
 }
+
+addNameToObject(start, "Matt");
 ```
 
-The function is **impure** because there is a not side effect and we are not mutating or changing the `start` variable. if we call this function again, we will get a different value!
+The function is **pure** because there is a not side effect and we are not mutating or changing the `start` variable. Instead, we're returning a brand new object based on the structure of `start`.
+
+Here's another one:
 
 ```js
-var arr = [1,2,3,4]
-function addToArr(arr,val){
+var arr = [1, 2, 3, 4];
+
+function addToArr(arr,val) {
     arr.push(val);
     return arr;
 }
 
-addToArr(arr, 5); // [1,2,3,4,5]
-arr; // [1,2,3,4,5]
+addToArr(arr, 5); // [1, 2, 3, 4, 5]
+arr; // [1, 2, 3, 4, 5]
 ```
 
-The function is **impure** because there is a side effect and we are mutating or changing the `arr` variable. if we call this function again, we will get a different value!
+The function is **impure** because there is a side effect: we are mutating (or changing) the `arr` variable. 
 
 ```js
-var arr = [1,2,3,4]
-function addToArr(arr,val){
+var arr = [1, 2, 3, 4];
+function addToArr(arr,val) {
     var newArr = arr.concat(val);
     return newArr;
 }
 
-addToArr(arr, 5); // [1,2,3,4,5]
+addToArr(arr, 5); // [1, 2, 3, 4, 5]
+arr; // [1, 2, 3, 4]
 ```
 
-The function is **pure** because there is a not side effect and we are notmutating or changing the `arr` variable. if we call this function again, we will get a different value!
+The function is **pure** because there is a not side effect and we are not mutating or changing the `arr` variable. 
 
-You can read more about pure functions [here](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.d1qdboexh), [here](https://egghead.io/lessons/javascript-redux-pure-and-impure-functions), and if you are looking for a more advanced read, take a look [here](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/)
+You can read more about pure functions [here](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.d1qdboexh), [here](https://egghead.io/lessons/javascript-redux-pure-and-impure-functions), and if you are looking for a more advanced read, take a look [here](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/).
 
 ### Reducer
 
-Reducers are functions that accept the state and an action and return a new state. We need to make sure that we do not mutate state so very commonly we will use conditional logic to find an action and if we do not find one, we just return the state. Our reducers **MUST** be pure functions
+Reducers are pure functions that accept a state and an action, and return a new state. We need to make sure that we do not mutate state, so very commonly we will use conditional logic to find an action. If we do not find one, we just return the state. 
+
+It bears repeating: our reducers **MUST** be pure functions.
+
+Here's an example of a reducer that updates an array of names:
 
 ```js
 function firstReducer(state=[], action){
@@ -142,30 +154,32 @@ function firstReducer(state=[], action){
 }
 ```
 
+Be very careful when you're writing your own reducers that you aren't accidentally mutating state! If you're using methods like `pop`, `shift`, `unshift`, `push`, or `splice` on arrays, for instance, you're probably doing something wrong.
+
 ### Actions
 
-We create actions to change the state, which trigger reducers
+We create actions to change the state and trigger reducers. Here's what that might look like for the example above:
 
 ```js
 function addName(name){
-    dipatch({
+    return {
         type: 'ADD_NAME',
         payload: name
-    })
+    }
 }
 function removeName(name){
-    dipatch({
+    return {
         type: 'REMOVE_NAME',
         payload: name
-    })
+    }
 }
 ```
 
 ### Store
 
-Our store accepts a reducer and has methods for getting the state, dispatching actions and subscribing and unsubscribing. If we have multiple reducers, we can merge them together with the `combineReducers` function that `redux` provides, but we will just be starting with a single reducer
+Our store accepts a reducer and has methods for getting the state, dispatching actions, and subscribing and unsubscribing. If we have multiple reducers, we can merge them together with the `combineReducers` function that `redux` provides, but we will just be starting with a single reducer.
 
-We import the `createStore` from `redux` and create a store with a reducer.
+Let's create our first store! To begin, we'll need to import `createStore` from `redux` and create a store with a reducer.
 
 ```js
 import {createStore} from 'redux' // bring in the createStore method
@@ -193,7 +207,7 @@ What happens if you have multiple reducers? You can import the `combineReducers`
 
 ### Redux Dev Tools
 
-What having a single immutable state store allows us to do is some really awesome stuff like time travelling, hot module reloading and easier debugging. With redux, the only way we can change state is to fire off an action, which creates a new state so that we can always revert and see changes in state! You can get the chrome extention [here](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) and here is the code necessary to use the extention with a redux application (this is a sample store)
+Having a single immutable state store allows us to do some really awesome stuff like time traveling, hot module reloading, and easier debugging. With redux, the only way we can change state is to fire off an action, which creates a new state so that we can always revert and see changes in state! You can get the Chrome extention [here](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en), and here is the code necessary to use the extention with a redux application (this is a sample store):
 
 ```js
 import { createStore, compose } from 'redux'
@@ -206,13 +220,13 @@ const store = createStore(rootReducer, compose(
 export default store
 ```
 
-Once this is installed, you can open up the chrome dev tools and check out the redux tab. Inside here you can time travel and do the following:
+Once this is installed, you can open up the Chrome dev tools and check out the redux tab. Inside here you can time travel and do the following:
 
 `commit` - take any changes you have made to the redux state and set it to be the new initial state. You can do this as many times as you want.
 `revert` - go back to an original state (a previous commit)
 `reset` - undo all commits and revert to the original state
 
-You can read more about the dev tools [here](https://onsen.io/blog/react-redux-devtools-with-time-travel/) 
+You can read more about the dev tools [here](https://onsen.io/blog/react-redux-devtools-with-time-travel/).
 
 ### Exercises
 
