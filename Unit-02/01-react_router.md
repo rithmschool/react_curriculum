@@ -13,17 +13,17 @@ By the end of this chapter, you should be able to:
 
 As we want to navigate to more pages, we can use JavaScript to add and remove elements to give the idea of a single page feel, but what happens when the user clicks the back button in the browser, or refreshes the page! All of our history and state is lost so it would be nice if we could use JavaScript to be able to change the URL and give the "illusion" of navigation even though it is all one single HTML page (with modifications to the DOM).
 
-The API commonly used to do this is the `history` API, which is a JavaScript web API. React router is a wrapper around this that uses React components for routes, anchor tags and much more. 
+The API commonly used to do this is the `history` API, which is a JavaScript web API. React Router is a wrapper around this that uses React components for routes, anchor tags, and much more. 
 
 React Router is quite helpful when building more robust applications with multiple components and views. 
 
 ### React Router Version
 
-React Router has gone through quite a few changes since its first version and a new version, `v4` is in beta. We will be learning `v4` since it is the future of react-router and it is a bit easier to use than previous versions.
+React Router has gone through quite a few changes since its first version and a new version, `v4` is in beta. We will be learning `v4` since it is the future of React Router and it is a bit easier to use than previous versions.
 
 ### Getting Started with create-react-app
 
-To get started with react apps a bit quicker, we will be using a generator called `create-react-app` which can be installed with `npm install -g create-react-app`. 
+To get started with React apps a bit quicker, we will be using a generator called `create-react-app` which can be installed with `npm install -g create-react-app`. 
 
 To generate an app simply run `create-react-app NAME_OF_APP` and then `cd NAME_OF_APP` and run `npm start` and a browser window will pop up with page to describe what to do next!
 
@@ -175,7 +175,8 @@ export default RouterExample
 Another very useful feature that react router v4 gives us is the ability to easily redirect and render conditionally. This is essential for any kind of authentication or authorization, but it does require a bit more set up. Let's take a look at the example from the docs: 
 
 ```js
-import React, { PropTypes } from 'react'
+import React from 'react'
+import { render } from 'react-dom'
 import {
   BrowserRouter as Router,
   Route,
@@ -190,26 +191,11 @@ import {
 // 3. Log in
 // 4. Click the back button, note the URL each time
 
-const AuthExample = () => (
-  <Router>
-    <div>
-      <AuthButton/>
-      <ul>
-        <li><Link to="/public">Public Page</Link></li>
-        <li><Link to="/protected">Protected Page</Link></li>
-      </ul>
-      <Route path="/public" component={Public}/>
-      <Route path="/login" component={Login}/>
-      <PrivateRoute path="/protected" component={Protected}/>
-    </div>
-  </Router>
-)
-
 const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
     this.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
+    setTimeout(cb, 100)
   },
   signout(cb) {
     this.isAuthenticated = false
@@ -217,11 +203,12 @@ const fakeAuth = {
   }
 }
 
-const AuthButton = withRouter(({ push }) => (
+const AuthButton = withRouter( props => (
   fakeAuth.isAuthenticated ? (
     <p>
-      Welcome! <button onClick={() => {
-        fakeAuth.signout(() => push('/'))
+      Welcome! 
+      <button onClick={() => {
+        fakeAuth.signout(() => props.history.push('/'))
       }}>Sign out</button>
     </p>
   ) : (
@@ -252,18 +239,16 @@ class Login extends React.Component {
 
   login = () => {
     fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true })
+      this.setState({redirectToReferrer: true})
     })
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } }
+    const { from } = this.props.location.state || { from: { pathname: '/'} }
     const { redirectToReferrer } = this.state
 
     if (redirectToReferrer) {
-      return (
-        <Redirect to={from}/>
-      )
+      return <Redirect to={from} />
     }
 
     return (
@@ -280,17 +265,27 @@ class Login extends React.Component {
         <button onClick={this.login}>Log in</button>
       </div>
     )
-
-    return (
-      <div>
-        <p>You must log in to view the page at {from.pathname}</p>
-        <button onClick={this.login}>Log in</button>
-      </div>
-    )
   }
 }
 
-export default AuthExample
+const AuthExample = () => (
+  <Router>
+    <div>
+      <AuthButton></AuthButton>
+      <ul>
+        <li><Link to="/public">Public Page</Link></li>
+        <li><Link to="/protected">Protected Page</Link></li>
+      </ul>
+      <Route path="/public" component={Public}></Route>
+      <Route path="/login" component={Login}></Route>
+      <PrivateRoute path="/protected" component={Protected}></PrivateRoute>
+    </div>
+  </Router>
+)
+
+render(<AuthExample />,
+  document.getElementById('root')
+);
 ```
 
 There is quite a lot going on here including some new components and functions:
@@ -299,12 +294,15 @@ __withRouter__ - You can get access to the router object’s properties via the 
 
 __Redirect__ - Useful for redirecting, you just have to specify the to prop to tell the router where to go next.
 
-`{...rest}`  - The rest/spread operator for objects is a useful way to spread or list the remaining/rest keys and values in an object with just one parameter. You can read more about it [here](https://babeljs.io/docs/plugins/transform-object-rest-spread/)
+`{...rest}`  - The rest/spread operator for objects is a useful way to spread or list the remaining/rest keys and values in an object with just one parameter. You can read more about it [here](https://babeljs.io/docs/plugins/transform-object-rest-spread/).
 
 ### Route Config
 
+Another common pattern is to store all of your route configuration in a single location. Here's an example of what that looks like: 
+
 ```js
 import React from 'react'
+import { render } from 'react-dom'
 import {
   BrowserRouter as Router,
   Route,
@@ -317,6 +315,7 @@ import {
 
 ////////////////////////////////////////////////////////////
 // first our route components
+
 const Main = () => <h2>Main</h2>
 
 const Sandwiches = () => <h2>Sandwiches</h2>
@@ -336,11 +335,15 @@ const Tacos = ({ routes }) => (
 )
 
 const Bus = () => <h3>Bus</h3>
+
 const Cart = () => <h3>Cart</h3>
 
 ////////////////////////////////////////////////////////////
 // then our route config
 const routes = [
+  { path: '/main',
+    component: Main
+  },
   { path: '/sandwiches',
     component: Sandwiches
   },
@@ -359,10 +362,10 @@ const routes = [
 
 // wrap <Route> and use this everywhere instead, then when
 // sub routes are added to any route it'll work
-const RouteWithSubRoutes = (route) => (
+const RouteWithSubRoutes = route => (
   <Route path={route.path} render={props => (
     // pass the sub-routes down to keep nesting
-    <route.component {...props} routes={route.routes}/>
+    <route.component {...props} routes={route.routes} />
   )}/>
 )
 
@@ -370,8 +373,9 @@ const RouteConfigExample = () => (
   <Router>
     <div>
       <ul>
-        <li><Link to="/tacos">Tacos</Link></li>
+        <li><Link to="/main">Main</Link></li>
         <li><Link to="/sandwiches">Sandwiches</Link></li>
+        <li><Link to="/tacos">Tacos</Link></li>
       </ul>
 
       {routes.map((route, i) => (
@@ -381,10 +385,15 @@ const RouteConfigExample = () => (
   </Router>
 )
 
-export default RouteConfigExample
+render(
+  <RouteConfigExample/>, 
+  document.getElementById('root')
+)
 ```
 
 ### Sidebar 
+
+So far we've been associating one component per path via the `component` prop. But we can associate multiple components for a given path using differently named props. Here's an example where each path is associated with two different components, a sidebar and a main:
 
 ```js
 import React from 'react'
@@ -466,7 +475,9 @@ export default SidebarExample
 
 ### Redirecting Programatically
 
-With react router v4 we are given access to the `Redirect` component which is useful for conditionally rendering or redirecting, but if we need to redirect programatically (after a form submission, click) we can use `context` to do that. This can also be done with `state` and having something like `this.state.redirect` be set to `false` unless something has changed, and if so - change `this.state.redirect` to be `true` and redirect to another component. However, this example will show you how to redirect using an object called `context`, which you should almost never be manipulating on your own, it is internal to React and you can read more about it [here](https://facebook.github.io/react/docs/context.html)
+With react router v4 we are given access to the `Redirect` component which is useful for conditionally rendering or redirecting, but if we need to redirect programatically (after a form submission, click, and so on) we can use `context` to do that. 
+
+This can also be done with `state`. In this case, we can set `this.state.redirect` to `false` if nothing has changed, and we can set it to `true` and redirect to another component if something has changed. However, this example will show you how to redirect using an object called `context`, which you should almost never be manipulating on your own, it is internal to React and you can read more about it [here](https://facebook.github.io/react/docs/context.html)
 
 For now, let's see an example of redirecting with `context`. You will also see in order to make this work, we need to add `contextTypes` as a `static` property to our `class`. 
 
