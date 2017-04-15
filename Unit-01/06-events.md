@@ -11,7 +11,7 @@ By the end of this chapter, you should be able to:
 
 ### Events with React
 
-Events in React are not actually `DOM` events they are called `synthetic` events. They React event API is almost identical to the DOM API in its methods, but they are not exactly the same.
+Events in React are not actually `DOM` events they are called `synthetic` events. The React event API is almost identical to the DOM API in its methods, but they are not exactly the same.
 
 ```js
 import React, {Component} from 'react'
