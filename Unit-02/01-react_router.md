@@ -29,7 +29,7 @@ To generate an app simply run `create-react-app NAME_OF_APP` and then `cd NAME_O
 
 ### Adding react-router
 
-Now let's get started with react-router by running `npm install react-router@next`. Most of these examples are taken from [here](https://reacttraining.com/react-router/). 
+Now let's get started with react-router by running `npm install --save react-router-dom@next`. Most of these examples are taken from [here](https://reacttraining.com/react-router/). 
 
 ```js
 import React from 'react'
