@@ -14,11 +14,11 @@ By the end of this chapter, you should be able to:
 
 So far all of our react applications have been composed of a few components.  As our applications grow, we will need to change the components on the page.  Often the changes happen because of a link that was clicked or because of data that has been submitted.
 
-Any client side (javascript) application that has lots of different pages and transitions that happen entirely on the client side is called a __single page applicaiton__.  To make a single page application well, the user should feel like the page still functions just like a standard server based web app.  Specifically, the browser back button should still work.  Adding a bookmark to a specific page should still work.  Even the first page load should essentially work the same way (we'll talk more about this one later).
+Any client-side (JavaScript) application that has lots of different pages and transitions that happen without refreshing the page or rendering a new HTML file from the server is called a __single-page applicaiton__.  To make a single-page application well, the user should feel like the page still functions just like a standard server-based web app.  Specifically, the browser back button should still work.  Adding a bookmark to a specific page should still work.  Even the first page load should essentially work the same way (we'll talk more about this one later).
 
 #### HTML 5 History API
 
-So if javascript is doing all of the changes to the page, how can the browser back button still work?  The answer is the HTML 5 history API.  [MDN](https://developer.mozilla.org/en-US/docs/Web/API/History_API) has a good intro to history.  Assume you are on a site with the following url: `https://www.example.com`.  In your javascript you can change the history:
+So if JavaScript is doing all of the changes to the page, how can the browser back button still work?  The answer is the HTML 5 history API.  [MDN](https://developer.mozilla.org/en-US/docs/Web/API/History_API) has a good intro to history.  Assume you are on a site with the following url: `https://www.example.com`.  In your javascript you can change the history:
 
 ```js
 // We can store some data we care about here
@@ -32,9 +32,16 @@ window.history.pushState(state, "title not used right now", "yoyo.html");
 window.history.back();
 ```
 
-### Adding react-router
+If you want to build a single-page application in JavaScript and include routing using the browser's back button, you'll need to be using the history API. However, you'll rarely be interfacing with this API directly; typically you'll be using some other tool that abstracts away any direct interaction with the history API. In the case of React, the tool we use to enable routing is called `react-router`.
 
-Let's create an application using `create-react-app` then add `react-router` to it.  In your terminal:
+### Adding `react-router`
+
+Let's create an application using `create-react-app` then add `react-router-dom` to it.  In your terminal:
+
+```sh
+create-react-app react-router-demo && cd react-router-demo
+npm install --save react-router-dom
+```
 
 First, go to to the `src/index.js` file inside of your demo project.  We are going to wrap the `App` component with a router. The code should look like this:
 
@@ -54,9 +61,11 @@ ReactDOM.render(
 registerServiceWorker();
 ```
 
-There are a few things to take note of here.  First, we imported `BrowserRouter` as `Router`.  The `BrowserRouter`, as the name implies, is a router designed for the bowser. Second, notice that our `App` component is now a child of `Router`.  Whenever you use react router, you will need to wrap your application in a Router just like the example above.
+There are a few things to take note of here.  First, we imported `BrowserRouter` as `Router`.  The `BrowserRouter`, as the name implies, is a router designed for the browser. There are other types of routers you can import, but for now, the `BrowserRouter` is the only one we'll need.
 
-Next, edit `src/App.js` to have the following:
+Second, notice that our `App` component is now a child of `Router`.  Whenever you use React Router, you will need to wrap your application in a Router just like the example above.
+
+Next, edit `src/App.js` to have the following (this example is taken from the [React Router docs](https://reacttraining.com/react-router/web/example/basic)):
 
 ```js
 import React from 'react';
@@ -78,7 +87,6 @@ const About = () => (
   </div>
 )
 
-
 const App = () => (
   <div>
     <ul>
@@ -93,13 +101,13 @@ const App = () => (
 export default App;
 ```
 
-We have used two new components from react router:
+We have used two new components from React Router:
 
-__Route__ - this component tells the router what route triggers what component. We can give this component quite a few more props aside from `path`, and `component` - we will see more later ( we can even render )
+__Route__ - this component tells the router what route triggers what component. We can give this component quite a few more props aside from `path`, and `component` - we will see more later.
 
-__Link__ - this component is used for building anchor tags. `<a>` tags are not enough since we need some javascript to tell react-router about the new route. Use `<Link>` instead of `<a>`.
+__Link__ - this component is used for building anchor tags. `<a>` tags are not enough since we need some JavaScript to tell react-router about the new route. Use `<Link>` instead of `<a>`.
 
-Try running the application and clicking on the links.  Notice that the address bar in the browser is changing.  If you open up your network tab in chrome developer tools and check for http requests, you should see that nothing is happening on the network and that the browser is not reloading the page.
+Try running the application and clicking on the links.  Notice that the address bar in the browser is changing.  If you open up your network tab in chrome developer tools and check for HTTP requests, you should see that nothing is happening on the network and that the browser is not reloading the page.
 
 So how does this work?  Whenever you click on a `Link` component, react uses `window.history` to change the url in the address bar.  The `Route` component renders the component specified in the component attribute whenever the current url path matches the path attribute.
 
@@ -107,9 +115,9 @@ Notice that the `Route` for `path="/"` has the exact attribute.  That tells reac
 
 ### URL Parameters and Query String
 
-Just like we saw with server side programming, we can design routes with dynamic URL parameters and access them using the `match` object given to us by react router. We can also access values in the query string using the `location` object given to us by react router as well. Let's see what that looks like.
+Just like we saw with server side programming, we can design routes with dynamic URL parameters and access them using the `match` object given to us by React Router. We can also access values in the query string using the `location` object given to us by React Router as well. Let's see what that looks like.
 
-First, create a new file called `src/ParamsExample.js`.  Inside of `src/App.js`, add a new link for our the new component we will build:
+First, create a new file called `src/ParamsExample.js`.  Inside of `src/App.js`, add a new link for the new component we will build:
 
 ```js
 import React from 'react';
@@ -131,7 +139,6 @@ const About = () => (
     <h2>About</h2>
   </div>
 )
-
 
 const App = () => (
   <div>
@@ -170,7 +177,6 @@ const Instructor = ({ match, location }) => {
   );
 };
 
-
 const ParamsExample = () => (
   <div>
     <h2>Instructors:</h2>
@@ -186,19 +192,17 @@ const ParamsExample = () => (
 export default ParamsExample;
 ```
 
-In `src/ParamsExample.js`, we have 2 components: `ParmsExample` and `Instructor`.  The route renders an instructor component based the on the current path.  In the instructor component, you can see that we're 
-
-You can also see above that one of our routes has an `exact` prop, which specifies that we should only display that route if the "exact" match exists and not a relative match. If we do not specify "exact" on a route like `/`, then any route that starts with a `/` will include whatever component we render. Try to remove the `exact` prop and see what it does!
+In `src/ParamsExample.js`, we have 2 components: `ParmsExample` and `Instructor`.  The route renders an instructor component based the on the current path.  In the instructor component, you can see that we're rendering a few special props: `match` and `location`. When we pass a component into `Route` using the `component` prop, that component will render with `match` and `location` props that expose information about the current path, including any URL parameters.
 
 ### HashRouter vs BrowserRouter
 
-With ReactRouter there are quite a few Router components that come with the module. Here is brief description on each one
+With React Router there are quite a few router components that come with the module. Here is brief description on each one:
 
 __Router__ - The common low-level interface for all router components. Higher-level routers include:
 
 __BrowserRouter__ - A `<Router>` that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
 
-__HashRouter__ - A `<Router>` that uses the hash portion of the URL (i.e. window.location.hash) to keep your UI in sync with the URL. Using HashRouter will include a `#` in the URL. This is a fallback for older browsers when using `BrowserRouter`
+__HashRouter__ - A `<Router>` that uses the hash portion of the URL (i.e. window.location.hash) to keep your UI in sync with the URL. Using HashRouter will include a `#` in the URL. This is a fallback for older browsers when using `BrowserRouter`.
 
 __NativeRouter__ - A `<Router>` for native iOS and Android apps built using React Native.
 
@@ -206,34 +210,35 @@ __MemoryRouter__ - A `<Router>` that keeps the history of your “URL” in memo
 
 __StaticRouter__ - A `<Router>` that never changes location. This can be useful in server-side rendering scenarios when the user isn’t actually clicking around, so the location never actually changes. Hence, the name: static. It’s also useful in simple tests when you just need to plug in a location and make assertions on the render output.
 
-In order to use BrowserRouter, we need to specify a fallback (what route to go to when a full refresh comes in (changing something in the browser bar)). This can be done in the `webpack.config.js` and is handled for us when using `create-react-app` - you can read more about it [here](https://webpack.github.io/docs/webpack-dev-server.html#the-historyapifallback-option)
+To see the most obvious difference between `HashRouter` and `BrowserRouter`, let's change up our existing app so that import `HashRouter` in our `index.js` instead of `BrowserRouter`. When you use this router instead, you'll see that your URLs all have a hashtag (`#`) separating the host from the path. As we mentioned above, this can be useful as a fallback for older browsers that don't support the history API. For more on this, check out [this article](https://css-tricks.com/using-the-html5-history-api/) on the HTML5 history API.
 
-Let's see what these two examples look like:
+### `BrowserRouter` fallback
+
+In order to use BrowserRouter, we need to specify a fallback (what route to go to when a full refresh comes in (changing something in the browser bar)). This can be done in the `webpack.config.js` and is handled for us when using `create-react-app` - you can read more about it [here](https://webpack.github.io/docs/webpack-dev-server.html#the-historyapifallback-option).
+
+In production, you may also need to configure your remote server with a `static.json` file that tells the server how to handle requests to routes other than the root. Here's what that file would look like:
 
 ```js
-import React from 'react'
-import {
-  BrowserRouter as BRouter,
-  HashRouter as HRouter,
-  Route,
-  Link
-} from 'react-router-dom'
-
-
-const RouterExample = () => (
-  <HRouter>
-    <div>
-      <h2>Look at the URL!</h2>
-    </div>
-  </HRouter>
-)
-
-export default RouterExample
+{
+  "root": "build/",
+  "routes": {
+    "/**": "index.html"
+  }
+}
 ```
+
+This tells your server to make the `build` directory your root, and to respond with the `index.html` file for every request. Without this file, if you deployed our example app and tried to go to `/name/tim`, the server would return a 404, since it doesn't know how to respond to this request! This is a route that only React Router understands.
+
+By telling your server to respond to all requests with `index.html`, any requests made by manually entering an address in the URL bar are processed as follows:
+
+1. A GET request is made to your server with the path in the URL bar;
+2. Your server responds with `index.html`, which includes your bundled JavaScript files;
+3. Once your JavaScript loads, React Router takes over and reads the URL in the URL bar;
+4. Based on the current URL, React Router renders the appropriate components on the page.
 
 ### Redirecting / Auth
 
-Another very useful feature that react router v4 gives us is the ability to easily redirect and render conditionally. This is essential for any kind of authentication or authorization, but it does require a bit more set up. Let's take a look at the example from the docs: 
+Another very useful feature that React Router v4 gives us is the ability to easily redirect and render conditionally. This is essential for any kind of authentication or authorization, but it does require a bit more set up. Let's take a look at the example from the docs involving authentication: 
 
 ```js
 import React from 'react'
@@ -454,7 +459,7 @@ render(
 
 ### Sidebar 
 
-So far we've been associating one component per path via the `component` prop. But we can associate multiple components for a given path using differently named props. Here's an example where each path is associated with two different components, a sidebar and a main:
+So far we've been associating one component per path via the `component` prop. But we can associate multiple components for a given path using differently named props. Here's an example where each path is associated with two different components, a sidebar and a main (again, taken from the docs):
 
 ```js
 import React from 'react'
@@ -562,9 +567,11 @@ class Button extends Component {
     super(props)
     this.handleClick = this.handleClick.bind(this)
   }
+
   handleClick(){
     this.context.router.push('/data')
   }
+  
   render(){
     return (
         <div>
@@ -588,11 +595,8 @@ const ContextExample = () => (
   </Router>
 )
 
-export default ContextExample
+export default ContextExample;
 ```
-
-
-
 
 ### Exercises
 
