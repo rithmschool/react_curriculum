@@ -600,7 +600,9 @@ export default ContextExample;
 
 ### Exercises
 
-Build a simple todo application but use the router for the following routes:
+Complete the react router [makeup mega market application](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-02/01-react-router/README.md)
+
+Once you've completed that, try refactoring your todo application.  Use the router for the following routes:
 
 - `/todos` - list all of your todos
 - `/todos/new` - render a form to create a new todos
