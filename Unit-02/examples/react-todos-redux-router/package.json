@@ -1,20 +1,16 @@
 {
-  "name": "redux-auth",
+  "name": "react-todos-redux-router",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "0.9.3"
-  },
   "dependencies": {
-    "axios": "^0.16.2",
-    "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.4",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
-    "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux": "^3.6.0"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.7"
   },
   "scripts": {
     "start": "react-scripts start",

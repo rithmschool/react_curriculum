@@ -18,7 +18,7 @@ class LoginForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
       this.props.login(this.state).then(
-        (res) => this.context.router.push('/welcome'),
+        (res) => this.props.history.push('/welcome'),
         (err) => {
           debugger
         });
