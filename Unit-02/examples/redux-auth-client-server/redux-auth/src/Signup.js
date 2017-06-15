@@ -23,10 +23,10 @@ class Signup extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-      // make sure we use an arrow function here to correctly bind this to this.context.router
+      // make sure we use an arrow function here to correctly bind this to this.props.history
       this.props.signup(this.state).then(() =>{
           // route to /login once signup is complete
-          this.context.router.push('/login');
+          this.props.history.push('/login');
         },
         // if we get back a status code of >= 400 from the server...
         (err) =>{

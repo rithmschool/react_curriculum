@@ -6,13 +6,13 @@ export default function(ComposedComponent) {
   class Authenticate extends Component {
     componentWillMount() {
       if (!this.props.isAuthenticated) {
-        this.context.router.push('/login');
+        this.props.history.push('/login');
       }
     }
 
     componentWillUpdate(nextProps) {
       if (!nextProps.isAuthenticated) {
-        this.context.router.push('/');
+        this.props.history.push('/');
       }
     }
 
