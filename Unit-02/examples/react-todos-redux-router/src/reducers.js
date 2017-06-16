@@ -15,9 +15,12 @@ export default function games(state = DEFAULT_STATE, action = {}) {
         return t.id === action.todo.id ? action.todo : t;
       });
       return {...state, todos}
-    //case DELETE_TODO:
+    case DELETE_TODO:
+      const todosToKeep = state.todos.filter((t, i) => {
+        return t.id !== action.id;
+      }); 
+      return {...state, todos: todosToKeep};
       // return a new array of todos without the one passed to this action
-      // return a new object with the todos
     default:
       return state;
   }
