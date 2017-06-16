@@ -1,25 +1,32 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {updateTodo} from './actions';
+import {Link} from 'react-router-dom';
+import {updateTodo, deleteTodo} from './actions';
 
 class TodoEditContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      text: this.props.todo.text
+      text: this.props.todo.text,
+      id: +this.props.match.params.id
     }
     this.handleChange = this.handleChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleChange(e) {
+    // debugger;
     this.setState({
-      text: e.target.value
+      text: e.target.value,
+      id: +this.props.match.params.id
     });
   }
 
-  render() {
-    const { todo } = this.props;
+  handleDelete(e) {
+    this.props.deleteTodo(this.state.id);
+  }
 
+  render() {
     return (
       <div>
         <form className="form-inline" onSubmit={(e) => {
@@ -34,17 +41,22 @@ class TodoEditContainer extends Component {
                  value={this.state.text}
                  id="todo-input" placeholder="something's wrong"
                  className="form-control" />
+
           <button style={{margin: "10px"}}
                   type="submit" className="btn btn-primary">Update</button>
         </div>
         </form>
+        <Link to={"/todos"}>
+          <button style={{margin: "10px"}}
+                  className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
+        </Link>
       </div>
     );
   }
 }
 
 
-const mapDispatchToProps = {updateTodo};
+const mapDispatchToProps = {updateTodo, deleteTodo};
 
 function mapStateToProps(state, props) {
   const { match } = props;
@@ -56,4 +68,4 @@ function mapStateToProps(state, props) {
   return { todo: null };
 }
 
-export default connect(mapStateToProps)(TodoEditContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoEditContainer);

@@ -9,7 +9,6 @@ const TodoList = ({ todos }) => (
         key={todo.id}
         {...todo}
       />
-      // <button name="edit" type="submit" onClick={this.props.history.push(`/todos/${todo.id}}/edit`)}>Edit</button>
     )}
   </ul>
 );
