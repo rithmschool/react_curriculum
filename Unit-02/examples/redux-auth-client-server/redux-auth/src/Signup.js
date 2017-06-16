@@ -24,9 +24,9 @@ class Signup extends React.Component {
   onSubmit(e) {
     e.preventDefault();
       // make sure we use an arrow function here to correctly bind this to this.props.history
-      this.props.signup(this.state).then(() =>{
+      this.props.signup(this.state).then(() => {
           // route to /login once signup is complete
-          this.props.history.push('/login');
+          this.props.history.push('/welcome');
         },
         // if we get back a status code of >= 400 from the server...
         (err) =>{
@@ -61,9 +61,10 @@ class Signup extends React.Component {
   }
 }
 
+/*
 Signup.contextTypes = {
   router: React.PropTypes.object.isRequired
-}
+}*/
 
 Signup.propTypes = {
   signup: React.PropTypes.func.isRequired

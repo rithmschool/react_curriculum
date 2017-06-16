@@ -5,6 +5,11 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 const BASE_URL = 'http://localhost:3001'
 
+function setToken(token) {
+  localStorage.setItem('jwtToken', token);
+  setAuthorizationToken(token);
+}
+
 export function setAuthorizationToken(token) {
   if (token) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -15,7 +20,13 @@ export function setAuthorizationToken(token) {
 
 export function signup(userData) {
   return dispatch => {
-    return axios.post(`${BASE_URL}/api/users`, userData);
+    return axios.post(`${BASE_URL}/api/users`, userData).then(res => {
+      return axios.post(`${BASE_URL}/api/users/auth`, userData);
+    }).then(res => {
+      const token = res.data;
+      setToken(token);
+      return dispatch(setCurrentUser(jwtDecode(token)));
+    });
   }
 }
 
@@ -31,8 +42,7 @@ export function login(data) {
   return dispatch => {
     return axios.post(`${BASE_URL}/api/users/auth`, data).then(res => {
       const token = res.data;
-      localStorage.setItem('jwtToken', token);
-      setAuthorizationToken(token);
+      setToken(token);
       dispatch(setCurrentUser(jwtDecode(token)));
     });
   }
