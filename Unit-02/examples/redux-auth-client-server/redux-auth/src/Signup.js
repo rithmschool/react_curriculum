@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { signup } from './actions';
+import PropTypes from 'prop-types';
 
 class Signup extends React.Component {
   // pretty standard
@@ -61,13 +62,8 @@ class Signup extends React.Component {
   }
 }
 
-/*
-Signup.contextTypes = {
-  router: React.PropTypes.object.isRequired
-}*/
-
 Signup.propTypes = {
-  signup: React.PropTypes.func.isRequired
+  signup: PropTypes.func.isRequired
 }
 
 export default connect(null,{ signup })(Signup);

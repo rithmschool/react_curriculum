@@ -12,7 +12,7 @@ export default function(ComposedComponent) {
 
     componentWillUpdate(nextProps) {
       if (!nextProps.isAuthenticated) {
-        this.props.history.push('/');
+        this.props.history.push('/login');
       }
     }
 
@@ -21,10 +21,6 @@ export default function(ComposedComponent) {
         <ComposedComponent {...this.props} />
       );
     }
-  }
-
-  Authenticate.contextTypes = {
-    router: React.PropTypes.object.isRequired
   }
 
   function mapStateToProps(state) {
