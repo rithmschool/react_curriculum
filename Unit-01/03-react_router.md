@@ -1,4 +1,4 @@
-#### [⇐ Previous](./01-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-react_router_continued.md)
+#### [⇐ Previous](./02-testing_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-react_router_continued.md)
 
 # React Router
 
@@ -290,4 +290,5 @@ export default App;
 
 Now that you have seen how to perform some simple routing - it's time to build a small application!
 
-#### [⇐ Previous](./01-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-react_router_continued.md)
+#### [⇐ Previous](./02-testing_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-react_router_continued.md)
+

@@ -1,4 +1,4 @@
-#### [⇐ Previous](./04-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-testing.md)
+#### [⇐ Previous](./05-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-testing.md)
 
 # Redux Continued
 
@@ -525,4 +525,4 @@ Each `Todo` component should have a prop called `deleteTodo` which is recieved f
 
 Complete CRUD on `todos`! 
 
-#### [⇐ Previous](./04-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-testing.md)
+#### [⇐ Previous](./05-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-testing.md)

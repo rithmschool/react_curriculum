@@ -1,4 +1,11 @@
-#### [⇐ Previous](./02-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-redux_intro.md)
+#### [⇐ Previous](./03-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_intro.md)
+
+### Objectives
+
+By the end of this chapter, you should be able to:
+
+- Add redirecting to an application with React router
+- Use `context` when necessary
 
 ### Redirecting / Auth
 
@@ -201,5 +208,5 @@ Once you've completed that, try refactoring your todo application.  Use the rout
 When a user creates, updates or deletes a todo - they should be redirected to the `/todos` page.
 
 
-#### [⇐ Previous](./02-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-redux_intro.md)
+#### [⇐ Previous](./03-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_intro.md)
 

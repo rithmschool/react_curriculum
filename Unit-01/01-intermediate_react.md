@@ -1,4 +1,4 @@
-#### [Table of Contents](./../readme.md) | [Next ⇒](./02-react_router.md)
+#### [Table of Contents](./../readme.md) | [Next ⇒](./02-testing_react.md)
 
 # Intermediate React
 
