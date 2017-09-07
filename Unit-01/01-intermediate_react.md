@@ -6,10 +6,9 @@
 
 By the end of this chapter, you should be able to:
 
-- Validate properties of components using PropTypes
-- Compare and contrast different kinds of components
-- Understand the value and performance benefits of immutable data structures with react
-- Define what `context` is and how it can be used to solve complex issues with state management
+- Write more complex propTypes
+- Define what a higher order component is 
+- Understand additional tools that can be added for react codebases
 
 ### PropTypes
 

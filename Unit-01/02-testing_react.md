@@ -19,6 +19,66 @@ So Let's first start by creating a react application and let's write some simple
 
 We can use Jest without React so it's important to understand how that works. Before we start testing our components, let's write some simple specs with Jest and see how the built in `test` and `expect` functions work.
 
+Let's first get started with a simple `create-react-app` application so let's run in terminal, `create-react-app learn-testing && cd learn-testing`.
+
+Inside of here we can run our specs by typing `yarn test` and we will see that we have one spec passing - here's what you should see:
+
+```sh
+ PASS  src/App.test.js
+  ✓ renders without crashing (25ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.393s
+Ran all test suites related to changed files.
+
+Watch Usage
+ › Press p to filter by a filename regex pattern.
+ › Press t to filter by a test name regex pattern.
+ › Press q to quit watch mode.
+ › Press Enter to trigger a test run.
+```
+
+Notice here that we are in watch mode which will constantly look for changes in our test files - and this is coming from our `App.test.js` file, which looks like this
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+
+it("renders without crashing", () => {
+  const div = document.createElement("div");
+  ReactDOM.render(<App />, div);
+});
+```
+
+We can see here that we easily can test that the application has rendered, but before we jump into testing our components, let's get to learn `jest` a bit better. Let's start by making a file called `learn.test.js` and inside add the following
+
+```js
+test("it works", function() {
+  expect(1).toBe(1);
+});
+```
+
+Notice that we are using the word `test` - this is very similar to `it` with Jasmine or Mocha. You can actually use the `it` and `describe` keywords if you'd like, but you will commonly see `test` when using Jest.
+
+### Matchers
+
+Similar to Jasmine or Mocha, Jest has quite a few functions used for assertions/expectations. You can see a full list [here](https://facebook.github.io/jest/docs/en/expect.html), but here are some common ones
+
+- `toBeDefined`
+- `toBeGreaterThan / toBeLessThan`
+- `toBe` (uses === to compare)
+- `toEqual` (for deep object comparison)
+- `toContain` (see if a value is inside of a collection)
+
+### Folder structure for tests
+
+You also might not want to place all of your test files with your files in the `src` folder so in order for Jest to read your tests, place them in a folder called `__tests__` inside of the `src` folder.
+
+Make sure that your folder is called `__tests__` - this is essential!
+
 ### Snapshot Testing
 
 Now that we have a basic understanding of how to use Jest, let's discuss a nice feature it provides called Snapshot Testing.
