@@ -89,15 +89,113 @@ Now that we can run simple specs and take snapshots of our components, let's see
 
 To do this, we're going to install an additional library called Enzyme which is made by the wonderful people at AirBnB. Enzyme uses React testing utilities, but it is a nice abstraction and makes testing components quite easy.
 
+To get started we simply need to run `npm install --save-dev enzyme react-test-renderer` to install it! The `react-test-renderer` is necessary for rendering our components while testing.
+
+We're going to be using Enzyme to test the content of our React Components and when using Enzyme there are three different functions we can use: 
+
+### shallow  
+
+You can read more about it [here](https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md)
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "../App";
+import Child from "../Child";
+import { shallow } from "enzyme";
+
+test("should render one <Child /> component", () => {
+  const wrapper = shallow(<App />);
+  console.log("WRAPPER!", expect(wrapper.find(Child)));
+  expect(wrapper.find(Child)).toHaveLength(1);
+});
+
+test("should render with a class of App-header", () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.find(".App-header")).toHaveLength(1);
+});
+```
+
+### mount  
+
+You can read more about it [here](https://github.com/airbnb/enzyme/blob/master/docs/api/mount.md)
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "../App";
+import Child from "../Child";
+import { shallow, mount } from "enzyme";
+
+test("should render one <Child /> component", () => {
+  const wrapper = shallow(<App />);
+  console.log("WRAPPER!", expect(wrapper.find(Child)));
+  expect(wrapper.find(Child)).toHaveLength(1);
+});
+
+test("should render with a class of App-header", () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.find(".App-header")).toHaveLength(1);
+});
+
+test("mount allows us to set props", () => {
+  const wrapper = mount(<App />);
+  wrapper.setProps({ name: "foo" });
+  expect(wrapper.props().name).toEqual("foo");
+});
+```
+
+### render  
+
+You can read more about it [here](https://github.com/airbnb/enzyme/blob/master/docs/api/render.md)
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "../App";
+import Child from "../Child";
+import { shallow, mount, render } from "enzyme";
+
+test("should render one <Child /> component", () => {
+  const wrapper = shallow(<App />);
+  console.log("WRAPPER!", expect(wrapper.find(Child)));
+  expect(wrapper.find(Child)).toHaveLength(1);
+});
+
+test("should render with a class of App-header", () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.find(".App-header")).toHaveLength(1);
+});
+
+test("mount allows us to set props", () => {
+  const wrapper = mount(<App />);
+  wrapper.setProps({ name: "foo" });
+  expect(wrapper.props().name).toEqual("foo");
+});
+
+test("should render with a name prop of elie", () => {
+  const wrapper = render(<App name="Elie" />);
+  expect(wrapper.text()).toContain("Hi Elie");
+});
+
+test("should render with a name prop of elie", () => {
+  const wrapper = render(<App name="Bob" />);
+  expect(wrapper.text()).toContain("You're not Elie");
+});
+```
+
 ### Coverage
 
 As you start writing more tests, it's good to know how much of your application is covered with tests. The metric that we use to determine what percent of our code is covered by tests is called "coverage" and it is a described as a percent of lines of code that have test "coverage"
 
+Let's see what our application looks like so far with coverage! 
+
+`yarn test -- --coverage `
 
 ### Challenges with Testing UI
 
 One of the biggest challenges around testing UI is that your UI will so frequently change. This means that tests can become obsolete quickly and will need to be re-written quite often. It is useful to understand how to test UIs with React, but it is also important to understand just how often your code is going to change. 
 
-This does not mean that all UI code should not be tested. If you are working wiht data that will be put into your UI - that should absolutely be tested, but if you are only testing certain markup on a page, that can become obsolete quite quickly.
+This does not mean that all UI code should not be tested. If you are working with data that will be put into your UI - that should absolutely be tested, but if you are only testing certain markup on a page, that can become obsolete quite quickly.
 
 #### [⇐ Previous](./01-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-react_router.md)
