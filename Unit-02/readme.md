@@ -1,10 +1,5 @@
-### Unit 2 - Intermediate React / React-Router / Redux
+### Unit 3 - React Native / Mobile Applications
 
-- [01 React Router](./01-react_router.md)
-- [02 Introduction to Redux](./02-redux_intro.md)
-- [03 Redux Continued](./03-redux_continued.md)
-- [04 Intermediate React](./04-intermediate_react.md)
-- [05 Testing](./05-testing.md)
-- [06 Full Stack React](./06-backend.md)
-- [07 React Redux Auth](./07-react_redux_auth.md)
-- [08 Unit 2 Assessment](./08-unit_2_assessment.md)
+- [01 React Native Setup And Styling](./01-react_native_setup_and_styling.md)
+- [02 React Native HTTP Requests](./02-react_native_http_requests.md)
+- [03 React Native Navigation](./03-react_native_navigation.md)

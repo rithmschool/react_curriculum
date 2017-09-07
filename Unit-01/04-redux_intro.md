@@ -1,4 +1,4 @@
-#### [⇐ Previous](./01-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-redux_continued.md)
+#### [⇐ Previous](./03-react_router_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_and_react.md)
 
 # Introduction to Redux
 
@@ -237,4 +237,5 @@ Build a simple todo application but include redux to manage your data! You shoul
 - `/todos/:id` - list a single todo
 - `/todos/:id/edit` - render a form to edit an existing todo
 
-#### [⇐ Previous](./01-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-redux_continued.md)
+#### [⇐ Previous](./03-react_router_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_and_react.md)
+

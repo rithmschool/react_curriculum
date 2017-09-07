@@ -1,11 +1,10 @@
-### Unit 1 - React Fundamentals
+### Unit 1 - Intermediate React / React-Router / Redux
 
-- [01 Introduction To React](./01-intro.md)
-- [02 Babel + JSX](./02-jsx.md)
-- [03 Webpack](./03-webpack.md)
-- [04 Component Architecture](./04-components.md)
-- [05 Props + State](./05-props_state.md)
-- [06 Events](./06-events.md)
-- [07 Forms and Refs](./07-refs_forms.md)
-- [08 Component Life Cycle](./08-lifecycle.md)
-- [09 Unit 1 Assessment](./09-unit_1_assessment.md)
+- [01 Intermediate React](./01-intermediate_react.md)
+- [01 React Router](./02-react_router.md)
+- [02 React Router Continued](./03-react_router_continued.md)
+- [03 Introduction to Redux](./04-redux_intro.md)
+- [04 Redux Continued](./05-redux_and_react.md)
+- [06 Testing React and Redux](./06-testing.md)
+- [07 Full Stack React](./07-backend.md)
+- [08 Authentication with React and Redux](./08-react_redux_auth.md)

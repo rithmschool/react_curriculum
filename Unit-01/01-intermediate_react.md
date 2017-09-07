@@ -1,4 +1,4 @@
-#### [⇐ Previous](./03-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-testing.md)
+#### [Table of Contents](./../readme.md) | [Next ⇒](./02-react_router.md)
 
 # Intermediate React
 
@@ -108,4 +108,4 @@ A bit more of an advanced topic in React is the use of immutable data structures
 
 [https://camjackson.net/post/9-things-every-reactjs-beginner-should-know](https://camjackson.net/post/9-things-every-reactjs-beginner-should-know)
 
-#### [⇐ Previous](./03-redux_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-testing.md)
+#### [Table of Contents](./../readme.md) | [Next ⇒](./02-react_router.md)
