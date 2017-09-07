@@ -1,6 +1,5 @@
 #### [⇐ Previous](./01-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-react_router_continued.md)
 
-
 # React Router
 
 ### Objectives
@@ -37,11 +36,12 @@ If you want to build a single-page application in JavaScript and include routing
 
 ### Adding `react-router`
 
-Let's create an application using `create-react-app` then add `react-router-dom` to it.  In your terminal:
+Some frameworks like Angular and Ember come with a router, but since React is a much smaller library, it does not have it's own router. To use client side routing with React, we're going to install a popular router called `react-router`. What's neat about `react-router` is that it has different kinds of routers for how you are using React. For web applications, you use `react-router-dom`, but if you're building applications in a different environment like React Native (using React to build mobile apps), the router you will install is different.
+
+So let's get started with `react-router`! Let's first create an application using `create-react-app` then add `react-router-dom` to it.  In your terminal type the following:
 
 ```sh
 create-react-app react-router-demo && cd react-router-demo
-npm install 
 npm install --save react-router-dom
 ```
 
@@ -51,21 +51,67 @@ First, go to to the `src/index.js` file inside of your demo project.  We are goi
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 ReactDOM.render(
-  <Router>
+  <BrowserRouter>
     <App />
-  </Router>,
-  document.getElementById('root'));
+  </BrowserRouter>,
+  document.getElementById('root')
+);
+
 registerServiceWorker();
 ```
 
 There are a few things to take note of here.  First, we imported `BrowserRouter` as `Router`.  The `BrowserRouter`, as the name implies, is a router designed for the browser. There are other types of routers you can import, but for now, the `BrowserRouter` is the only one we'll need.
 
 Second, notice that our `App` component is now a child of `Router`.  Whenever you use React Router, you will need to wrap your application in a Router just like the example above.
+
+### HashRouter vs BrowserRouter
+
+With React Router there are quite a few router components that come with the module. Here is brief description on each one:
+
+__Router__ - The common low-level interface for all router components. Higher-level routers include:
+
+__BrowserRouter__ - A `<Router>` that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
+
+__HashRouter__ - A `<Router>` that uses the hash portion of the URL (i.e. window.location.hash) to keep your UI in sync with the URL. Using HashRouter will include a `#` in the URL. This is a fallback for older browsers when using `BrowserRouter`.
+
+__NativeRouter__ - A `<Router>` for native iOS and Android apps built using React Native.
+
+__MemoryRouter__ - A `<Router>` that keeps the history of your “URL” in memory (does not read or write to the address bar). Useful in tests and non-browser environments like React Native.
+
+__StaticRouter__ - A `<Router>` that never changes location. This can be useful in server-side rendering scenarios when the user isn’t actually clicking around, so the location never actually changes. Hence, the name: static. It’s also useful in simple tests when you just need to plug in a location and make assertions on the render output.
+
+To see the most obvious difference between `HashRouter` and `BrowserRouter`, let's change up our existing app so that import `HashRouter` in our `index.js` instead of `BrowserRouter`. When you use this router instead, you'll see that your URLs all have a hashtag (`#`) separating the host from the path. As we mentioned above, this can be useful as a fallback for older browsers that don't support the history API. For more on this, check out [this article](https://css-tricks.com/using-the-html5-history-api/) on the HTML5 history API.
+
+### `BrowserRouter` fallback
+
+In order to use BrowserRouter, we need to specify a fallback (what route to go to when a full refresh comes in (changing something in the browser bar)). This can be done in the `webpack.config.js` and is handled for us when using `create-react-app` - you can read more about it [here](https://webpack.github.io/docs/webpack-dev-server.html#the-historyapifallback-option).
+
+In production, you may also need to configure your remote server with a `static.json` file that tells the server how to handle requests to routes other than the root. Here's what that file would look like:
+
+```js
+{
+  "root": "build/",
+  "routes": {
+    "/**": "index.html"
+  }
+}
+```
+
+This tells your server to make the `build` directory your root, and to respond with the `index.html` file for every request. Without this file, if you deployed our example app and tried to go to `/name/tim`, the server would return a 404, since it doesn't know how to respond to this request! This is a route that only React Router understands.
+
+By telling your server to respond to all requests with `index.html`, any requests made by manually entering an address in the URL bar are processed as follows:
+
+1. A GET request is made to your server with the path in the URL bar;
+2. Your server responds with `index.html`, which includes your bundled JavaScript files;
+3. Once your JavaScript loads, React Router takes over and reads the URL in the URL bar;
+4. Based on the current URL, React Router renders the appropriate components on the page.
+
+### Adding Routes
 
 Next, edit `src/App.js` to have the following (this example is taken from the [React Router docs](https://reacttraining.com/react-router/web/example/basic)):
 
@@ -102,6 +148,7 @@ const App = () => (
 
 export default App;
 ```
+
 
 We have used two new components from React Router:
 
@@ -196,46 +243,51 @@ export default ParamsExample;
 
 In `src/ParamsExample.js`, we have 2 components: `ParmsExample` and `Instructor`.  The route renders an instructor component based the on the current path.  In the instructor component, you can see that we're rendering a few special props: `match` and `location`. When we pass a component into `Route` using the `component` prop, that component will render with `match` and `location` props that expose information about the current path, including any URL parameters.
 
-### HashRouter vs BrowserRouter
+#### Passing information as props to a route
 
-With React Router there are quite a few router components that come with the module. Here is brief description on each one:
-
-__Router__ - The common low-level interface for all router components. Higher-level routers include:
-
-__BrowserRouter__ - A `<Router>` that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
-
-__HashRouter__ - A `<Router>` that uses the hash portion of the URL (i.e. window.location.hash) to keep your UI in sync with the URL. Using HashRouter will include a `#` in the URL. This is a fallback for older browsers when using `BrowserRouter`.
-
-__NativeRouter__ - A `<Router>` for native iOS and Android apps built using React Native.
-
-__MemoryRouter__ - A `<Router>` that keeps the history of your “URL” in memory (does not read or write to the address bar). Useful in tests and non-browser environments like React Native.
-
-__StaticRouter__ - A `<Router>` that never changes location. This can be useful in server-side rendering scenarios when the user isn’t actually clicking around, so the location never actually changes. Hence, the name: static. It’s also useful in simple tests when you just need to plug in a location and make assertions on the render output.
-
-To see the most obvious difference between `HashRouter` and `BrowserRouter`, let's change up our existing app so that import `HashRouter` in our `index.js` instead of `BrowserRouter`. When you use this router instead, you'll see that your URLs all have a hashtag (`#`) separating the host from the path. As we mentioned above, this can be useful as a fallback for older browsers that don't support the history API. For more on this, check out [this article](https://css-tricks.com/using-the-html5-history-api/) on the HTML5 history API.
-
-### `BrowserRouter` fallback
-
-In order to use BrowserRouter, we need to specify a fallback (what route to go to when a full refresh comes in (changing something in the browser bar)). This can be done in the `webpack.config.js` and is handled for us when using `create-react-app` - you can read more about it [here](https://webpack.github.io/docs/webpack-dev-server.html#the-historyapifallback-option).
-
-In production, you may also need to configure your remote server with a `static.json` file that tells the server how to handle requests to routes other than the root. Here's what that file would look like:
+So far we have see how to route to other components, but what if we want to pass certain properties depending on what the parent component contains? Since components are just functions, we can pass a function to render the component with additional props! Let's see what that looks like
 
 ```js
-{
-  "root": "build/",
-  "routes": {
-    "/**": "index.html"
-  }
-}
+import React from "react";
+import "./App.css";
+import { Route, Link } from "react-router-dom";
+
+const Home = props => (
+  <div>
+    <h2>Hello {props.name}! </h2>
+  </div>
+);
+
+const About = () => (
+  <div>
+    <h2>About</h2>
+  </div>
+);
+
+const App = () => (
+  <div>
+    <ul>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/about">About</Link>
+      </li>
+    </ul>
+    <Route
+      exact
+      path="/"
+      component={props => <Home name="Elie" {...props} />}
+    />
+    <Route path="/about" component={About} />
+  </div>
+);
+
+export default App;
 ```
 
-This tells your server to make the `build` directory your root, and to respond with the `index.html` file for every request. Without this file, if you deployed our example app and tried to go to `/name/tim`, the server would return a 404, since it doesn't know how to respond to this request! This is a route that only React Router understands.
+### Exercise
 
-By telling your server to respond to all requests with `index.html`, any requests made by manually entering an address in the URL bar are processed as follows:
-
-1. A GET request is made to your server with the path in the URL bar;
-2. Your server responds with `index.html`, which includes your bundled JavaScript files;
-3. Once your JavaScript loads, React Router takes over and reads the URL in the URL bar;
-4. Based on the current URL, React Router renders the appropriate components on the page.
+Now that you have seen how to perform some simple routing - it's time to build a small application!
 
 #### [⇐ Previous](./01-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-react_router_continued.md)
