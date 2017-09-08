@@ -85,11 +85,9 @@ We can even create our own types of objects with certain keys and values and use
 
 You can read more about them here  -[https://facebook.github.io/react/docs/typechecking-with-proptypes.html](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
 
-### Types of Components
+### Higher Order Components
 
-So far we have been creating almost all of our components using `class ___ extends React.component` or the ES5 `React.createClass` method. While this will work, it is not necessary for components that do not have state or "stateless" components. These components can be written as functions that render JSX and can accept props. These are known as [Stateless Functional Components](https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#stateless-functional-components) and are often labeled as "dumb" components (which you can read more about [here](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.mlq5og2kx)). 
 
-Using this structure, it is much easier to scale applications as its easy to discern between our presentation (presentational/components) and our stateful components (containers). You can read more about them [here](http://jaketrent.com/post/smart-dumb-components-react/)
 
 ### Folder Structure
 
@@ -98,6 +96,9 @@ Now that we have an idea of how to create different kinds of components and we h
 ### Immutability
 
 A bit more of an advanced topic in React is the use of immutable data structures when building larger applications. You can read more about it [here](http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/), [here](http://jamesknelson.com/should-i-use-shouldcomponentupdate/) and [here](https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures)
+
+### Type Checking with Flow
+
 
 ### Additional Resources
 

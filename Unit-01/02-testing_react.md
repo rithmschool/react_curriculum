@@ -61,11 +61,11 @@ test("it works", function() {
 });
 ```
 
-Notice that we are using the word `test` - this is very similar to `it` with Jasmine or Mocha. You can actually use the `it` and `describe` keywords if you'd like, but you will commonly see `test` when using Jest.
+Notice that we are using the word `test` - this is very similar to `it` with Jasmine or Mocha. You can actually use the `it` and `describe` keywords if you'd like as well!
 
 ### Matchers
 
-Similar to Jasmine or Mocha, Jest has quite a few functions used for assertions/expectations. You can see a full list [here](https://facebook.github.io/jest/docs/en/expect.html), but here are some common ones
+Similar to Jasmine or Mocha, Jest has quite a few functions used for assertions/expectations. You can see a full list [here](https://facebook.github.io/jest/docs/en/expect.html), but here are some common ones.
 
 - `toBeDefined`
 - `toBeGreaterThan / toBeLessThan`
@@ -77,11 +77,101 @@ Similar to Jasmine or Mocha, Jest has quite a few functions used for assertions/
 
 You also might not want to place all of your test files with your files in the `src` folder so in order for Jest to read your tests, place them in a folder called `__tests__` inside of the `src` folder.
 
-Make sure that your folder is called `__tests__` - this is essential!
+Make sure that your folder is called `__tests__` - this is essential! Inside of the `__tests__` folder we can place all of the files that we'd like Jest to run
 
 ### Snapshot Testing
 
 Now that we have a basic understanding of how to use Jest, let's discuss a nice feature it provides called Snapshot Testing.
+
+Imagine for a second we have a component that looks like this
+
+```js
+import React from "react";
+
+const SimpleComponent = props => (
+  <div>
+    <h1>Hello there!</h1>
+    <p>First Name - {props.first}</p>
+    <p>Last Name - {props.last}</p>
+    <p>Favorite Food - {props.favFood}</p>
+  </div>
+);
+
+export default SimpleComponent;
+```
+
+If we wanted to test this component we could write all the specs to make sure that when we render the component there are three paragraph tags, one `h1` tag and that props are being correctly set on the component. 
+
+However, when one small change is made to our UI, this test will fail and we'll have to go edit the test again to account for new UI changes. This process is quite tedious, but thankfully Jest has an excellent alternative - snapshot testing.
+
+The way snapshot testing works is that Jest will take a snapshot of your component and when future tests are run, it will alert you of any differences between the current snapshot and a previous one. If you would like to update the snapshot, you can simply add a `-u` flag and update with a new snapshot.
+
+Snapshot testing does not cover all cases, there will be times where you want to test the functionality of a component, but when testing stateless functional components, snapshot testing is esspecially useful since you don't anticipate these components changing frequently.
+
+Enough about Snapshot testing - let's see the code! In our `src` folder, let's create a new file called `SimpleComponent` and place the following code:
+
+```js
+import React from "react";
+
+const SimpleComponent = props => (
+  <div>
+    <h1>Hello there!</h1>
+    <p>First Name - {props.first}</p>
+    <p>Last Name - {props.last}</p>
+    <p>Favorite Food - {props.favFood}</p>
+  </div>
+);
+
+export default SimpleComponent;
+```
+
+Now in our `__tests__` folder, let's add the following code
+
+```js
+import React from "react";
+import SimpleComponent from "../SimpleComponent";
+import renderer from "react-test-renderer";
+
+describe("<SimpleComponent />", () => {
+  it("matches the snapshot", () => {
+    var tree = renderer.create(<SimpleComponent />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
+```
+
+When we run `yarn test` we should see everything passing! We can also see that in our `__tests__` folder, a folder called `__snapshots__` has been created. In here, we can see our SimpleComponent.test.js.snap file which looks like this: 
+
+
+```js
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SimpleComponent /> matches the snapshot 1`] = `
+<div>
+  <h1>
+    Hello there!
+  </h1>
+  <p>
+    First Name - 
+  </p>
+  <p>
+    Last Name - 
+  </p>
+  <p>
+    Favorite Food - 
+  </p>
+</div>
+`;
+```
+
+This is the saved snapshot! Now let's go and edit our SimpleComponent.js file and insert a new `h2` which says Welcome! And let's see what happens with our test. We now see that there is a failing test because the snapshots are different! So we are faced with two choices here
+
+1 - go fix the component because this UI change is not something we wanted
+2 - update the snapshot to include our new UI
+
+In our terminal, there is an option for us to press `u` to update the snapshot, so let's do that and we should see the tests are passing again!
+
+Snapshot testing is fantastic as a really quick and easy way to test the UI of components.
 
 ### Adding Enzyme
 
@@ -89,11 +179,15 @@ Now that we can run simple specs and take snapshots of our components, let's see
 
 To do this, we're going to install an additional library called Enzyme which is made by the wonderful people at AirBnB. Enzyme uses React testing utilities, but it is a nice abstraction and makes testing components quite easy.
 
+In the previous example with snapshot testing, we imported the renderer function from "react-test-renderer". These functions which are part of the React testing utilities are not always the easiest to use, esspecially when you need to find certain elements on the page. To make this easier, we're going to use Enzyme which uses a very similar DOM selection API to jQuery (it uses a library called Cheerio, which you might have come across when learning about web scraping with node).
+
 To get started we simply need to run `npm install --save-dev enzyme react-test-renderer` to install it! The `react-test-renderer` is necessary for rendering our components while testing.
 
 We're going to be using Enzyme to test the content of our React Components and when using Enzyme there are three different functions we can use: 
 
 ### shallow  
+
+Shallow rendering : Is useful to test a component in isolation of every other. In the typical React pattern of smart and dumb components, shallow rendering is usually used to test ‘dumb’ components (stateless components) in terms of their props and the events that can be simulated. You will find yourself using shallow most of the time
 
 You can read more about it [here](https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md)
 
@@ -117,6 +211,8 @@ test("should render with a class of App-header", () => {
 ```
 
 ### mount  
+
+Mounting : Also known as full DOM rendering, it allows you to render a part of the DOM tree and it also gives you access to the lifecycle methods of React components (ComponentWillMount, ComponentWillReceiveProps , etc…)
 
 You can read more about it [here](https://github.com/airbnb/enzyme/blob/master/docs/api/mount.md)
 
@@ -146,6 +242,8 @@ test("mount allows us to set props", () => {
 ```
 
 ### render  
+
+Static rendering : Is sparsely used but when it is the case, serves as means of testing plain JSX / HTML.
 
 You can read more about it [here](https://github.com/airbnb/enzyme/blob/master/docs/api/render.md)
 
@@ -192,10 +290,16 @@ Let's see what our application looks like so far with coverage!
 
 `yarn test -- --coverage `
 
+When we run this, we will see a nice looking table to show how much coverage our code has. This is done on a per file basis and gives us a useful metric for how well our code has been tested. It's not realistic that you will always have 100% coverage or that 100% coverage will prevent all bugs, so there are diminishing returns if you try to overly maximize your coverage. It's essential to test your code, but you don't have to go overboard with coverage.
+
 ### Challenges with Testing UI
 
 One of the biggest challenges around testing UI is that your UI will so frequently change. This means that tests can become obsolete quickly and will need to be re-written quite often. It is useful to understand how to test UIs with React, but it is also important to understand just how often your code is going to change. 
 
 This does not mean that all UI code should not be tested. If you are working with data that will be put into your UI - that should absolutely be tested, but if you are only testing certain markup on a page, that can become obsolete quite quickly.
+
+### Additional Resources
+
+[https://www.theodo.fr/blog/2017/04/enzyme-fast-and-simple-react-testing/](https://www.theodo.fr/blog/2017/04/enzyme-fast-and-simple-react-testing/)
 
 #### [⇐ Previous](./01-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-react_router.md)

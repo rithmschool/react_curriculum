@@ -5,9 +5,80 @@
 By the end of this chapter, you should be able to:
 
 - Add redirecting to an application with React router
-- Use `context` when necessary
+- Use `context` when necessary to programatically redirect.
 
-### Redirecting / Auth
+### Redirecting Programatically
+
+So far we have seen how to set up React Router with different types of routers and create routes and pass props to our routes. This is a great start, but we're missing another essential concept with routing - redirecting!
+
+When we redirect in a single page application, we are **not** doing the same thing as what a normal HTTP redirect would be which involves sending a location header and making a GET request to the value of that location header. We are simply making another AJAX request to load the correct information when we redirect.
+
+With react router v4 we are given access to a `Redirect` component which is useful for conditionally rendering or redirecting, but if we need to redirect programatically (after a form submission, click, and so on) we can use something called `context` to do that. 
+
+### Context
+
+In React, we've seen state and props as the core tools we use to pass data and display information with our components, however there is one more API that we can use called `context`. It is **not** recommended that you use context frequently and the docs do mention that the API is subject to change, but context does have some useful moments.
+
+With context, you can add information in a component and have it accessible by all other components without having to pass it down like with props. You just have to establish what in context you will be using in your component. 
+
+Like we mentioned earlier, context does have some useful places and the router is one of them. Since the router is placed in context, we can use it in any of our components and this is commonly done when redirecting. Let's see how this works with the code below.
+
+```js
+import React, {PropTypes, Component} from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+
+const Data = () => (<h1>You made it!</h1>)
+
+class Button extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
+  constructor(props){
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(){
+    this.context.router.push('/data')
+  }
+  
+  render(){
+    return (
+        <div>
+          <button onClick={this.handleClick}>Click me!</button>
+        </div>
+      )
+  }
+}
+
+const ContextExample = () => (
+  <Router>
+    <div>
+      <h2>Start here:</h2>
+      <ul>
+        <li><Link to="/next">With me!</Link></li>
+        <li><Link to="/data">Or just go here!</Link></li>
+      </ul>
+      <Route path="/next" component={Button}/>
+      <Route path="/data" component={Data}/>
+    </div>
+  </Router>
+)
+
+export default ContextExample;
+```
+
+### Using withRouter instead of context
+
+### Using the Redirect Component
+
+### Additional Examples of Redirecting
 
 Another very useful feature that React Router v4 gives us is the ability to easily redirect and render conditionally. This is essential for any kind of authentication or authorization, but it does require a bit more set up. Let's take a look at the example from the docs involving authentication: 
 
@@ -132,67 +203,6 @@ __withRouter__ - You can get access to the router object’s properties via the 
 __Redirect__ - Useful for redirecting, you just have to specify the to prop to tell the router where to go next.
 
 `{...rest}`  - The rest/spread operator for objects is a useful way to spread or list the remaining/rest keys and values in an object with just one parameter. You can read more about it [here](https://babeljs.io/docs/plugins/transform-object-rest-spread/).
-
-
-
-### Redirecting Programatically
-
-With react router v4 we are given access to the `Redirect` component which is useful for conditionally rendering or redirecting, but if we need to redirect programatically (after a form submission, click, and so on) we can use `context` to do that. 
-
-This can also be done with `state`. In this case, we can set `this.state.redirect` to `false` if nothing has changed, and we can set it to `true` and redirect to another component if something has changed. However, this example will show you how to redirect using an object called `context`, which you should almost never be manipulating on your own, it is internal to React and you can read more about it [here](https://facebook.github.io/react/docs/context.html)
-
-For now, let's see an example of redirecting with `context`. You will also see in order to make this work, we need to add `contextTypes` as a `static` property to our `class`. 
-
-```js
-import React, {PropTypes, Component} from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
-
-const Data = () => (<h1>You made it!</h1>)
-
-class Button extends Component {
-
-  static contextTypes = {
-    router: PropTypes.object
-  }
-
-  constructor(props){
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick(){
-    this.context.router.push('/data')
-  }
-  
-  render(){
-    return (
-        <div>
-          <button onClick={this.handleClick}>Click me!</button>
-        </div>
-      )
-  }
-}
-
-const ContextExample = () => (
-  <Router>
-    <div>
-      <h2>Start here:</h2>
-      <ul>
-        <li><Link to="/next">With me!</Link></li>
-        <li><Link to="/data">Or just go here!</Link></li>
-      </ul>
-      <Route path="/next" component={Button}/>
-      <Route path="/data" component={Data}/>
-    </div>
-  </Router>
-)
-
-export default ContextExample;
-```
 
 ### Exercises
 
