@@ -8,6 +8,56 @@ By the end of this chapter, you should be able to:
 - Use `context` to programatically redirect.
 - Use `withRouter` and `Redirect` as a better and more stable alternative to `context`
 
+### 404s with React Router
+
+Very commonly with routing, you will want a 404 handler for routes that do not exist. To do this with React Router v4, we use a component called `<Switch></Switch>` and place our routes inside. Switch will renders the first child <Route> ( or `<Redirect>` which we will see in a little bit) that matches the location.
+
+You might be wondering, how is this different than just using a bunch of `<Route>` components? The answer is that `<Switch>` is unique in that it renders a route exclusively. In contrast, every `<Route>` that matches the location renders inclusively. 
+
+Consider this code:
+
+```js
+import React from 'react'
+import {
+  BrowserRouter,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom'
+
+const NotFoundExample = () => (
+  <BrowserRouter>
+    <div>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/will-not-match">More 404!</Link></li>
+        <li><Link to="/dsajkdjsaldjskla">404 time!</Link></li>
+      </ul>
+      <Switch>
+        <Route path="/" exact component={Home}/>
+        <Route component={NotFound}/>
+      </Switch>
+    </div>
+  </BrowserRouter>
+)
+
+const Home = () => (
+  <div>
+    Welcome home!
+  </div>
+)
+
+const NotFound = ({ location }) => (
+  <div>
+    <h3>No match for <code>{location.pathname}</code></h3>
+  </div>
+)
+
+export default NotFoundExample
+
+```
+You can read more about it [here](https://reacttraining.com/react-router/core/api/Switch)
+
 ### Redirecting Programatically
 
 So far we have seen how to set up React Router with different types of routers and create routes and pass props to our routes. This is a great start, but we're missing another essential concept with routing - redirecting!
@@ -79,6 +129,8 @@ export default ContextExample;
 
 ### Using withRouter instead of context
 
+The React Router v4 and Facebook docs mention that using the router on context (router.context) should not be considered public API. Since context itself is an experimental API and may change in a future release of React, you should avoid accessing `this.context.router` directly in your components. Instead, you can access the variables we store on context through the props that are passed to your `<Route>` component or a component wrapped in `withRouter`.
+
 Instead of using `context`, which is an unstable API and not something that the React docs recommend using publicly, we will be using a higher order component that React Router v4 provides called `withRouter`. If you wrap your component with the `withRouter` component, you can get access to the router using `this.props`. So let's see what our example below would look like with that.
 
 ```js
@@ -131,121 +183,11 @@ export default App;
 
 Along with context and `withRouter`, there is another way to redirect using the <Redirect/> component. 
 
+You can read more about <Redirect/> [here](https://reacttraining.com/react-router/core/api/Redirect)
+
 ### Additional Examples of Redirecting
 
-```js
-import React from 'react'
-import { render } from 'react-dom'
-import {
-  BrowserRouter,
-  Route,
-  Link,
-  Redirect,
-  withRouter
-} from 'react-router-dom'
-
-////////////////////////////////////////////////////////////
-// 1. Click the public page
-// 2. Click the protected page
-// 3. Log in
-// 4. Click the back button, note the URL each time
-
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100)
-  },
-  signout(cb) {
-    this.isAuthenticated = false
-    setTimeout(cb, 100)
-  }
-}
-
-const AuthButton = withRouter( props => (
-  fakeAuth.isAuthenticated ? (
-    <p>
-      Welcome! 
-      <button onClick={() => {
-        fakeAuth.signout(() => props.history.push('/'))
-      }}>Sign out</button>
-    </p>
-  ) : (
-    <p>You are not logged in.</p>
-  )
-))
-
-const PrivateRoute = ({ component, ...rest }) => (
-  <Route {...rest} render={props => (
-    fakeAuth.isAuthenticated ? (
-      React.createElement(component, props)
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    )
-  )}/>
-)
-
-const Public = () => <h3>Public</h3>
-const Protected = () => <h3>Protected</h3>
-
-class Login extends React.Component {
-  state = {
-    redirectToReferrer: false
-  }
-
-  login = () => {
-    fakeAuth.authenticate(() => {
-      this.setState({redirectToReferrer: true})
-    })
-  }
-
-  render() {
-    const { from } = this.props.location.state || { from: { pathname: '/'} }
-    const { redirectToReferrer } = this.state
-
-    if (redirectToReferrer) {
-      return <Redirect to={from} />
-    }
-
-    return (
-      <div>
-        <h2>this.props.location</h2>
-        <pre>
-          {JSON.stringify(this.props.location, null, 4 )}
-        </pre>
-        <h2>this.state</h2>
-        <pre>
-          {JSON.stringify(this.state, null, 4)}
-        </pre>
-        <p>You must log in to view the page at {from.pathname}</p>
-        <button onClick={this.login}>Log in</button>
-      </div>
-    )
-  }
-}
-
-const AuthExample = () => (
-  <BrowserRouter>
-    <div>
-      <AuthButton></AuthButton>
-      <ul>
-        <li><Link to="/public">Public Page</Link></li>
-        <li><Link to="/protected">Protected Page</Link></li>
-      </ul>
-      <Route path="/public" component={Public}></Route>
-      <Route path="/login" component={Login}></Route>
-      <PrivateRoute path="/protected" component={Protected}></PrivateRoute>
-    </div>
-  </BrowserRouter>
-)
-
-render(<AuthExample />,
-  document.getElementById('root')
-);
-```
+Take a look at [this example](https://reacttraining.com/react-router/web/example/auth-workflow) in the React docs and work your way through what is happening. Click around and see waht the code on the right is doing.
 
 There is quite a lot going on here including some new components and functions:
 

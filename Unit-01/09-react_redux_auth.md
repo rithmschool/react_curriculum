@@ -115,6 +115,7 @@ Our signup component is not very complex, we just need to connect redux with our
 import React from 'react';
 import { connect } from 'react-redux';
 import { signup } from './actions';
+import { withRouter } from 'react-router-dom';
 
 class Signup extends React.Component {
   // pretty standard
@@ -137,10 +138,10 @@ class Signup extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-      // make sure we use an arrow function here to correctly bind this to this.context.router
+      // make sure we use an arrow function here to correctly bind this to this.props.history.push
       this.props.signup(this.state).then(() =>{
           // route to /login once signup is complete
-          this.context.router.push('/login');
+          this.props.history.push('/login');
         },
         // if we get back a status code of >= 400 from the server...
         (err) =>{
@@ -175,17 +176,12 @@ class Signup extends React.Component {
   }
 }
 
-// we NEED contextTypes to use context
-Signup.contextTypes = {
-  router: React.PropTypes.object.isRequired
-}
-
 // let's start adding propTypes - it's a best practice
 Signup.propTypes = {
   signup: React.PropTypes.func.isRequired
 }
 
-export default connect(null,{ signup })(Signup);
+export default withRouter(connect(null,{ signup })(Signup));
 ```
 
 #### Login
@@ -194,6 +190,7 @@ export default connect(null,{ signup })(Signup);
 import React from 'react';
 import { connect } from 'react-redux';
 import { login } from './actions';
+import { withRouter } from 'react-router-dom';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -212,7 +209,7 @@ class LoginForm extends React.Component {
     e.preventDefault();
       this.props.login(this.state).then(
         // make sure we use arrow functions to bind `this` correctly
-        (res) => this.context.router.push('/welcome'),
+        (res) => this.props.history.push('/welcome'),
         (err) => {
           debugger
         });
@@ -249,12 +246,9 @@ class LoginForm extends React.Component {
 LoginForm.propTypes = {
   login: React.PropTypes.func.isRequired
 }
-// we NEED contextTypes to use `context`
-LoginForm.contextTypes = {
-  router: React.PropTypes.object.isRequired
-}
+
 // we do not want any state mapped to props, so let's make that first parameter to connect `null`
-export default connect(null, { login })(LoginForm);
+export default withRouter(connect(null, { login })(LoginForm));
 ```
 
 ### Routing
@@ -296,19 +290,20 @@ The first option involves using something called a higher order component which 
 ```js
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 export default function(ComponentToBeRendered) {
 
   class Authenticate extends Component {
     componentWillMount() {
       if (!this.props.isAuthenticated) {
-        this.context.router.push('/login');
+        this.props.history.push('/login');
       }
     }
 
     componentWillUpdate(nextProps) {
       if (!nextProps.isAuthenticated) {
-        this.context.router.push('/login');
+        this.props.history.push('/login');
       }
     }
 
@@ -319,17 +314,13 @@ export default function(ComponentToBeRendered) {
     }
   }
 
-  Authenticate.contextTypes = {
-    router: React.PropTypes.object.isRequired
-  }
-
   function mapStateToProps(state) {
     return {
       isAuthenticated: state.isAuthenticated
     };
   }
 
-  return connect(mapStateToProps)(Authenticate);
+  return withRouter(connect(mapStateToProps)(Authenticate));
 }
 ```
 

@@ -17,55 +17,36 @@ One of the nice features of React is the ability to create PropTypes for props i
 PropTypes are not only useful for yourself when building React applications, but since components are meant to be reused, they are essential for letting other developers know how exactly your components should be used. Let's start by creating a couple components with PropTypes. Let's first show what this code looks like using the React.createClass syntax (which we will **not** be using):
 
 ```jsx
-var FirstComponent = React.createClass({
-    propTypes: {
-        name: React.PropTypes.string
-    }
-});
-
-// or 
-
-var FirstComponent = React.createClass({});
-
-FirstComponent.propTypes: {
-    name: React.PropTypes.string
-}
-
-```
-
-Using the second example, we can add propTypes in a similar fashion,
-
-```jsx
-import React, {Component} from 'react'
+import React, { Component } from "react";
 
 export default class App extends Component {
-
-    static get propTypes() {
-        return{
-           name: React.PropTypes.string,
-           age: React.PropTypes.number,
-           data: React.PropTypes.object.isRequired
-        }
-     }
-
-    constructor(props, name, age, data){
-        super(props)
-        this.name = name
-        this.age = age
-        this.data = data
-    }
-    render(){
-        return(
-                <div>
-                    <h1>Hello {this.props.name} you are {this.props.age} years old</h1>
-                </div>
-            )
-    }
+  constructor(props, name, age, data) {
+    super(props);
+    this.name = name;
+    this.age = age;
+    this.data = data;
+  }
+  render() {
+    return (
+      <div>
+        <h1>
+          Hello {this.props.name} you are {this.props.age} years old
+        </h1>
+      </div>
+    );
+  }
 }
+App.propTypes = {
+  name: React.PropTypes.string,
+  age: React.PropTypes.number,
+  data: React.PropTypes.object.isRequired
+};
+
 // to set default props we can do that outside the class
 App.defaultProps = {
-    age: 2
-}
+  age: 2
+};
+
 ```
 
 Now that we have an idea of how to add propTypes, let's see what kind of propTypes we can add 
@@ -87,20 +68,17 @@ You can read more about them here  -[https://facebook.github.io/react/docs/typec
 
 ### Higher Order Components
 
-
-
-### Folder Structure
-
-Now that we have an idea of how to create different kinds of components and we have just started the conversation around building larger react applications - the next logical question becomes, "how do we organize our applications"? A very common approach is to place `actions`, `components`, `containers`, `reducers` in their own folders as an app scales. However, there are other approaches and you can read some thoughts on them [here](https://medium.com/@alexmngn/how-to-better-organize-your-react-applications-2fd3ea1920f1#.yx64ess6p), but
-
 ### Immutability
 
 A bit more of an advanced topic in React is the use of immutable data structures when building larger applications. You can read more about it [here](http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/), [here](http://jamesknelson.com/should-i-use-shouldcomponentupdate/) and [here](https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures)
 
 ### Type Checking with Flow
 
+One tool that has been growing in popularity in the React community is Flow - a type checker created by Facebook. Since JavaScript is not staticly typed (you don't have to declare the type of a variable or parameter to a function), it becomes challenging to find certain bugs before runtime. What flow enables you to do is create or use types for your data so that if those types are not being used, an error will be thrown before your code even runs in the browser.  We will not be using Flow in our applications, but you can read more about it [here](https://flow.org/)
+
 ### Using Preact 
 
+One other tool that has been growing in popularity in the React community is Preact, which is a much smaller (3kb) alternative to React with an almost identical API. Preact strips out some of the additional modules that ship with React that you don't use frequently to minimize the file size of the library. Switching to Preact involves a little bit of work to set up and you can read more about it [here](https://preactjs.com/guide/switching-to-preact)
 
 ### Additional Resources
 
