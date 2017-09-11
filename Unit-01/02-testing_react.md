@@ -282,6 +282,8 @@ test("should render with a name prop of elie", () => {
 });
 ```
 
+If you are wondering when to use each of these methods, you can read a great post [here](https://stackoverflow.com/questions/38710309/when-should-you-use-render-and-shallow-in-enzyme-react-tests)
+
 ### Coverage
 
 As you start writing more tests, it's good to know how much of your application is covered with tests. The metric that we use to determine what percent of our code is covered by tests is called "coverage" and it is a described as a percent of lines of code that have test "coverage"

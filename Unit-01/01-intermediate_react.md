@@ -14,17 +14,16 @@ By the end of this chapter, you should be able to:
 
 One of the nice features of React is the ability to create PropTypes for props in our components. PropTypes are an excellent way to ensure that we are using the correct type (string / integer / boolean) as well as add additional validation for our props (make sure they exist). These validations will **not**throw errors if they are not met, but will return warnings letting a user know that they are not being met. 
 
-PropTypes are not only useful for yourself when building React applications, but since components are meant to be reused, they are essential for letting other developers know how exactly your components should be used. Let's start by creating a couple components with PropTypes. Let's first show what this code looks like using the React.createClass syntax (which we will **not** be using):
+PropTypes are not only useful for yourself when building React applications, but since components are meant to be reused, they are essential for letting other developers know how exactly your components should be used. Let's start by importing the PropTypes function and creating a component with PropTypes . 
 
 ```jsx
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
+
 
 export default class App extends Component {
-  constructor(props, name, age, data) {
+  constructor(props,) {
     super(props);
-    this.name = name;
-    this.age = age;
-    this.data = data;
   }
   render() {
     return (
@@ -40,11 +39,6 @@ App.propTypes = {
   name: React.PropTypes.string,
   age: React.PropTypes.number,
   data: React.PropTypes.object.isRequired
-};
-
-// to set default props we can do that outside the class
-App.defaultProps = {
-  age: 2
 };
 
 ```
@@ -68,9 +62,11 @@ You can read more about them here  -[https://facebook.github.io/react/docs/typec
 
 ### Higher Order Components
 
-### Immutability
+One of the more powerful techniques you can use when building applications with React is have a component return a new component. The Facebook docs define a A higher-order component (HOC) as an advanced technique in React for reusing component logic. HOCs are not part of the React API, they are a pattern that emerges from React's compositional nature.
 
-A bit more of an advanced topic in React is the use of immutable data structures when building larger applications. You can read more about it [here](http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/), [here](http://jamesknelson.com/should-i-use-shouldcomponentupdate/) and [here](https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures)
+Concretely, a higher-order component is a function that takes a component and returns a new component. Higher order components are quite common in libraries we will see soon like React-Router and Redux. This behavior used to be accomplished with mixins which are an older and depricated feature of React.
+
+To get started, follow along with the example [here](https://facebook.github.io/react/docs/higher-order-components.html)
 
 ### Type Checking with Flow
 
@@ -78,7 +74,11 @@ One tool that has been growing in popularity in the React community is Flow - a 
 
 ### Using Preact 
 
-One other tool that has been growing in popularity in the React community is Preact, which is a much smaller (3kb) alternative to React with an almost identical API. Preact strips out some of the additional modules that ship with React that you don't use frequently to minimize the file size of the library. Switching to Preact involves a little bit of work to set up and you can read more about it [here](https://preactjs.com/guide/switching-to-preact)
+Another tool that has been growing in popularity in the React community is Preact, which is a much smaller (3kb) alternative to React with an almost identical API. Preact strips out some of the additional modules that ship with React that you don't use frequently to minimize the file size of the library. Switching to Preact involves a little bit of work to set up and you can read more about it [here](https://preactjs.com/guide/switching-to-preact)
+
+### Immutability
+
+A bit more of an advanced topic in React is the use of immutable data structures when building larger applications. You can read more about it [here](http://reactkungfu.com/2015/08/pros-and-cons-of-using-immutability-with-react-js/), [here](http://jamesknelson.com/should-i-use-shouldcomponentupdate/) and [here](https://facebook.github.io/react/docs/optimizing-performance.html#using-immutable-data-structures)
 
 ### Additional Resources
 
