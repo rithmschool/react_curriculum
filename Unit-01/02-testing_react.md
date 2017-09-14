@@ -294,12 +294,6 @@ Let's see what our application looks like so far with coverage!
 
 When we run this, we will see a nice looking table to show how much coverage our code has. This is done on a per file basis and gives us a useful metric for how well our code has been tested. It's not realistic that you will always have 100% coverage or that 100% coverage will prevent all bugs, so there are diminishing returns if you try to overly maximize your coverage. It's essential to test your code, but you don't have to go overboard with coverage.
 
-### Challenges with Testing UI
-
-One of the biggest challenges around testing UI is that your UI will so frequently change. This means that tests can become obsolete quickly and will need to be re-written quite often. It is useful to understand how to test UIs with React, but it is also important to understand just how often your code is going to change. 
-
-This does not mean that all UI code should not be tested. If you are working with data that will be put into your UI - that should absolutely be tested, but if you are only testing certain markup on a page, that can become obsolete quite quickly.
-
 ### Additional Resources
 
 [https://www.theodo.fr/blog/2017/04/enzyme-fast-and-simple-react-testing/](https://www.theodo.fr/blog/2017/04/enzyme-fast-and-simple-react-testing/)

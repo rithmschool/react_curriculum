@@ -203,15 +203,5 @@ __Redirect__ - Useful for redirecting, you just have to specify the to prop to t
 
 Complete the react router [makeup mega market application](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-02/01-react-router/README.md)
 
-Once you've completed that, try refactoring your todo application.  Use the router for the following routes:
-
-- `/todos` - list all of your todos
-- `/todos/new` - render a form to create a new todos
-- `/todos/:id` - list a single todo
-- `/todos/:id/edit` - render a form to edit an existing todo
-
-When a user creates, updates or deletes a todo - they should be redirected to the `/todos` page.
-
-
 #### [⇐ Previous](./03-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_intro.md)
 

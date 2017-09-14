@@ -113,7 +113,7 @@ By telling your server to respond to all requests with `index.html`, any request
 
 ### Adding Routes
 
-Next, edit `src/App.js` to have the following (this example is taken from the [React Router docs](https://reacttraining.com/react-router/web/example/basic)):
+Next, edit `src/App.js` to have the following (this example is taken from the [React Router docs](https://reacttraining.com/react-router/web/example/basic)) - you can head over to the docs and interact with this example as well. 
 
 ```js
 import React from 'react';
@@ -160,7 +160,7 @@ Try running the application and clicking on the links.  Notice that the address 
 
 So how does this work?  Whenever you click on a `Link` component, react uses `window.history` to change the url in the address bar.  The `Route` component renders the component specified in the component attribute whenever the current url path matches the path attribute.
 
-Notice that the `Route` for `path="/"` has the exact attribute.  That tells react router that you only want to match the route exactly.  Without the exact attribute, both components would be rendered when you click the `/about` link.
+Notice that the `Route` for `path="/"` has the **exact** attribute.  That tells react router that you only want to match the route exactly.  Without the exact attribute, both components would be rendered when you click the `/about` link.
 
 ### URL Parameters and Query String
 
@@ -243,6 +243,19 @@ export default ParamsExample;
 
 In `src/ParamsExample.js`, we have 2 components: `ParmsExample` and `Instructor`.  The route renders an instructor component based the on the current path.  In the instructor component, you can see that we're rendering a few special props: `match` and `location`. When we pass a component into `Route` using the `component` prop, that component will render with `match` and `location` props that expose information about the current path, including any URL parameters.
 
+#### Parsing the query string with React Router v4
+
+React Router does not ship with a built in way to parse a query string so the recommended action is to use the `URLSearchParams` constructor in the browser. Here is what that might look like:
+
+```js
+let url = new URLSearchParams("https://rithmschool.com?
+instructor=Michael&admissions=Angelina&partnerships=Kira")
+
+url.get("admissions") // "Angelina"
+```
+
+You can see more about this [here](https://github.com/ReactTraining/react-router/issues/4410) and read about URLSearchParams [here](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
+
 #### Passing information as props to a route
 
 So far we have see how to route to other components, but what if we want to pass certain properties depending on what the parent component contains? Since components are just functions, we can pass a function to render the component with additional props! Let's see what that looks like
@@ -286,9 +299,21 @@ const App = () => (
 export default App;
 ```
 
+Notice here that we are passing a function as the value of the component prop. Since all of our components are functions anyway, we simply wrap our `<Home/>` component with a function! This is exactly the idea around higher order components. We're not explicitly creating a higher order component, but we are wrapping our component with a function that passes down props to the `<Home/>` component.
+
 ### Exercise
 
-Now that you have seen how to perform some simple routing - it's time to build a small application!
+Now that you have seen how to perform some simple routing - it's time to refactor your Todo application!
+
+The first thing you want to do is add React Router and set up the following RESTful routes.
+
+- `/todos` - list all of your todos
+- `/todos/new` - render a form to create a new todos
+- `/todos/:id` - list a single todo
+- `/todos/:id/edit` - render a form to edit an existing todo
+
+As a bonus, when a user creates, updates or deletes a todo - they should be redirected to the `/todos` page. You can start reading a bit about redirects in the next section or check out the React Router docs for some hints on how to `<Redirect/>` (we just gave you one right there!)
+
 
 #### [⇐ Previous](./02-testing_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./04-react_router_continued.md)
 
