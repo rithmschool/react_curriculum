@@ -113,6 +113,7 @@ Our signup component is not very complex, we just need to connect redux with our
 
 ```js
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { signup } from './actions';
 import { withRouter } from 'react-router-dom';
@@ -191,6 +192,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { login } from './actions';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class LoginForm extends React.Component {
   constructor(props) {

@@ -46,17 +46,17 @@ App.propTypes = {
 Now that we have an idea of how to add propTypes, let's see what kind of propTypes we can add 
 
 ```
-  optionalArray: React.PropTypes.array,
-  optionalBool: React.PropTypes.bool,
-  optionalFunc: React.PropTypes.func,
-  optionalNumber: React.PropTypes.number,
-  optionalObject: React.PropTypes.object,
-  optionalString: React.PropTypes.string,
-  optionalSymbol: React.PropTypes.symbol,
-  optionalElement: React.PropTypes.element,
+  optionalArray: PropTypes.array,
+  optionalBool: PropTypes.bool,
+  optionalFunc: PropTypes.func,
+  optionalNumber: PropTypes.number,
+  optionalObject: PropTypes.object,
+  optionalString: PropTypes.string,
+  optionalSymbol: PropTypes.symbol,
+  optionalElement: PropTypes.element,
 ```
 
-We can even create our own types of objects with certain keys and values and use `React.PropTypes.shape({})` to customize our propTypes.
+We can even create our own types of objects with certain keys and values and use `PropTypes.shape({})` to customize our propTypes.
 
 You can read more about them here  -[https://facebook.github.io/react/docs/typechecking-with-proptypes.html](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
 

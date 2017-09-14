@@ -77,7 +77,8 @@ With context, you can add information in a component and have it accessible by a
 Like we mentioned earlier, context does have some useful places and the router is one of them. Since the router is placed in context, we can use it in any of our components and this is commonly done when redirecting. Let's see how this works with the code below.
 
 ```js
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {
   BrowserRouter,
   Route,
@@ -134,7 +135,8 @@ The React Router v4 and Facebook docs mention that using the router on context (
 Instead of using `context`, which is an unstable API and not something that the React docs recommend using publicly, we will be using a higher order component that React Router v4 provides called `withRouter`. If you wrap your component with the `withRouter` component, you can get access to the router using `this.props`. So let's see what our example below would look like with that.
 
 ```js
-import React, { PropTypes, Component } from "react";
+import React, {Component } from "react";
+import PropTypes from "prop-types";
 import { Route, Link, withRouter } from "react-router-dom";
 
 const Data = () => <h1>You made it!</h1>;
