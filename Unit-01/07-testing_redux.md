@@ -22,4 +22,4 @@ By the end of this chapter, you should be able to:
 [A thorough screencast for testing React and Redux](https://www.youtube.com/watch?v=bMmntkVM4wQ)
 
 #### [⇐ Previous](./06-redux_and_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./08-backend.md)
-w
+
