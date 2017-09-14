@@ -208,7 +208,7 @@ export function someAction (omdbData) {
 
 export function asyncExample (imdbID) {
   return (dispatch) => {
-    axios.get(`http://www.omdbapi.com/?t=titanic`)
+    axios.get(`https://www.omdbapi.com/?t=titanic&apikey=thewdb`)
       .then((response) => {
         dispatch(someAction(response.data))
       })
@@ -341,7 +341,7 @@ export function getMovie (omdbData) {
 
 export function getRandomMovie () {
   return function (dispatch, getState) {
-    axios.get(`http://www.omdbapi.com/?t=${randomMovie}`)
+    axios.get(`https://www.omdbapi.com/?t=${randomMovie}&apikey=thewdb`)
       .then((response) => {
         dispatch(getMovie(response.data))
       })
