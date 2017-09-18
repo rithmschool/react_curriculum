@@ -229,7 +229,7 @@ Snapshot testing is fantastic as a really quick and easy way to test the UI of c
 
 Now that we can run simple specs and take snapshots of our components, let's see how we can test exactly what a component is rendering, as well as certain props that it will have.
 
-To do this, we're going to install an additional library called [Enzyme]() which is made by the wonderful people at AirBnB. Enzyme uses React testing utilities, but it is a nice abstraction and makes testing components quite easy.
+To do this, we're going to install an additional library called [Enzyme](http://airbnb.io/enzyme/) which is made by the wonderful people at AirBnB. Enzyme uses React testing utilities, but it is a nice abstraction and makes testing components quite easy.
 
 In the previous example with snapshot testing, we imported the renderer function from `react-test-renderer`. These functions, which are part of the React testing utilities, are not always the easiest to use. This is especially true when you need to find certain elements on the page. To make this easier, we're going to use Enzyme, which uses a very similar DOM selection API to jQuery (it uses a library called Cheerio, which you might have come across when learning about web scraping with Node).
 
