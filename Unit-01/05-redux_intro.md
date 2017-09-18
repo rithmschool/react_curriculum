@@ -228,14 +228,9 @@ Once this is installed, you can open up the Chrome dev tools and check out the r
 
 You can read more about the dev tools [here](https://onsen.io/blog/react-redux-devtools-with-time-travel/).
 
-### Exercises
+### Exercise
 
-Build a simple todo application but include redux to manage your data! You should have actions for creating, updating and deleting todos. Remember that since you are using redux, all of your reducers must be pure functions so each of these CRUD operations **must** be done using pure functions. 
-
-- `/todos` - list all of your todos
-- `/todos/new` - render a form to create a new todos
-- `/todos/:id` - list a single todo
-- `/todos/:id/edit` - render a form to edit an existing todo
+Complete the [Redux Exercise](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/05-redux)
 
 #### [⇐ Previous](./04-react_router_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-redux_and_react.md)
 

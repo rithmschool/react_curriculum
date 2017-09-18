@@ -523,6 +523,9 @@ Each `Todo` component should have a prop called `deleteTodo` which is recieved f
 
 ### Exercise
 
+Complete the [React Redux Exercise](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/06-react-redux)
+
+
 Complete CRUD on `todos`! 
 
 #### [⇐ Previous](./05-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-testing.md)
