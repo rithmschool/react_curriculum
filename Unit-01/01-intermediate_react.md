@@ -6,9 +6,9 @@
 
 By the end of this chapter, you should be able to:
 
-- Write more complex PropTypes
-- Understand additional tools that can be added for React codebases
-- Define what a Higher Order Component is
+- Write more complex **PropTypes**
+- Understand **additional tools** that can be added for React codebases
+- Define what a **Higher Order Component** is
 
 ## PropTypes
 
@@ -124,7 +124,7 @@ You can read more about it [here](http://reactkungfu.com/2015/08/pros-and-cons-o
 
 [https://camjackson.net/post/9-things-every-reactjs-beginner-should-know](https://camjackson.net/post/9-things-every-reactjs-beginner-should-know)
 
-### Exercise
+## Exercise
 
 Complete the [Intermediate React Exercise](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/01-intermediate-react/README.md)
 
