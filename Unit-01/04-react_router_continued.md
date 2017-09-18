@@ -1,6 +1,8 @@
 #### [⇐ Previous](./03-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_intro.md)
 
-### Objectives
+# React Router (continued)
+
+## Objectives
 
 By the end of this chapter, you should be able to:
 
@@ -8,15 +10,15 @@ By the end of this chapter, you should be able to:
 - Use `context` to programatically redirect.
 - Use `withRouter` and `Redirect` as a better and more stable alternative to `context`
 
-### 404s with React Router
+## 404s with React Router
 
-Very commonly with routing, you will want a 404 handler for routes that do not exist. To do this with React Router v4, we use a component called `<Switch></Switch>` and place our routes inside. Switch will renders the first child <Route> ( or `<Redirect>` which we will see in a little bit) that matches the location.
+Very commonly with routing, you will want a 404 handler for routes that do not exist. To do this with React Router v4, we use a component called `Switch` to wrap our routes. Switch will renders the first child `<Route>` ( or `<Redirect>` which we will see in a little bit) that matches the location.
 
-You might be wondering, how is this different than just using a bunch of `<Route>` components? The answer is that `<Switch>` is unique in that it renders a route exclusively. In contrast, every `<Route>` that matches the location renders inclusively. 
+You might be wondering, how is this different than just using a bunch of `<Route>` components? The answer is that `<Switch>` is unique in that it renders a route exclusively. In contrast, every `<Route>` that matches the location renders inclusively.
 
 Consider this code:
 
-```js
+```jsx
 import React from 'react'
 import {
   BrowserRouter,
@@ -56,27 +58,28 @@ const NotFound = ({ location }) => (
 export default NotFoundExample
 
 ```
-You can read more about it [here](https://reacttraining.com/react-router/core/api/Switch)
 
-### Redirecting Programatically
+You can read more about `Switch` [here](https://reacttraining.com/react-router/core/api/Switch)
+
+## Redirecting Programatically
 
 So far we have seen how to set up React Router with different types of routers and create routes and pass props to our routes. This is a great start, but we're missing another essential concept with routing - redirecting!
 
 When we redirect in a single page application, we are **not** doing the same thing as what a normal HTTP redirect would be which involves sending a location header and making a GET request to the value of that location header. We are simply making another AJAX request to load the correct information when we redirect.
 
-With react router v4 we are given access to a `Redirect` component which is useful for conditionally rendering or redirecting as well as a higher order component called `withRouter`, which will allow for accessing the router in any component. 
+With react router v4 we are given access to a `Redirect` component which is useful for conditionally rendering or redirecting as well as a higher order component called `withRouter`, which will allow for accessing the router in any component.
 
-In many examples you will see another way to programatically redirect (after a form submission, click, and so on) using something called `context` to do that. This is **not** the recommended way of using React Router v4 now, but it is an important concept to understand so we will learn it and then see how we can do better using `withRouter` and the `Redirect` component. 
+In many examples you will see another way to programatically redirect (after a form submission, click, and so on) using something called `context` to do that. This is **not** the recommended way of using React Router v4 now, but it is an important concept to understand so we will learn it and then see how we can do better using `withRouter` and the `Redirect` component.
 
-### Context
+## Context
 
 In React, we've seen state and props as the core tools we use to pass data and display information with our components, however there is one more API that we can use called `context`. It is **not** recommended that you use context frequently and the docs do mention that the API is subject to change, but context does have some useful moments.
 
-With context, you can add information in a component and have it accessible by all other components without having to pass it down like with props. You just have to establish what in context you will be using in your component. 
+With context, you can add information in a component and have it accessible by all other components without having to pass it down like with props. You just have to establish what in context you will be using in your component.
 
 Like we mentioned earlier, context does have some useful places and the router is one of them. Since the router is placed in context, we can use it in any of our components and this is commonly done when redirecting. Let's see how this works with the code below.
 
-```js
+```jsx
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {
@@ -101,7 +104,7 @@ class Button extends Component {
   handleClick(){
     this.context.router.history.push('/data')
   }
-  
+
   render(){
     return (
         <div>
@@ -128,13 +131,13 @@ const ContextExample = () => (
 export default ContextExample;
 ```
 
-### Using withRouter instead of context
+## Using withRouter instead of context
 
 The React Router v4 and Facebook docs mention that using the router on context (router.context) should not be considered public API. Since context itself is an experimental API and may change in a future release of React, you should avoid accessing `this.context.router` directly in your components. Instead, you can access the variables we store on context through the props that are passed to your `<Route>` component or a component wrapped in `withRouter`.
 
 Instead of using `context`, which is an unstable API and not something that the React docs recommend using publicly, we will be using a higher order component that React Router v4 provides called `withRouter`. If you wrap your component with the `withRouter` component, you can get access to the router using `this.props`. So let's see what our example below would look like with that.
 
-```js
+```jsx
 import React, {Component } from "react";
 import PropTypes from "prop-types";
 import { Route, Link, withRouter } from "react-router-dom";
@@ -179,11 +182,11 @@ const App = () => (
 export default App;
 ```
 
-### Using the Redirect Component
+## Using the Redirect Component
 
-Along with context and `withRouter`, there is another way to redirect using the <Redirect/> component. 
+Along with context and `withRouter`, there is another way to redirect using the `<Redirect/>` component.
 
-You can read more about <Redirect/> [here](https://reacttraining.com/react-router/core/api/Redirect)
+You can read more about `<Redirect/>` [here](https://reacttraining.com/react-router/core/api/Redirect)
 
 ### Additional Examples of Redirecting
 
@@ -197,9 +200,8 @@ __Redirect__ - Useful for redirecting, you just have to specify the to prop to t
 
 `{...rest}`  - The rest/spread operator for objects is a useful way to spread or list the remaining/rest keys and values in an object with just one parameter. You can read more about it [here](https://babeljs.io/docs/plugins/transform-object-rest-spread/).
 
-### Exercises
+## Exercises
 
 Complete the react router [makeup mega market application](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/04-react-router-continued/README.md)
 
 #### [⇐ Previous](./03-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_intro.md)
-
