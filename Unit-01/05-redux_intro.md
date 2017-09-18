@@ -2,7 +2,7 @@
 
 # Introduction to Redux
 
-### Objectives
+## Objectives
 
 By the end of this chapter, you should be able to:
 
@@ -10,9 +10,9 @@ By the end of this chapter, you should be able to:
 - Compare and contrast `actions`, `reducers` and `stores`
 - Build applications using `redux` as a state manager
 
-### Intro
+## Intro
 
-Redux is a single state management store.  While it is commonly used with React, it is an entirely separate library that can be used on its own or with a other frameworks. 
+Redux is a single state management store.  While it is commonly used with React, it is an entirely separate library that can be used on its own or with a other frameworks.
 
 ![https://css-tricks.com/wp-content/uploads/2016/03/redux-article-3-04.svg](https://css-tricks.com/wp-content/uploads/2016/03/redux-article-3-04.svg)
 
@@ -25,17 +25,17 @@ Here's an overview of the purpose of redux, courtesy of their [documentation](ht
 >The data lifecycle in any Redux app follows these 4 steps:
 >
 >1. You call `store.dispatch(action)`.
->2. The Redux store calls the reducer function you gave it.
->3. The root reducer may combine the output of multiple reducers into a single state tree.
->4. The Redux store saves the complete state tree returned by the root reducer.
+>1. The Redux store calls the reducer function you gave it.
+>1. The root reducer may combine the output of multiple reducers into a single state tree.
+>1. The Redux store saves the complete state tree returned by the root reducer.
 
-### Functional Programming Review
+## Functional Programming Review
 
 Redux revolves around some core concepts in functional programming. Let's examine these in more detail before we talk about reducers.
 
 ### Pure Functions
 
-A *pure function* is a predictable function that does not have any side-effects. What does that mean? When a pure function is called many times with the same input, it will always give the same output (this is also known as idempotence). This makes the function predictable, easier to reason about, and easier to test. Another characteristic of pure functions are that they do not modify external state, or change values outside of their scope. 
+A *pure function* is a predictable function that does not have any side-effects. What does that mean? When a pure function is called many times with the same input, it will always give the same output (this is also known as idempotence). This makes the function predictable, easier to reason about, and easier to test. Another characteristic of pure functions are that they do not modify external state, or change values outside of their scope.
 
 Let's try to identify some pure and impure functions:
 
@@ -56,7 +56,7 @@ doubleValues(arr);
 arr; // [8, 16, 24]
 ```
 
-The function is **impure** because there is a side effect: we are mutating (or changing) the `arr` variable. 
+The function is **impure** because there is a side effect: we are mutating (or changing) the `arr` variable.
 
 ```js
 var arr = [2, 4, 6];
@@ -115,7 +115,7 @@ addToArr(arr, 5); // [1, 2, 3, 4, 5]
 arr; // [1, 2, 3, 4, 5]
 ```
 
-The function is **impure** because there is a side effect: we are mutating (or changing) the `arr` variable. 
+The function is **impure** because there is a side effect: we are mutating (or changing) the `arr` variable.
 
 ```js
 var arr = [1, 2, 3, 4];
@@ -128,13 +128,13 @@ addToArr(arr, 5); // [1, 2, 3, 4, 5]
 arr; // [1, 2, 3, 4]
 ```
 
-The function is **pure** because there is a not side effect and we are not mutating or changing the `arr` variable. 
+The function is **pure** because there is a not side effect and we are not mutating or changing the `arr` variable.
 
 You can read more about pure functions [here](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.d1qdboexh), [here](https://egghead.io/lessons/javascript-redux-pure-and-impure-functions), and if you are looking for a more advanced read, take a look [here](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/).
 
-### Reducer
+## Reducer
 
-Reducers are pure functions that accept a state and an action, and return a new state. We need to make sure that we do not mutate state, so very commonly we will use conditional logic to find an action. If we do not find one, we just return the state. 
+Reducers are pure functions that accept a state and an action, and return a new state. We need to make sure that we do not mutate state, so very commonly we will use conditional logic to find an action. If we do not find one, we just return the state.
 
 It bears repeating: our reducers **MUST** be pure functions.
 
@@ -144,7 +144,7 @@ Here's an example of a reducer that updates an array of names:
 function firstReducer(state=[], action){
     switch(action.type){
         case 'ADD_NAME':
-            return [...state, action.payload] 
+            return [...state, action.payload]
         case 'REMOVE_NAME'
             const idx = state.indexOf(action.payload)
             return state.slice(0,idx).concat(state.slice(idx+1))
@@ -156,7 +156,7 @@ function firstReducer(state=[], action){
 
 Be very careful when you're writing your own reducers that you aren't accidentally mutating state! If you're using methods like `pop`, `shift`, `unshift`, `push`, or `splice` on arrays, for instance, you're probably doing something wrong.
 
-### Actions
+## Actions
 
 We create actions to change the state and trigger reducers. Here's what that might look like for the example above:
 
@@ -175,7 +175,7 @@ function removeName(name){
 }
 ```
 
-### Store
+## Store
 
 Our store accepts a reducer and has methods for getting the state, dispatching actions, and subscribing and unsubscribing. If we have multiple reducers, we can merge them together with the `combineReducers` function that `redux` provides, but we will just be starting with a single reducer.
 
@@ -200,12 +200,12 @@ console.log(store.getState()) // this object will have an array with three value
 
 store.dispatch(removeName('Elie'))
 
-console.log(store.getState()) // this array will have 2 values 
+console.log(store.getState()) // this array will have 2 values
 ```
 
 What happens if you have multiple reducers? You can import the `combineReducers` function that is part of `redux`.
 
-### Redux Dev Tools
+## Redux Dev Tools
 
 Having a single immutable state store allows us to do some really awesome stuff like time traveling, hot module reloading, and easier debugging. With redux, the only way we can change state is to fire off an action, which creates a new state so that we can always revert and see changes in state! You can get the Chrome extention [here](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en), and here is the code necessary to use the extention with a redux application (this is a sample store):
 
@@ -228,9 +228,12 @@ Once this is installed, you can open up the Chrome dev tools and check out the r
 
 You can read more about the dev tools [here](https://onsen.io/blog/react-redux-devtools-with-time-travel/).
 
-### Exercise
+## Additional Resources
+
+[Great Redux Tutorial Videos](https://egghead.io/courses/getting-started-with-redux) from the creator of Redux, Dan Abramov
+
+## Exercise
 
 Complete the [Redux Exercise](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/05-redux)
 
 #### [⇐ Previous](./04-react_router_continued.md) | [Table of Contents](./../readme.md) | [Next ⇒](./06-redux_and_react.md)
-
