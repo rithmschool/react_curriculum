@@ -6,8 +6,10 @@
 
 By the end of this chapter, you should be able to:
 
-- Use `jest` to test components
-- Test redux actions and reducers
+- Test your components with `jest`, `react-test-renderer`, and `enzyme`
+- Explain what snapshot testing is
+- Compare the `shallow`, `mount`, and `render` functions in `enzyme`
+- Explain what coverage is, and find the test coverage percentage in your React apps
 
 ### Getting Started with Jest
 
@@ -274,7 +276,7 @@ test("should render with a class of App-intro", () => {
 
 As you can see, this test is able to detect that the `App` component consists of a single `SimpleComponent` child, and that there's an element with a class of `App-intro`. Note also that with shallow rendering, only one `h2` is found: this is the one inside of the `App` component, not the one inside of `SimpleComponent`.
 
-### mount  
+### `mount`  
 
 Mounting: Also known as full DOM rendering, it allows you to render a part of the DOM tree and it also gives you access to the lifecycle methods of React components (`componentWillMount`, `componentWillReceiveProps` , etc…)
 
@@ -324,7 +326,7 @@ test("should detect state and all h2s on mounting", () => {
 
 ```
 
-### render  
+### `render`  
 
 Static rendering: Is sparsely used but when it is the case, serves as means of testing plain HTML. This may be useful if you care about testing the eventual HTML that gets rendered, and not the React Component structure.
 
