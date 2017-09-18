@@ -389,4 +389,8 @@ When we run this, we will see a nice looking table to show how much coverage our
 
 [https://www.theodo.fr/blog/2017/04/enzyme-fast-and-simple-react-testing/](https://www.theodo.fr/blog/2017/04/enzyme-fast-and-simple-react-testing/)
 
+### Exercise
+
+Complete the [Todo testing Exericse](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/02-testing/README.md)
+
 #### [⇐ Previous](./01-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-react_router.md)

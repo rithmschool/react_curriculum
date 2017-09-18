@@ -199,7 +199,7 @@ __Redirect__ - Useful for redirecting, you just have to specify the to prop to t
 
 ### Exercises
 
-Complete the react router [makeup mega market application](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-02/01-react-router/README.md)
+Complete the react router [makeup mega market application](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/04-react-router-continued/README.md)
 
 #### [⇐ Previous](./03-react_router.md) | [Table of Contents](./../readme.md) | [Next ⇒](./05-redux_intro.md)
 

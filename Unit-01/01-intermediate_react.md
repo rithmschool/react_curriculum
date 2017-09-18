@@ -124,4 +124,9 @@ You can read more about it [here](http://reactkungfu.com/2015/08/pros-and-cons-o
 
 [https://camjackson.net/post/9-things-every-reactjs-beginner-should-know](https://camjackson.net/post/9-things-every-reactjs-beginner-should-know)
 
-#### [Table of Contents](./../readme.md) | [Next ⇒](./02-testing_react.md)
+### Exercise
+
+Complete the [Intermediate React Exercise](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/01-intermediate-react/README.md)
+
+#### [Table of Contents](./../readme.md) | [Next ⇒](./02-react_router.md)
+>>>>>>> Stashed changes
