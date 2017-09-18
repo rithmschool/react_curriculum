@@ -126,6 +126,6 @@ You can read more about it [here](http://reactkungfu.com/2015/08/pros-and-cons-o
 
 ## Exercise
 
-Complete the [Intermediate React Exercise](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/01-intermediate-react/README.md)
+Complete the [Intermediate React Exercise](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/01-intermediate-react)
 
 #### [Table of Contents](./../readme.md) | [Next ⇒](./02-react_router.md)

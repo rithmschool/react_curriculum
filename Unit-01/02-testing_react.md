@@ -391,6 +391,6 @@ When we run this, we will see a nice looking table to show how much coverage our
 
 ### Exercise
 
-Complete the [Todo testing Exericse](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/02-testing/README.md)
+Complete the [Todo testing Exericse](https://github.com/rithmschool/react_curriculum_exercises/blob/master/Unit-01/02-testing)
 
 #### [⇐ Previous](./01-intermediate_react.md) | [Table of Contents](./../readme.md) | [Next ⇒](./03-react_router.md)
