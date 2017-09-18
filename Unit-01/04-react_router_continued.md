@@ -153,11 +153,9 @@ class Button extends Component {
 
   render() {
     return (
-      <withRouter>
-        <div>
-          <button onClick={this.handleClick}>Click me!</button>
-        </div>
-      </withRouter>
+      <div>
+        <button onClick={this.handleClick}>Click me!</button>
+      </div>
     );
   }
 }
@@ -173,7 +171,7 @@ const App = () => (
         <Link to="/data">Or just go here!</Link>
       </li>
     </ul>
-    <Route path="/next" component={Button} />
+    <Route path="/next" component={withRouter(Button)} />
     <Route path="/data" component={Data} />
   </div>
 );
