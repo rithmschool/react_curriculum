@@ -12,15 +12,17 @@ By the end of this chapter, you should be able to:
 
 ## Redux and React
 
-### Overview
+### Containers
 
 Typically, one can think of Redux as controlling application state and React as controlling UI state. For example, Redux would be handle receiving an API request to GET a list of todo items and passing them to React components. Then, React handles whether or not the item renders, if it is marked "complete" or "active", etc. React would also receieve user input (e.g. checking off a todo item) and use Redux to fire off an action (e.g. "remove item") which the Reducer would process.
 
+This idea of "separation of concerns" brings us to container components, which are "smart" vs. presentational components, which are "dumb". To get a good grasp on this, read the [Redux docs section on containers](http://redux.js.org/docs/basics/UsageWithReact.html#presentational-and-container-components) and definitely click [the link](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) he references first. This separation of concerns is really important to understand before connecting React and Redux.
+
 ### Connecting React and Redux
 
-But as we mentioned previously, Redux is its own thing and is not connected to React by default. To connect React with Redux we need to use another library called... wait for it... `react-redux`! This library gives us a few functions and components to connect Redux state to React state. Let's install this library with `npm install --save react-redux`. Once it's installed, we will most commonly use the `connect()` function from that library to connect React and Redux along with a component called `Provider`. This component accepts a prop of `store`, which is a `Redux` store!
+As mentioned previously, Redux is its own thing and is not connected to React by default. To connect React with Redux we need to use another library called... wait for it... `react-redux`! This library gives us a few functions and components to connect Redux state to React state. Let's install this library with `npm install --save react-redux`. Once it's installed, we will most commonly use the `connect()` function from that library to connect React and Redux along with a component called `Provider`. This component accepts a prop of `store`, which is a `Redux` store!
 
-The `connect` function returns a new function which can wrap a component. Syntactically, then, using `connect` looks something like this: `connect(mapStateToProps, mapDispatchToProps)(SomeReactComponent)`.
+The `connect` function returns a new function which can wrap a component. This new function will essentially be a container. Syntactically, then, using `connect` looks something like this: `connect(mapStateToProps, mapDispatchToProps)(SomeReactComponent)`.
 
 So what's up with `mapStateToProps` and `mapDispatchToProps`? Let's find out!
 
@@ -33,7 +35,7 @@ You don't need specify how state should get mapped to props; if you want to omit
 In other words, whenever the Redux store is updated, the new state will be passed to the component's props via the object returned by `mapStateToProps`. Here's a quick example:
 
 ```jsx
-const mapStateToProps = function(state){
+const mapStateToProps = function(state) {
     return {
         // state comes from the Redux store
         propertyToPassToReact: state.someValue
@@ -185,7 +187,7 @@ Start up the application, and you should be able to increment the count!
 
 ### Async Redux with Redux Thunk
 
-So far all of our actions have been synchronous. But what happens if we want to perform some asynchronous action (e.g. an AJAX call or a `setTimeout`). Unfortunately, Redux by itself has no built in way of handling async actions. To add this functionality we need to add some middleware to `Redux`. The two most popular pieces of middleware for managing asynchronous code with `Redux` are `redux-thunk`, which uses functions and promises (and ES2017 async functions) and `redux-saga`, which makes use of ES2015 generators.
+So far all of our actions have been synchronous. But what happens if we want to perform some asynchronous action (e.g. an AJAX call or a `setTimeout`). Unfortunately, Redux by itself has no built in way of handling async actions. To add this functionality we need to add some middleware to `Redux`. The two most popular pieces of middleware for managing asynchronous code with `Redux` are `redux-thunk`, which uses functions and promises (and ES2017 `async` functions) and `redux-saga`, which makes use of ES2015 generators.
 
 While `redux-saga` has some advantages, it is a bit more challenging to understand so we will be using `redux-thunk`. You can can install it with `npm install --save redux-thunk`. We will add this middleware inside of our `store`.
 
