@@ -6,17 +6,17 @@
 
 By the end of this chapter, you should be able to:
 
-- Explain what `redux` is and the problems it tries to solve
-- Compare and contrast `actions`, `reducers` and `stores`
-- Build applications using `redux` as a state manager
+- Explain what **redux** is and the problems it tries to solve
+- Compare and contrast **actions**, **reducers** and **stores**
+- Build applications using **redux** as a state manager
 
 ## Intro
 
-Redux is a single state management store.  While it is commonly used with React, it is an entirely separate library that can be used on its own or with a other frameworks.
+Redux is a centralized state management store.  While it is commonly used with React, it is an entirely separate library that can be used on its own or with a other frameworks.
 
 ![https://css-tricks.com/wp-content/uploads/2016/03/redux-article-3-04.svg](https://css-tricks.com/wp-content/uploads/2016/03/redux-article-3-04.svg)
 
-Here's an overview of the purpose of redux, courtesy of their [documentation](http://redux.js.org/docs/basics/DataFlow.html).
+Here's an overview of the purpose of redux, courtesy of their [documentation](http://redux.js.org/docs/basics/DataFlow.html):
 
 >Redux architecture revolves around a strict unidirectional data flow.
 >
@@ -35,7 +35,45 @@ Redux revolves around some core concepts in functional programming. Let's examin
 
 ### Pure Functions
 
-A *pure function* is a predictable function that does not have any side-effects. What does that mean? When a pure function is called many times with the same input, it will always give the same output (this is also known as idempotence). This makes the function predictable, easier to reason about, and easier to test. Another characteristic of pure functions are that they do not modify external state, or change values outside of their scope.
+A *pure function* is a predictable function that does not have any side-effects. What does that mean? **Side effects** occur when your function modifies the external environment somehow. Consider the following `foo` function:
+
+```js
+
+var myArr = [];
+
+function foo(a) {
+    myArr.push(a);
+}
+
+foo(5); // [5]
+foo(5); // [5, 5]
+foo(5); // [5, 5, 5]
+
+```
+
+This function is NOT pure because it **mutates** `myArr` which is outside its scope. In fact, all this function does is create side effects (_bleh_).
+
+Instead, pure functions need to be **deterministic**, that is, they need to produce the same output for the same input regardless of how many times the function is called. This property is also known as idempotence. This makes the function predictable, easier to reason about, and easier to test.
+
+Here is a "purified" version of the `foo` function:
+
+```js
+
+function foo(a) {
+    var myArr = [];
+    myArr.push(a);
+    return myArr;
+}
+
+foo(5); // [5]
+foo(5); // [5]
+foo(5); // [5]
+
+```
+
+Notice how a new array is created in every function call? That means every time you call `foo` you get a new array with that element pushed into it with no side effects.
+
+### Pure Functions Quiz
 
 Let's try to identify some pure and impure functions:
 
@@ -56,7 +94,7 @@ doubleValues(arr);
 arr; // [8, 16, 24]
 ```
 
-The function is **impure** because there is a side effect: we are mutating (or changing) the `arr` variable.
+The function is **impure** because there is a side effect: we are mutating the `arr` variable.
 
 ```js
 var arr = [2, 4, 6];
@@ -132,9 +170,9 @@ The function is **pure** because there is a not side effect and we are not mutat
 
 You can read more about pure functions [here](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976#.d1qdboexh), [here](https://egghead.io/lessons/javascript-redux-pure-and-impure-functions), and if you are looking for a more advanced read, take a look [here](http://www.nicoespeon.com/en/2015/01/pure-functions-javascript/).
 
-## Reducer
+## Reducers
 
-Reducers are pure functions that accept a state and an action, and return a new state. We need to make sure that we do not mutate state, so very commonly we will use conditional logic to find an action. If we do not find one, we just return the state.
+Redux is all about **reducers** (hence the name). **Reducers are pure functions** that accept a state and an action, and return a new state. We need to make sure that we do not mutate state, so very commonly we will use conditional logic to find an action. If we do not find one, we just return the state.
 
 It bears repeating: our reducers **MUST** be pure functions.
 
@@ -142,72 +180,120 @@ Here's an example of a reducer that updates an array of names:
 
 ```js
 function firstReducer(state=[], action){
-    switch(action.type){
-        case 'ADD_NAME':
-            return [...state, action.payload]
-        case 'REMOVE_NAME'
-            const idx = state.indexOf(action.payload)
-            return state.slice(0,idx).concat(state.slice(idx+1))
-        default:
-            return state
+    if (action.type === 'ADD_NAME') {
+        // return a new array with old state and new payload
+        const newState = [...state, action.payload]
+        return newState;
+    } else if (action.type === 'REMOVE_NAME') {
+        // get the index of the item to remove
+        const idx = state.indexOf(action.payload);
+        const newState = [...state];
+        // splice is used to remove 1 item at index idx
+        return newState.splice(idx, 1);
+    } else {
+        // by default return original state
+        return state;
     }
 }
 ```
 
-Be very careful when you're writing your own reducers that you aren't accidentally mutating state! If you're using methods like `pop`, `shift`, `unshift`, `push`, or `splice` on arrays, for instance, you're probably doing something wrong.
+Be very careful when you're writing your own reducers that you aren't accidentally mutating state!
+If you're using methods like `pop`, `shift`, `unshift`, `push`, or `splice` on arrays, for instance, you **first must create a copy of the array**.
 
-## Actions
+_Note: Remember that composite data structures in JavaScript (Objects, Arrays) are passed by memory reference by default, whereas primitives (Numbers, Strings) are copied.
+  That means if you pass `state` as an argument and state is an Object or Array, then it acting on it will modify it directly. This happens even if you define another variable pointing to it, for example: `const x = state`; actions on `x` _will_ modify state as well!_
 
-We create actions to change the state and trigger reducers. Here's what that might look like for the example above:
+## Actions & Action Creators
+
+### Actions
+
+Reducers are not supposed to be called directly. Instead, fire off an **action** which is intercepted and processed by a reducer.
+ In Redux, actions are simple instructions that tell the reducer(s) how to adjust state.
+ They come in object form and by convention contain a `type` which is, by convention, a string in UPPER_SNAKE_CASE,
+ and (optionally) a payload that can be anything. For example:
+
+```js
+
+{
+    type: 'ADD_NAME',
+    payload: 'Jimmy'
+}
+
+```
+
+As you may have guessed, this is an action that tells the reducer to add 'Jimmy' to the list of names in state.
+
+Many projects maintain a file called something like `actionConstants.js` that just lists all of the possible actions.
+ It is usually preferable to use string constants instead of inline string literals when passing actions around, for example:
+
+ `actionConstants.js`
+
+ ```js
+
+ const ADD_NAME = 'ADD_NAME';
+ const REMOVE_NAME = 'REMOVE_NAME';
+
+ ```
+
+ This may look like unnecessary overhead, but it makes debugging easier.
+
+### Action Creators
+
+Action Creators are just functions that create actions.
+ Sometimes people use the word `action` to refer to an action creator, since the actual actions themselves are the return values of the functions:
 
 ```js
 function addName(name){
     return {
-        type: 'ADD_NAME',
+        type: ADD_NAME,
         payload: name
     }
 }
 function removeName(name){
     return {
-        type: 'REMOVE_NAME',
+        type: REMOVE_NAME,
         payload: name
     }
 }
 ```
 
+These functions will **dispatch actions** whenever your app wants to make changes to state.
+
 ## Store
 
-Our store accepts a reducer and has methods for getting the state, dispatching actions, and subscribing and unsubscribing. If we have multiple reducers, we can merge them together with the `combineReducers` function that `redux` provides, but we will just be starting with a single reducer.
+In Redux, the store is an object that holds the **state tree** for the application. Our store accepts a single reducer (called the root reducer) and has methods for getting the state, dispatching actions, and subscribing and unsubscribing.
+ If we have multiple reducers, we can merge them together into a root reducer with the `combineReducers` function that `redux` provides. For now, we will just be starting with a single reducer.
 
 Let's create our first store! To begin, we'll need to import `createStore` from `redux` and create a store with a reducer.
 
 ```js
-import {createStore} from 'redux' // bring in the createStore method
+import { createStore } from 'redux'; // bring in the createStore method
 
-let store = createStore(firstReducer)
+let store = createStore(firstReducer);
 
 // we can now dispatch actions and get state from the store
 
-let initialState = store.getState()
+let initialState = store.getState();
 
-console.log(initialState) // this will be an array
+console.log(initialState); // this will be an array
 
-store.dispatch(addName('Elie'))
-store.dispatch(addName('Matt'))
-store.dispatch(addName('Tim'))
+store.dispatch(addName('Elie'));
+store.dispatch(addName('Matt'));
+store.dispatch(addName('Tim'));
 
-console.log(store.getState()) // this object will have an array with three values
+console.log(store.getState()); // this object will have an array with three values
 
-store.dispatch(removeName('Elie'))
+store.dispatch(removeName('Elie'));
 
-console.log(store.getState()) // this array will have 2 values
+console.log(store.getState()); // this array will have 2 values
 ```
-
-What happens if you have multiple reducers? You can import the `combineReducers` function that is part of `redux`.
 
 ## Redux Dev Tools
 
-Having a single immutable state store allows us to do some really awesome stuff like time traveling, hot module reloading, and easier debugging. With redux, the only way we can change state is to fire off an action, which creates a new state so that we can always revert and see changes in state! You can get the Chrome extention [here](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en), and here is the code necessary to use the extention with a redux application (this is a sample store):
+Having a single immutable state store allows us to do some really awesome stuff like time traveling, hot module reloading, and easier debugging.
+ With Redux, the only way we can change state is to fire off an action, which goes through the reducer to produce a new state.
+  Since our store is keeping track of this, we can always revert and see changes in state! You can even replay the series of actions that you (or a user) took after visiting your app.
+   You can get the Chrome extention [here](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en), and here is the code necessary to use the extention with a redux application (this is a sample store):
 
 ```js
 import { createStore, compose } from 'redux'
@@ -220,7 +306,7 @@ const store = createStore(rootReducer, compose(
 export default store
 ```
 
-Once this is installed, you can open up the Chrome dev tools and check out the redux tab. Inside here you can time travel and do the following:
+Once this is installed, you can open up the Chrome dev tools and check out the Redux tab. Here is where the "time travelling takes place" via the following:
 
 `commit` - take any changes you have made to the redux state and set it to be the new initial state. You can do this as many times as you want.
 `revert` - go back to an original state (a previous commit)
@@ -231,6 +317,7 @@ You can read more about the dev tools [here](https://onsen.io/blog/react-redux-d
 ## Additional Resources
 
 [Great Redux Tutorial Videos](https://egghead.io/courses/getting-started-with-redux) from the creator of Redux, Dan Abramov
+[What is functional programming?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0)
 
 ## Exercise
 
