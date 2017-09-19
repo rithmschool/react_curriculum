@@ -128,7 +128,7 @@ Next, let's build our main component, which we'll hook up to `Redux`:
 ```js
 import { connect } from 'react-redux';
 import { add } from './actions';
-import React, {Component} from 'React';
+import React, { Component } from 'React';
 
 class LearnConnect extends Component {
   render() {
@@ -154,7 +154,7 @@ const mapStateToProps = function(state) {
   };
 }
 
-export default connect(mapStateToProps, {add})(LearnConnect);
+export default connect(mapStateToProps, { add })(LearnConnect);
 ```
 
 So far, so good. One issue remains: how do we place our connection into a React component? The final step we need to do is inject our Redux store into a component called `Provider`.
