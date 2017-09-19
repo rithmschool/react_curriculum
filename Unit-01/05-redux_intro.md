@@ -39,39 +39,41 @@ A *pure function* is a predictable function that does not have any side-effects.
 
 ```js
 
-var myArr = [];
+var myObj = {};
 
-function foo(a) {
-    myArr.push(a);
+function setObject(a, b) {
+    myObj[a] = b;
 }
 
-foo(5); // [5]
-foo(5); // [5, 5]
-foo(5); // [5, 5, 5]
+// all of these modify the same object
+setObject('firstNumber', 55); // { firstNumber: 55 }
+setObject('secondNumber', 21); // { firstNumber: 55, secondNumber: 21 }
+setObject('firstNumber', 1); // { firstNumber: 1, secondNumber: 21 }
 
 ```
 
-This function is NOT pure because it **mutates** `myArr` which is outside its scope. In fact, all this function does is create side effects (_bleh_).
+This function is NOT pure because it **mutates** `myObj` which is in the global scope. In fact, all this function does is create side effects (_bleh_).
 
-Instead, pure functions need to be **deterministic**, that is, they need to produce the same output for the same input regardless of how many times the function is called. This property is also known as idempotence. This makes the function predictable, easier to reason about, and easier to test.
+Instead, pure functions need to be **deterministic**, that is, they need to produce the same output for the same input regardless of how many times the function is called.
+ This property is also known as idempotence. This makes the function predictable, easier to reason about, and easier to test.
 
-Here is a "purified" version of the `foo` function:
+Here is a "purified" version of the `setObject` function:
 
 ```js
 
-function foo(a) {
-    var myArr = [];
-    myArr.push(a);
-    return myArr;
+function setObjectPure(a, b) {
+    var myObj = { a: b };
+    return myObj;
 }
 
-foo(5); // [5]
-foo(5); // [5]
-foo(5); // [5]
+// all of these are separate objects
+setObject('firstNumber', 55); // { firstNumber: 55 }
+setObject('secondNumber', 21); // { secondNumber: 21 }
+setObject('firstNumber', 1); // { firstNumber: 1 }
 
 ```
 
-Notice how a new array is created in every function call? That means every time you call `foo` you get a new array with that element pushed into it with no side effects.
+Notice how a new object is created in every function call? That means `setObjectPure` is side-effect free now.
 
 ### Pure Functions Quiz
 
@@ -259,6 +261,8 @@ function removeName(name){
 
 These functions will **dispatch actions** whenever your app wants to make changes to state.
 
+In a smaller project, you can just put all the action creators and constants in `actions.js`.
+
 ## Store
 
 In Redux, the store is an object that holds the **state tree** for the application. Our store accepts a single reducer (called the root reducer) and has methods for getting the state, dispatching actions, and subscribing and unsubscribing.
@@ -296,14 +300,14 @@ Having a single immutable state store allows us to do some really awesome stuff 
    You can get the Chrome extention [here](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en), and here is the code necessary to use the extention with a redux application (this is a sample store):
 
 ```js
-import { createStore, compose } from 'redux'
-import rootReducer from './reducers'
+import { createStore, compose } from 'redux';
+import rootReducer from './reducers';
 
 const store = createStore(rootReducer, compose(
   typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : (f) => f
-))
+));
 
-export default store
+export default store;
 ```
 
 Once this is installed, you can open up the Chrome dev tools and check out the Redux tab. Here is where the "time travelling takes place" via the following:
