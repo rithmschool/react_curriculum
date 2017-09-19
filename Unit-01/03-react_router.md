@@ -6,7 +6,7 @@
 
 By the end of this chapter, you should be able to:
 
-- Define client side routing and the HTML 5 history API.
+- Define client side routing and the HTML 5 history API
 - Use `react-router` to build navigation for single page applications
 - Diagram how the first load of a client side application works
 
@@ -79,9 +79,9 @@ ReactDOM.render(
 registerServiceWorker();
 ```
 
-There are a few things to take note of here.  First, we imported `BrowserRouter` as `Router`.  The `BrowserRouter`, as the name implies, is a router designed for the building dynamic pages in the browser. There are other types of routers you can import, but for now, the `BrowserRouter` is the only one we'll need.
+There are a few things to take note of here.  First, we imported `BrowserRouter`.  The `BrowserRouter`, as the name implies, is a router designed for the building dynamic pages in the browser. There are other types of routers you can import, but for now, the `BrowserRouter` is the only one we'll need.
 
-Second, notice that our `App` component is now a child of `Router`. It is important to take note that React Router expects exactly one child. Therefore whenever you use React Router, you will need to wrap your application in a Router just like the example above.
+Second, notice that our `App` component is now a child of `BrowserRouter`. It is important to take note that React Router expects exactly one child. Therefore whenever you use React Router, you will need to wrap your application in a Router just like the example above.
 
 ### HashRouter vs BrowserRouter
 
