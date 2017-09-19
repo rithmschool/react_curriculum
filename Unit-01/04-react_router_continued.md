@@ -138,8 +138,7 @@ The React Router v4 and Facebook docs mention that using the router on context (
 Instead of using `context`, which is an unstable API and not something that the React docs recommend using publicly, we will be using a higher order component that React Router v4 provides called `withRouter`. If you wrap your component with the `withRouter` component, you can get access to the router using `this.props`. So let's see what our example below would look like with that.
 
 ```jsx
-import React, {Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from "react";
 import { Route, Link, withRouter } from "react-router-dom";
 
 const Data = () => <h1>You made it!</h1>;
@@ -163,21 +162,23 @@ class Button extends Component {
   }
 }
 
-const App = () => (
-  <div>
-    <h2>Start here:</h2>
-    <ul>
-      <li>
-        <Link to="/next">With me!</Link>
-      </li>
-      <li>
-        <Link to="/data">Or just go here!</Link>
-      </li>
-    </ul>
-    <Route path="/next" component={withRouter(Button)} />
-    <Route path="/data" component={Data} />
-  </div>
-);
+const App = () => {
+  const RouterButton = withRouter(Button);
+  return (
+    <div>
+      <h2>Let's show the data component!</h2>
+      <div>
+        This button won't work!
+        <Button />
+      </div>
+      <div>
+        This button will!
+        <RouterButton />
+      </div>
+      <Route path="/data" component={Data} />
+    </div>
+  );
+};
 
 export default App;
 ```

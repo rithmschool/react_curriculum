@@ -191,7 +191,8 @@ function firstReducer(state=[], action){
         const idx = state.indexOf(action.payload);
         const newState = [...state];
         // splice is used to remove 1 item at index idx
-        return newState.splice(idx, 1);
+        newState.splice(idx, 1);
+        return newState;
     } else {
         // by default return original state
         return state;
