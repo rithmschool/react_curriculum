@@ -32,7 +32,7 @@ You don't need specify how state should get mapped to props; if you want to omit
 
 In other words, whenever the Redux store is updated, the new state will be passed to the component's props via the object returned by `mapStateToProps`. Here's a quick example:
 
-```js
+```jsx
 const mapStateToProps = function(state){
     return {
         // state comes from the Redux store
@@ -51,7 +51,7 @@ The first argument in `connect` controls how we pass data from `Redux` to `React
 
 As with `mapStateToProps`, if you don't want to provide a function for `mapDispatchToProps` you can pass in `null` or `undefined`. By default, this function takes in `dispatch` as its first argument, and an optional `ownProps` object as a second argument. Here's a basic example:
 
-```js
+```jsx
 const mapDispatchToProps = function(dispatch) {
     return {
         someAction: function(param) {
@@ -69,7 +69,7 @@ In this case, our component should have a prop of `someAction`, which, when invo
 
 Unlike `mapStateToProps`, `mapDispatchToProps` does not need to be a function. It can also be an object that directly maps props to actions. Very commonly, we will pass in an object instead of a function when we import actions from another file:
 
-```js
+```jsx
 import { addTodo, updateTodo } from './actions';
 import { connect } from 'react-redux';
 
@@ -91,7 +91,7 @@ Let's use the `connect` function to build a little application that increments a
 
 `rootReducer.js`
 
-```js
+```jsx
 import { ADD } from './actions.js';
 
 const DEFAULT_STATE = { count: 0 };
@@ -112,7 +112,7 @@ Next, let's add a single action to increment a counter:
 
 `actionCreators.js`
 
-```js
+```jsx
 
 export function add() {
   return {
@@ -125,7 +125,7 @@ Next, let's build our main component, which we'll hook up to `Redux`:
 
 `LearnConnect.js`
 
-```js
+```jsx
 import { connect } from 'react-redux';
 import { add } from './actions';
 import React, { Component } from 'React';
@@ -248,8 +248,8 @@ export default store;
 
 Since we don't have any reducers, let's make one in `reducers.js`
 
-```js
-import {GET_RANDOM_MOVIE} from './actions';
+```jsx
+import { GET_RANDOM_MOVIE } from './actions';
 
 const DEFAULT_STATE = {
   omdbData: {}
@@ -269,7 +269,7 @@ export default rootReducer;
 
 Now let's use this reducer in our `App.js`
 
-```js
+```jsx
 import React, { Component } from 'React';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -294,7 +294,7 @@ export default App;
 
 We also need to create our `MovieDetails` component
 
-```js
+```jsx
 import React, { Component } from 'React';
 import { connect } from 'react-redux';
 import { getRandomMovie } from './actions';
@@ -331,7 +331,7 @@ export default connect(mapStateToProps)(MovieDetails);
 
 Next, we need to define our actions! We'll be using `axios` inside of our `actions.js` to make AJAX requests:
 
-```js
+```jsx
 import axios from 'axios'
 
 const randomMovies = ['titanic', 'forrest gump', 'good will hunting'];
@@ -354,7 +354,7 @@ export function getRandomMovie () {
 
 Finally, we can render everything inside of our `index.js`:
 
-```js
+```jsx
 import React from 'React';
 import ReactDOM from 'React-dom';
 import App from './App';
@@ -388,7 +388,7 @@ This application will contain the following components:
 
 In our `App.js` we can set up the following:
 
-```js
+```jsx
 import React, { Component } from 'React';
 import { Link, Route } from 'React-router-dom';
 import TodoListContainer from './TodoListContainer';
@@ -414,7 +414,7 @@ export default App;
 
 And in our `index.js` we can set up the following:
 
-```js
+```jsx
 import React from 'React';
 import ReactDOM from 'React-dom';
 import App from './App';
@@ -443,7 +443,7 @@ ReactDOM.render(
 
 The actions we will need are for adding, updating and deleting. Since we are not using a backend, there will be no "fetching" so we do not need these actions.
 
-```js
+```jsx
 export const ADD_TODO = 'ADD_TODO';
 export const UPDATE_TODO = 'UPDATE_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
@@ -474,7 +474,7 @@ export function deleteTodo(id) {
 
 We can now use these actions in our reducers - remember that reducers need to be **pure functions!**
 
-```js
+```jsx
 import { ADD_TODO, UPDATE_TODO, DELETE_TODO } from './actions';
 
 const DEFAULT_STATE = {

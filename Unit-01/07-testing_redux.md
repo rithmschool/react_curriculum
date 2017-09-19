@@ -116,9 +116,9 @@ Here is our container which maps state and dispatch to props:
 `TodoFormContainer.js`
 
 ```js
-import { ADD_TODO } from "./actions";
-import { TodoForm } from ".";
-import { connect } from "react-redux";
+import { ADD_TODO } from'./actions';
+import { TodoForm } from'.';
+import { connect } from'react-redux';
 
 export const mapStateToProps = (state = { todos: [] }) => {
   return {
@@ -146,35 +146,35 @@ Now we can test it just like other React components, using Enzyme:
 
 ```js
 
-import { ADD_TODO } from "./actions";
-import { TodoFormContainer, mapStateToProps, mapDispatchToProps } from ".";
-import { shallow } from "enzyme";
+import { ADD_TODO } from'./actions';
+import { TodoFormContainer, mapStateToProps, mapDispatchToProps } from'.';
+import { shallow } from'enzyme';
 
-describe("<TodoFormContainer />", () => {
+describe('<TodoFormContainer />', () => {
   const wrapper = (props = {}) => shallow(<TodoFormContainer {...props} />);
 
-  it("renders the container", () => {
+  it('renders the container', () => {
     expect(wrapper.find(TodoFormContainer)).toHaveLength(1);
   });
 
-  it("passes todos from state to props", () => {
+  it('passes todos from state to props', () => {
     const state = {
-      todos: ["foo", "bar"]
+      todos: ['foo','bar']
     };
-    expect(mapStateToProps(state)).toEqual({ todos: ["foo", "bar"] });
+    expect(mapStateToProps(state)).toEqual({ todos: ['foo','bar'] });
   });
 
-  it("dispatches addItem", () => {
+  it('dispatches addItem', () => {
     // mock a dispatch function with jest
     const dispatch = jest.fn();
     
     // call the function with the mock function as a param
-    mapDispatchToProps(dispatch).addTodo("foo");
+    mapDispatchToProps(dispatch).addTodo('foo');
 
     // expect a proper action to have been fired
     expect(dispatch).toHaveBeenCalledWith({
       type: ADD_TODO,
-      payload: "foo"
+      payload:'foo'
     });
   });
 });
