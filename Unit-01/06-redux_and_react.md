@@ -1,6 +1,6 @@
 #### [⇐ Previous](./05-redux_intro.md) | [Table of Contents](./../readme.md) | [Next ⇒](./07-testing.md)
 
-# Redux (Continued)
+# Redux and React
 
 ## Objectives
 
