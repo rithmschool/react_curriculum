@@ -550,7 +550,7 @@ export default connect(mapStateToProps)(App)
 
 [JSON Web Tokens](https://jwt.io/)
 
-[Auth0 Blog](https://auth0.com/blog/) - Auth0 are the maintainers of jwt.io and offer Auth as a service. Their blog has great posts such as [detailing security vulnerabilities in JWT libraries](https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/).
+[Auth0 Blog](https://auth0.com/blog/) - Auth0 are the maintainers of jwt.io and offer auth-as-a-service. Their blog has great posts detailing things such as [security vulnerabilities in JWT libraries](https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/).
 
 [5 Easy Steps to Understanding JSON Web Tokens](https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec)
 
