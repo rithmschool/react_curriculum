@@ -2,37 +2,38 @@
 
 # Authentication with React and Redux
 
-### Objectives
+## Objectives
 
 By the end of this chapter, you should be able to:
 
 - Build a SPA with Authentication
-- Connect client side routing with an API 
+- Connect client side routing with an API
 
-### Authentication with React and JWTs
+## Authentication with React and JWTs
 
-When a user logs in, we will store a token in localStorage and when they log out we will remove that token. When they make requests, we will place the token in an authorization header and send it on any follow request. We will also delete any header value on future requests once a user is logged out. We will use `axios` to handle this. 
+When a user logs in, we will store a token in `localStorage`, and when they log out we will remove that token. When they make requests, we will place the token in an authorization header and send it on any follow request. We will also delete any header value on future requests once a user is logged out. We will use `axios` to handle this.
 
 In order to build our application we need to have the following:
 
-- actions for signup and login (since these are making AJAX calls we will need some async middleware to handle this with `redux-thunk`). These actions will be dispatched by components
+- actions for sign-up and login (since these are making AJAX calls we will need some async middleware to handle this with `redux-thunk`). These actions will be dispatched by components.
 - actions for managing the current user and a reducer to handle these actions
 - logic to handle stopping a user from getting to the `/welcome` route unless they are logged in.
 
 Let's start with the actions.
 
-#### Setting Up Actions
+### Setting Up Actions
 
 Before we focus on the `react` portion, let's think about our `redux` portion. We will want actions for the following:
 
-`signup` - when this is dispatched, we will post to the server with the user data from a form. 
-`login` - when this is dispatched, we will post to the server with the user data from a form and if the credentials are valid, the server will respond with a JWT which this action will place in localStorage. We will also dispatch another action to set our current user to the value of the token decoded 
-`logout` - when this is dispatched we will remove a token from localStorage, delete any authorization headers and set our current user to be an empty object
+`signup` - when this is dispatched, we will post to the server with the user data from a form.
+`login` - when this is dispatched, we will post to the server with the user data from a form and if the credentials are valid, the server will respond with a JWT which this action will place in `localStorage`. We will also dispatch another action to set our current user to the value of the token decoded.
+`logout` - when this is dispatched we will remove a token from `localStorage`, delete any authorization headers and set our current user to be an empty object
 `setting a current user` - this action will be dispatched by the login (setting the user as the value of the decoded token) and logout function (setting the user as an empty object).
 
 Since we will be posting to the server, we will need to use `redux-thunk` to manage asynchronous actions:
 
-```js
+```jsx
+
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 
@@ -81,11 +82,12 @@ export function setCurrentUser(user) {
 }
 ```
 
-#### A simple rootReducer
+### A simple rootReducer
 
 In our reducer, the only action we will be working with is setting a current user. We will also store a property in our state to see if a user is authenticated which will be very helpful for our UI logic (and navbar as well)
 
-```js
+```jsx
+
 import { SET_CURRENT_USER } from './actions';
 
 const DEFAULT_STATE = {
@@ -101,17 +103,19 @@ export default (state = DEFAULT_STATE, action) => {
         isAuthenticated: !!(Object.keys(action.user).length),
         user: action.user
       };
-    default: 
+    default:
       return state;
   }
 }
 ```
 
-#### Signup
+### Sign-Up
 
-Our signup component is not very complex, we just need to connect redux with our react component and map our `signup` action to props.
+Our `signup` component is not very complex, we just need to connect Redux with our React component and map our `signup` action to props.
 
-```js
+```jsx
+x
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -121,11 +125,11 @@ import { withRouter } from 'react-router-dom';
 class Signup extends React.Component {
   // pretty standard
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       username: '',
-      password: '',
-    }
+      password: ''
+    };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -133,44 +137,56 @@ class Signup extends React.Component {
 
   onChange(e) {
     // change a key in state with whatever the name attribute is
-      // either username or password
+    // either username or password
     this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit(e) {
     e.preventDefault();
-      // make sure we use an arrow function here to correctly bind this to this.props.history.push
-      this.props.signup(this.state).then(() =>{
-          // route to /login once signup is complete
-          this.props.history.push('/login');
-        },
-        // if we get back a status code of >= 400 from the server...
-        (err) =>{
-          // not for production - but good for testing for now!
-          debugger
-        });
+    // make sure we use an arrow function here to correctly bind this to this.props.history.push
+    this.props.signup(this.state).then(
+      () => {
+        // route to /login once signup is complete
+        this.props.history.push('/login');
+      },
+      // if we get back a status code of >= 400 from the server...
+      err => {
+        // not for production - but good for testing for now!
+        debugger;
+      }
+    );
   }
 
   render() {
     return (
       <div className="row">
         <div className="col-md-4 col-md-offset-4">
-            <form onSubmit={this.onSubmit}>
-              <h1>Sign up!</h1>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <input type="text" id="username" name="username" value={this.state.username} onChange={this.onChange}/>
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">password</label>
-                <input type="password" id="password" name="password" value={this.state.password} onChange={this.onChange}/>
-              </div>
-              <div className="form-group">
-                <button className="btn btn-primary btn-lg">
-                  Sign up
-                </button>
-              </div>
-            </form>
+          <form onSubmit={this.onSubmit}>
+            <h1>Sign up!</h1>
+            <div className="form-group">
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={this.state.username}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.onChange}
+              />
+            </div>
+            <div className="form-group">
+              <button className="btn btn-primary btn-lg">Sign up</button>
+            </div>
+          </form>
         </div>
       </div>
     );
@@ -180,14 +196,16 @@ class Signup extends React.Component {
 // let's start adding propTypes - it's a best practice
 Signup.propTypes = {
   signup: React.PropTypes.func.isRequired
-}
+};
 
-export default withRouter(connect(null,{ signup })(Signup));
+export default withRouter(connect(null, { signup })(Signup));
+
 ```
 
-#### Login
+### Login
 
-```js
+```jsx
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { login } from './actions';
@@ -257,7 +275,8 @@ export default withRouter(connect(null, { login })(LoginForm));
 
 Our routes for this application will be pretty simple - here is what our `App` component might look like:
 
-```js
+```jsx
+
 import React, { Component } from 'react';
 import { Route, BrowserRouter, Switch} from 'react-router-dom'
 import Login from './Login'
@@ -265,7 +284,7 @@ import Signup from './Signup'
 import Welcome from './Welcome'
 
 export default class App extends Component {
-  render(){
+  render() {
     return(
         <BrowserRouter>
           <div>
@@ -281,7 +300,7 @@ export default class App extends Component {
 }
 ```
 
-#### Authenticating / Authorizing Routes
+### Authenticating / Authorizing Routes
 
 Now that we have a simple log in working, let's think about how to make sure that someone who is not logged in can not get access to the login route. There are two ways of doing this, we can create a higher order component or create our own routes which check first to see if a user is authenticated.
 
@@ -289,7 +308,8 @@ Now that we have a simple log in working, let's think about how to make sure tha
 
 The first option involves using something called a higher order component which is a function that wraps the creation of a component so that when a component is rendered, it is decorated with additional functionality. Let's take a look at a `requireAuth` higher order component. 
 
-```js
+```jsx
+
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -330,7 +350,8 @@ export default function(ComponentToBeRendered) {
 
 Here is what our `App` component now looks like with our higher order component
 
-```js
+```jsx
+
 import React, { Component } from 'react';
 import { Route, BrowserRouter, Switch} from 'react-router-dom'
 import Login from './Login'
@@ -357,9 +378,11 @@ export default class App extends Component {
 }
 ```
 
-While these routes are nice - it will also be nice to have a `NavigationBar` component with links (signup / login) if the user is not authenticated and logout if the user is logged in. Here's what that might look like:
+While these routes are nice, it will also be nice to have a `NavigationBar` component with links (signup / login) if the user is not authenticated and logout if the user is logged in.
+ Here's what that might look like:
 
-```js
+```jsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -409,11 +432,14 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, { logout })(NavigationBar);
 ```
 
-#### Finishing up with a store
+### Finishing up with a store
 
-Now that we have our reducers, actions and components set up, let's wrap our application with a `Provider` component. Before we do this, we first need to create a redux `store` using our `rootReducer`. We also will want to make sure that when our application starts, we check to see if there is a token in localStorage and if there is, we will dispatch our `setCurrentUser` action passing in a decoded token.
+Now that we have our reducers, actions and components set up, let's wrap our application with a `Provider` component.
+ Before we do this, we first need to create a redux `store` using our `rootReducer`.
+  We also will want to make sure that when our application starts, we check to see if there is a token in `localStorage` and if there is, we will dispatch our `setCurrentUser` action passing in a decoded token.
 
-```js
+```jsx
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -437,7 +463,7 @@ if (localStorage.jwtToken) {
   // prevent someone from manually setting a key of 'jwtToken' in localStorage
   try {
     store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
-  } catch(e){
+  } catch(e) {
     store.dispatch(setCurrentUser({}))
   }
 }
@@ -452,11 +478,12 @@ ReactDOM.render(
 
 ```
 
-#### An Alternative - Creating Protected Routes
+### An Alternative - Creating Protected Routes
 
 Another option available to us in React router v4 is the option of creating our own types of components which render a `<Route>` component that have a `render` prop of either `<Redirect>` or a Component, depending on if a user is authenticated. 
 
-```js
+```jsx
+
 import React, { Component } from 'react';
 import { connect} from 'react-redux';
 import { Route, BrowserRouter, Switch, Redirect} from 'react-router-dom'
@@ -465,13 +492,13 @@ import Signup from './Signup'
 import Welcome from './Welcome'
 import NavigationBar from './NavigationBar'
 
-function PrivateRoute ({component: Component, isAuthenticated, ...rest}) {
+function PrivateRoute ({ component: Component, isAuthenticated, ...rest }) {
   return (
     <Route
       {...rest}
       render={(props) => isAuthenticated === true
         ? <Component {...props} />
-        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+        : <Redirect to={{ pathname: '/login', state: { from: props.location }}} />}
     />
   )
 }
@@ -514,6 +541,10 @@ function mapStateToProps(state){
 export default connect(mapStateToProps)(App)
 ```
 
-### Getting Started
+## Additional Resources
+
+[JSON Web Tokens](https://jwt.io/)
+[5 Easy Steps to Understanding JSON Web Tokens](https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec)
+[Securing React/Redux with JWT](https://medium.com/@rajaraodv/securing-react-redux-apps-with-jwt-tokens-fcfe81356ea0)
 
 #### [⇐ Previous](./08-backend.md) | [Table of Contents](./../readme.md) 
