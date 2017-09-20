@@ -52,13 +52,13 @@ The disadvantages include:
 
 As always, it depends. You will find many startups using monoliths (largely due to the popularity of Rails) because it's fast to get an MVP out there, while most mature companies / corporate conglomerates have SOAs due to the vast complexity of their enterprise systems. However, there is no clear best practice and exceptions exist for both.
 
-## Connecting to the Backend with React/Redux
+## The Backend for React/Redux
 
 Frontend apps with React/Redux will need to have different configurations of which services to connect to and keys to use. You should store this information in environment variables. For instance, webpack is set up to pass environment variables via the `.env` files (if you're using `create-react-app`, more about that [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables)).
 
 Your API endpoint requests should dynamically change based on environment. For example, if you're developing and want to connect to backend development services (instead of backend production services) you might query against `api-dev.mygateway.com` instead of `api.mygateway.com`.
 
-### Deploying the React/Redux Frontend
+### Deploying React/Redux
 
 When developing locally, you most likely use webpack's development server to serve your content on `localhost`. However, when ready for deployment there are two main options:
 
