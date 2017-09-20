@@ -1,13 +1,13 @@
 #### [⇐ Previous](./07-testing_redux.md) | [Table of Contents](./../readme.md) | [Next ⇒](./09-react_redux_auth.md)
 
-# Frontend vs. Backend and Deploying
+# Backend Concepts
 
 ## Objectives
 
 By the end of this chapter, you should be able to:
 
 - Understand the main architecture design patterns at a high-level
-- Understand how backend and frontend apps work together
+- Understand how frontend and backend apps work together
 - Understand the basics of how frontend apps can be deployed
 
 ## Two different structures
@@ -68,7 +68,7 @@ This is the most common method of deployment. You do `npm run build` to trigger 
 
 #### Server-Side Rendering (SSR)
 
-Another option is to run your own server that can pre-render certain assets and handle the initial renders of the site. This is a complex topic but you can read more [here](http://redux.js.org/docs/recipes/ServerRendering.html) and [here](http://andrewhfarmer.com/server-side-render/). and .
+Another option is to run your own server that can pre-render certain assets and handle the initial renders of the site. This is a complex topic but you can read more [here](http://redux.js.org/docs/recipes/ServerRendering.html) and [here](http://andrewhfarmer.com/server-side-render/).
 
 ## Additional Resources
 
