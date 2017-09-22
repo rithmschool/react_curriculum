@@ -192,7 +192,7 @@ So far all of our actions have been synchronous. But what happens if we want to 
 While `redux-saga` has some advantages, it is a bit more challenging to understand so we will be using `redux-thunk`. You can can install it with `npm install --save redux-thunk`. We will add this middleware inside of our `store`.
 
 ```js
-import { createStore, compose, applyMiddleware } from 'Redux'; // add applyMiddleware
+import { createStore, compose, applyMiddleware } from 'redux'; // add applyMiddleware
 import thunk from 'redux-thunk'; // import our middleware
 import rootReducer from './reducers';
 
